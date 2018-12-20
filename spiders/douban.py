@@ -13,7 +13,7 @@ from requests import RequestException
 from bs4 import BeautifulSoup as BS
 
 # 加载保存库
-from other.to_db import todo
+from other.serving import todo
 
 
 # 输入豆瓣地址，todo开始爬虫，保存信息并打印日志

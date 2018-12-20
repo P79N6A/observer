@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
-
 # 传入加载豆瓣地址，进行内容解析并储存信息，生成爬虫报告
+
+# 加载header信息
 from spiders.url_info import URL_Info
 
 # 加载解析地址库
@@ -18,7 +19,7 @@ import time
 import pandas as pd
 
 # 加载保存库
-from other.to_db import todo
+from other.serving import todo
 
 
 class Spider(object):
@@ -30,52 +31,14 @@ class Spider(object):
     def todo(self):
         # 解析演出列表页面，返回所有演出的基本信息以及地址id（clean过的）
         # _list = get_list(self.url)
+
+        # 以下是测试数据
         _list = [{'name': '舞台剧《剑网3·曲云传》武汉站', 'url': 'https://piao.damai.cn/171016.html'},
                  {'name': '开心麻花2019爆笑贺岁舞台剧《窗前不止明月光》', 'url': 'https://piao.damai.cn/169863.html'},
                  {'name': '有趣戏剧第四回 话剧《杏仁豆腐心》武汉站', 'url': 'https://piao.damai.cn/170709.html'},
                  {'name': '大型贺岁方言喜剧——新编《海底捞月》武汉站', 'url': 'https://piao.damai.cn/169745.html'},
                  {'name': '武汉·2019年1月大型儿童剧《白雪公主》', 'url': 'https://piao.damai.cn/169845.html'},
-                 {'name': 'MaiLive 孟京辉经典戏剧作品《恋爱的犀牛》武汉站', 'url': 'https://piao.damai.cn/163613.html'},
-                 {'name': '武汉说唱团贺岁剧2019经典再现《海底捞月》', 'url': 'https://piao.damai.cn/168943.html'},
-                 {'name': '武汉说唱团爆笑神剧《海底捞月》', 'url': 'https://piao.damai.cn/169619.html'},
-                 {'name': '武汉说唱团贺岁剧2019经典再现《海底捞月》-庆祝改革开放40周年优秀剧目展演', 'url': 'https://piao.damai.cn/168593.html'},
-                 {'name': '2018江湖爆笑喜剧《萨瓦迪大咖》', 'url': 'https://piao.damai.cn/168424.html'},
-                 {'name': '大型音乐舞台剧《犹太城》武汉站', 'url': 'https://piao.damai.cn/169510.html'},
-                 {'name': '小鬼当家系列亲子剧《神秘大盗》', 'url': 'https://piao.damai.cn/168990.html'},
-                 {'name': '开心麻花经典爆笑舞台剧 《乌龙山伯爵》', 'url': 'https://piao.damai.cn/166040.html'},
-                 {'name': '禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》', 'url': 'https://piao.damai.cn/168874.html'},
-                 {'name': '武汉人艺精品剧目 《泥巴人》', 'url': 'https://piao.damai.cn/167597.html'},
-                 {'name': '九町舞台剧《8090》', 'url': 'https://piao.damai.cn/581170117488.html'},
-                 {'name': '木偶剧《小马过河》', 'url': 'https://piao.damai.cn/166932.html'},
-                 {'name': 'MaiLive 孟京辉戏剧作品《两只狗的生活意见》武汉站', 'url': 'https://piao.damai.cn/163615.html'},
-                 {'name': '香港绿叶剧团肢体剧《孤儿2.0》', 'url': 'https://piao.damai.cn/162285.html'},
-                 {'name': '沉浸式儿童体验3D游戏剧《爱丽丝梦游仙境》', 'url': 'https://piao.damai.cn/164159.html'},
-                 {'name': '英国音乐戏剧秀《欢乐颂》', 'url': 'https://piao.damai.cn/171144.html'},
-                 {'name': '大型梦幻卡通舞台剧《白雪公主》', 'url': 'https://piao.damai.cn/171083.html'},
-                 {'name': '浪漫经典童话剧《灰姑娘》--武汉站', 'url': 'https://piao.damai.cn/171179.html'},
-                 {'name': '梦幻互动亲子剧《人鱼公主》--武汉站', 'url': 'https://piao.damai.cn/171140.html'},
-                 {'name': '凡创文化·大型恐龙主题实景童话剧《你看起来好像很好吃》', 'url': 'https://piao.damai.cn/170724.html'},
-                 {'name': '奇幻亲子音乐剧《绿野仙踪》--武汉站', 'url': 'https://piao.damai.cn/171186.html'},
-                 {'name': '经典成长童话《匹诺曹》--武汉站', 'url': 'https://piao.damai.cn/171025.html'},
-                 {'name': '武汉年度C位爆笑喜剧《抹茶攻略》', 'url': 'https://piao.damai.cn/170671.html'},
-                 {'name': '寻梦亲子音乐剧《Flight School 飞行学校》--武汉站', 'url': 'https://piao.damai.cn/171157.html'},
-                 {'name': '儿童剧《小蝌蚪找妈妈》', 'url': 'https://piao.damai.cn/170767.html'},
-                 {'name': '大型系列儿童剧《恐龙王国》之《恐龙王国之南极之旅》', 'url': 'https://piao.damai.cn/170700.html'},
-                 {'name': '武汉年度C位爆笑喜剧《抹茶攻略》', 'url': 'https://piao.damai.cn/169604.html'},
-                 {'name': '《海底小纵队4：极地大冒险》武汉站', 'url': 'https://piao.damai.cn/169531.html'},
-                 {'name': '爆笑喜剧《萨瓦迪大咖》', 'url': 'https://piao.damai.cn/169630.html'},
-                 {'name': '九町舞台剧《那次奋不顾身的爱情》', 'url': 'https://piao.damai.cn/168529.html'},
-                 {'name': '禾空间首部原创IP人偶儿童剧《熊猫飞飞历险记2之安徒生童话城堡的迷宫》', 'url': 'https://piao.damai.cn/168875.html'},
-                 {'name': '九町儿童剧《游侠小红帽》', 'url': 'https://piao.damai.cn/168921.html'},
-                 {'name': '江城爱情故事系列《缘来是你》', 'url': 'https://piao.damai.cn/581326318179.html'},
-                 {'name': '《死神来了之黄泉旅行社》万圣之夜，“惊喜”来袭！', 'url': 'https://piao.damai.cn/166298.html'},
-                 {'name': '音乐剧《灰姑娘》中文版（武汉站）', 'url': 'https://piao.damai.cn/579053572399.html'},
-                 {'name': '禾空间原创亲子互动剧《神奇动物在这里》', 'url': 'https://piao.damai.cn/167809.html'},
-                 {'name': '江城首部原创IP人偶儿童剧《熊猫飞飞历险记》2.0升级版（万圣节专场）', 'url': 'https://piao.damai.cn/166461.html'},
-                 {'name': '禾空间儿童剧嘉年华十次卡演出票', 'url': 'https://piao.damai.cn/164857.html'},
-                 {'name': '【小橙堡】神奇泡泡之科学音乐剧《爱迪生的泡泡实验室》-武汉站', 'url': 'https://piao.damai.cn/148021.html'},
-                 {'name': '禾空间儿童剧嘉年华《维小鲸历险记之乘风破浪》', 'url': 'https://piao.damai.cn/165097.html'},
-                 {'name': '禾空间嘉年华儿童剧《大头爸爸和小头儿子》', 'url': 'https://piao.damai.cn/164860.html'}]
+                 {'name': 'MaiLive 孟京辉经典戏剧作品《恋爱的犀牛》武汉站', 'url': 'https://piao.damai.cn/163613.html'}]
 
         # 轮询获取单个页面的数据，并储存到列表中
         _infos = []
@@ -83,42 +46,23 @@ class Spider(object):
             # time.sleep(5)
 
             _info = get_info(i['url'])
+
+            # 因为测试，所以只获取第一个就跳出了
             break
 
-        # 传入后，返回全部活动的详细信息
-        # _info_list=get_info(_list)
-        # #制作表头,不需要，因为这个信息不是我们最终要的信息
-        # headers = []
-        # for i in _list[0]:
-        #     headers.append(i)
+        # 保存活动数据到？，还没想好保存在哪儿
 
-        # print(len(_list), _list)
-
-        # 将数据变成csv，？有必要吗？
-        # db = pd.DataFrame(_parse)
-        # print(type(_parse), _parse)
-        # 手动挑选有用的内容，并保存
-        # db[['name', 'price_str']].to_csv('a.csv')
-
-        # a=[]
-        # for j in db.to_json():
-        #     print(i)
-        #
-        # _save = todo(_parse, 'damai')
-        # _save.save()
-
-        # print(db[['cityname','name']])
+        # print()
 
 
 # 获取单页中的有用信息
 def get_info(URL):
-
     _url_info = URL_Info(URL).damai()
 
-    #解析页面
+    # 解析页面
     # _html = pares(_url_info)
 
-    #测试用
+    # 测试用
     _html = BS("""<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -1267,55 +1211,30 @@ $(document).on("click", ".xiaonengService", function() {
 <script src="//g.alicdn.com/??damai/pc-wx/0.1.4/index.js"></script>
 </body>
 </html>""", 'html.parser')
+
     # 建立信息字典，单条信息是字典
-    _info = {}
-    # 加载图片
-    _info['img_url'] = 'https:'+str(_html.find('div', class_='m-picbox').img.get('original'))
-
-    # 加载标题
-    _info['标题'] = _html.find('h2', class_='tt').span.text.strip()
-
-    # 加载副标题
-    _info['副标题'] = _html.find('h3', class_='stt').findAll('span')[1].text.strip()
-
-    # 加载活动状态
-    _info['售票状态'] = _html.find('span', class_='txt-status').text.strip()
-
-    # 加载演出时间
-    _info['演出时间'] = _html.find('div', class_='m-infobase').findAll('tr')[0].findAll('td')[1].text
-
-    # # 加载票价信息
-    _info['票价信息'] = _html.find('div', class_='m-choose-price').span.text
-
-
-    # 加载演出场地
-    _info['演出场地'] = _html.find('div', class_='m-infobase').findAll('tr')[0].findAll('td')[3].text
-
-    # 加载演出时长
-    _info['演出时长'] = _html.find('div', class_='m-infobase').findAll('tr')[1].findAll('td')[1].text
-
-    # 加载演出语言
-    _info['演出语言'] = _html.find('div', class_='m-infobase').findAll('tr')[10].findAll('td')[1].text
-
-    # 加载演出字幕
-    _info['演出字幕'] = _html.find('div', class_='m-infobase').findAll('tr')[9].findAll('td')[3].text
-
-    # 加载主要演员
-    _info['主要演员'] = _html.find('div', class_='m-infobase').findAll('tr')[10].findAll('td')[3].text
-
-    # 加载演出介绍
-    _info['演出介绍'] = _html.find('div', class_='m-infobase').find('div',class_='pre')
+    _info = {'图片地址': 'https:' + str(_html.find('div', class_='m-picbox').img.get('original')),
+             '标题': _html.find('h2', class_='tt').span.text.strip(),
+             '副标题': _html.find('h3', class_='stt').findAll('span')[1].text.strip(),
+             '售票状态': _html.find('span', class_='txt-status').text.strip(),
+             '演出时间': _html.find('div', class_='m-infobase').findAll('tr')[0].findAll('td')[1].text,
+             '票价信息': _html.find('div', class_='m-choose-price').span.text,
+             '演出场地': _html.find('div', class_='m-infobase').findAll('tr')[0].findAll('td')[3].text,
+             '演出时长': _html.find('div', class_='m-infobase').findAll('tr')[1].findAll('td')[1].text,
+             '演出语言': _html.find('div', class_='m-infobase').findAll('tr')[10].findAll('td')[1].text,
+             '演出字幕': _html.find('div', class_='m-infobase').findAll('tr')[9].findAll('td')[3].text,
+             '主要演员': _html.find('div', class_='m-infobase').findAll('tr')[10].findAll('td')[3].text,
+             '演出介绍': _html.find('div', class_='m-infobase').find('div', class_='pre')}
 
     # print('\n图片：', t1, '\n标题：', t2, '\n副标题', t3, '活动状态\n', t4, '演出时间\n', t5, '\n', t7)
-    print(_info)
-    # print(_html)
+    # print(_info)
     return _info
 
 
 # 解析页面
-def pares(INFO):
+def pares(Info):
     try:
-        response = requests.get(INFO['url'], headers=INFO['headers'], proxies=INFO['proxies'], timeout=1)
+        response = requests.get(Info['url'], headers=Info['headers'], proxies=Info['proxies'], timeout=1)
         if response.status_code == 200:
             # 自行转码
             response.encoding = 'UTF-8'
