@@ -4,11 +4,11 @@ import os
 #获得当前路径的上级路径
 curPath = os.path.dirname(os.getcwd())
 
-def list_to_csv(LIST=[{'a': 1}, {'b': 2}], NAME='test.csv'):
+def list_to_csv(List):
     # 读取列表内容
-    _data = pd.DataFrame(LIST)
+    _data = pd.DataFrame(List)
     # _data.head()
-
+    NAME = curPath+'/tm51/test.csv'
     # 保存csv
     _data.to_csv(NAME,index=False,header=False, encoding='UTF-8')
 
