@@ -5,7 +5,7 @@
 # 可以通过数据库中的统计，获得真实的近30日每日留存，作为参照值，来算出更加贴合实际的30日预测
 # 可以生成视图
 import pandas as pd
-
+import datetime
 
 def Day_live():
     # 基础用户，不用新增就得到的
@@ -51,38 +51,36 @@ def clean(action_log):
             _clean.append(_info)
         print(len(_clean))
 
-    list_to_csv(_clean,'clean.csv')
+    list_to_csv(_clean, 'clean.csv')
 
 
 # fenxi
-def gg(_clean):
-
+def Day_data(_clean):
     _data = {}
-    for _info in range(len(_clean)):
-        print(_clean['日期'])
-        print(_clean.loc[_info])
-        # if _info['日期'] not in _clean:
-        #     _data[_info['日期']] = {'注册用户ID': [], '注册用户数': 0, '游客数': 0, '设备ID': [], '设备数': 0, 'IP': [], 'IP数': 0,
-        #                            '留存': []}
-        #
-        # if _info['用户ID'] == 0:
-        #     _data[_info['日期']]['游客数'] += 1
-        # else:
-        #     _data[_info['日期']]['注册用户数'] += 1
-        # if _info['用户ID'] not in _clean[_info['日期']]['用户ID']:
-        #     _data[_info['日期']]['用户ID'].append(_info['用户ID'])
-        #     _data[_info['日期']]['用户数'] += 1
-        #
-        # if _info['设备ID'] not in _clean[_info['日期']]['设备ID']:
-        #     _data[_info['日期']]['设备ID'].append(_info['设备ID'])
-        #     _data[_info['日期']]['设备数'] += 1
-        #
-        # if _info['IP'] not in _clean[_info['日期']]['IP']:
-        #     _data[_info['日期']]['IP'].append(_info['IP'])
-        #     _data[_info['日期']]['IP数'] += 1
-        break
-    #     print(len(_data))
-    # print(_data)
+    for i in range(len(_clean)):
+        _info = _clean.loc[i]
+
+        #如果没有此日期 就创建一个
+        if _info['日期'] not in _data:
+            _data[_info['日期']] = {'注册用户ID': [], '注册用户数': 0, '游客数': 0, '设备ID': [], '设备数': 0, 'IP': [], 'IP数': 0,
+                                  '留存': []}
+        #如果用户ID是零，说明是游客，如果不是，并且不在集合中，则添加。有可能是用户换了设备登入，但但账号是同一个
+        if _info['用户ID'] == 0:
+            _data[_info['日期']]['游客数'] += 1
+        elif _info['用户ID'] not in _data[_info['日期']]['注册用户ID']:
+            _data[_info['日期']]['注册用户ID'].append(_info['用户ID'])
+            _data[_info['日期']]['注册用户数'] += 1
+
+        if _info['设备ID'] not in _data[_info['日期']]['设备ID']:
+            _data[_info['日期']]['设备ID'].append(_info['设备ID'])
+            _data[_info['日期']]['设备数'] += 1
+
+        if _info['IP'] not in _data[_info['日期']]['IP']:
+            _data[_info['日期']]['IP'].append(_info['IP'])
+            _data[_info['日期']]['IP数'] += 1
+
+    list_to_csv(_data,'Day_data.csv')
+
 
 # 生成csv
 def list_to_csv(Data, Name):
@@ -91,14 +89,48 @@ def list_to_csv(Data, Name):
     _data.head()
 
     # 保存csv
-    _data.to_csv(Name, index=False, header=True, encoding='UTF-8')
+    _data.to_csv(Name, index=True, header=True, encoding='UTF-8')
 
     # print('显示列表', _data, '\n', _data.values)
 
 
+def test(_Day_data,user):
+    for i in _Day_data.head():
+        if i =='Unnamed: 0':
+            continue
+
+        info_ID =_Day_data.loc[2,i]
+        info_day =datetime.datetime.strptime(i, '%Y-%m-%d')
+
+        # print(info_ID,info_day)
+        for j in range(len(user.values)):
+
+
+            if str(user.loc[j]["id"]) in info_ID:
+                ge = user.loc[j]["created_at"].split(' ', 1)[0]
+                user_data = datetime.datetime.strptime(ge, '%Y-%m-%d')
+
+                print((info_day-user_data).days)
+                _Day_data.loc[5, i].append()
+
+
+
+        # print(i)
+        # print(_Day_data[i])
+        # dde =_Day_data[i][]
+    # for i in range(len(user.values)):
+    #     if user.loc[i]['id'] in _Day_data[]
+    #     # for j in _Day_data[i]['注册用户ID']:
+    #     #     if j in user and :
+
+
+
+
+
 if __name__ == '__main__':
-    # user = pd.DataFrame(pd.read_csv('uesr.csv', header=0, encoding='UTF-8')).values
+    user = pd.DataFrame(pd.read_csv('uesr.csv', header=0, encoding='UTF-8'))
     # action_log = pd.DataFrame(pd.read_csv('action_log.csv', header=0, encoding='UTF-8')).values
-    clean= pd.DataFrame(pd.read_csv('clean.csv',header=0, encoding='UTF-8'))
+    clean = pd.DataFrame(pd.read_csv('clean.csv', header=0, encoding='UTF-8'))
+    Day_data = pd.DataFrame(pd.read_csv('Day_data.csv',header=0, encoding='UTF-8'))
     # 洗掉无用的数据，并去重
-    _clean = gg(clean)
+    _clean = test(Day_data,user)

@@ -3,7 +3,7 @@
 import requests
 from requests import RequestException
 
-from spiders import url_info as _config
+from other import url_info as _config
 from bs4 import BeautifulSoup as bs
 
 

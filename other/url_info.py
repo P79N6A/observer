@@ -1,4 +1,4 @@
-# 爬虫页面信息配置文件
+# 爬虫的请求标头
 
 # 随机生成user_agent
 import user_agent
@@ -42,8 +42,3 @@ class URL_Info():
 
         info = {'url': self.url, 'headers': headers, 'data': data, 'data_key': None, 'proxies': self.proxies}
         return info
-
-    def Agent(self):
-        _list = [
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"]

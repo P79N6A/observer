@@ -3,7 +3,7 @@
 # 还需要增加去重功能
 # 还需要增加爬虫报告
 # 加载URL地址
-from spiders.url_info import URL_Info
+from other.spiders import URL_Info
 
 # 加载解析地址库
 import requests

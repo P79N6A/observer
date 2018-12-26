@@ -2,7 +2,7 @@
 # 传入加载豆瓣地址，进行内容解析并储存信息，生成爬虫报告
 
 # 加载header信息
-from spiders.url_info import URL_Info
+from other.url_info import URL_Info
 
 # 加载解析地址库
 import requests
@@ -14,12 +14,8 @@ import csv
 # 加载解析HTML库
 from bs4 import BeautifulSoup as BS
 
-import time
-
-import pandas as pd
-
+import other.Item
 # 加载保存库
-from other.serving import todo
 
 
 class Spider(object):
@@ -28,17 +24,18 @@ class Spider(object):
         self.url = URL_Info(URL).damai()
         # print(self.url)
 
+    #主函数
     def todo(self):
         # 解析演出列表页面，返回所有演出的基本信息以及地址id（clean过的）
-        # _list = get_list(self.url)
+        _list = get_list(self.url)
 
         # 以下是测试数据
-        _list = [{'name': '舞台剧《剑网3·曲云传》武汉站', 'url': 'https://piao.damai.cn/171016.html'},
-                 {'name': '开心麻花2019爆笑贺岁舞台剧《窗前不止明月光》', 'url': 'https://piao.damai.cn/169863.html'},
-                 {'name': '有趣戏剧第四回 话剧《杏仁豆腐心》武汉站', 'url': 'https://piao.damai.cn/170709.html'},
-                 {'name': '大型贺岁方言喜剧——新编《海底捞月》武汉站', 'url': 'https://piao.damai.cn/169745.html'},
-                 {'name': '武汉·2019年1月大型儿童剧《白雪公主》', 'url': 'https://piao.damai.cn/169845.html'},
-                 {'name': 'MaiLive 孟京辉经典戏剧作品《恋爱的犀牛》武汉站', 'url': 'https://piao.damai.cn/163613.html'}]
+        # _list = [{'name': '舞台剧《剑网3·曲云传》武汉站', 'url': 'https://piao.damai.cn/171016.html'},
+        #          {'name': '开心麻花2019爆笑贺岁舞台剧《窗前不止明月光》', 'url': 'https://piao.damai.cn/169863.html'},
+        #          {'name': '有趣戏剧第四回 话剧《杏仁豆腐心》武汉站', 'url': 'https://piao.damai.cn/170709.html'},
+        #          {'name': '大型贺岁方言喜剧——新编《海底捞月》武汉站', 'url': 'https://piao.damai.cn/169745.html'},
+        #          {'name': '武汉·2019年1月大型儿童剧《白雪公主》', 'url': 'https://piao.damai.cn/169845.html'},
+        #          {'name': 'MaiLive 孟京辉经典戏剧作品《恋爱的犀牛》武汉站', 'url': 'https://piao.damai.cn/163613.html'}]
 
         # 轮询获取单个页面的数据，并储存到列表中
         _infos = []
@@ -1313,12 +1310,15 @@ def save(self):
 def get_list(url):
     # 获取post数据包
     response = requests.post(url=url['url'], headers=url['headers'], data=url['data'])
+    # print(response)
 
     # 将字符串数据转换成字典数据
     dict_data = json.loads(response.text)
     # print(dict_data)
+
     # 将需要的爬取的字典数据存储在变量中
     need_spider_data = dict_data["pageData"]["resultData"]
+    print(need_spider_data)
 
     # clean数据
     _clean_list = []
