@@ -36,11 +36,22 @@ def csv_to_data():
     con = pd.DataFrame(pd.read_csv(curPath+'/res/contents.csv',header=None, encoding='UTF-8')).values
     doi = pd.DataFrame(pd.read_csv(curPath+'/res/doings.csv',header=None, encoding='UTF-8')).values
     yun = pd.DataFrame(pd.read_csv(curPath + '/res/yundong.csv', header=0, encoding='UTF-8')).values
-    test = pd.DataFrame(pd.read_csv('test.csv', header=0, encoding='UTF-8'))
-    #
-    # print('列表数：',len(doi[468:]),'\n',doi[468])
-    # print('列表数：',len(con[468:]),'\n',con[468:])
-    # print('列表数：',len(yun[0:]),'\n',yun[0])
+    test = pd.DataFrame(pd.read_csv('/Users/apple/Documents/observer/other/spiders/get_url.csv', header=0, encoding='UTF-8'))
+
+    #增加是否抓取详情的列
+    test['蜘蛛状态']=False
+    print(test)
+
+    #遍历列表
+    for i in test.iterrows():
+
+        #如果本条数据没有被爬取，则爬取
+        if i['蜘蛛状态'] ==False:
+            print('爬取数据')
+            print('修改状态')
+
+
+
 
 
     # #测试两个表中的数据是否相同
@@ -75,7 +86,7 @@ def csv_to_data():
     #     # print(_de)
     #     # break
 
-    print(test[''][0])
+    # print(test)
 
     # return _re
 
@@ -83,6 +94,6 @@ def csv_to_data():
 
 
 if __name__ == '__main__':
-    # csv_to_data()
-    list_to_csv()
+    csv_to_data()
+    # list_to_csv()
     # print(curPath)
