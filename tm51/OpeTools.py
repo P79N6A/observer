@@ -95,34 +95,42 @@ def list_to_csv(Data, Name):
 
 
 def test(_Day_data,user):
+    #定义一个显示留存的集合嵌套集合
+    aa = {}
     for i in _Day_data.head():
-        if i =='Unnamed: 0':
-            continue
+        if i == 'Unnamed: 0':
+           continue
 
+        aa[i]={}
+        for n in range(31):
+            aa[i][n]=0
+
+
+    #遍历所有日期
+    for i in aa:
+        #注册用户id集合
         info_ID =_Day_data.loc[2,i]
+
+        #将时间戳变成时间
         info_day =datetime.datetime.strptime(i, '%Y-%m-%d')
 
         # print(info_ID,info_day)
+
+        #遍历所有用户
         for j in range(len(user.values)):
 
-
             if str(user.loc[j]["id"]) in info_ID:
+
+                #用户注册时间
                 ge = user.loc[j]["created_at"].split(' ', 1)[0]
                 user_data = datetime.datetime.strptime(ge, '%Y-%m-%d')
 
-                print((info_day-user_data).days)
-                _Day_data.loc[5, i].append()
+                be =int((info_day-user_data).days)
 
 
 
-        # print(i)
-        # print(_Day_data[i])
-        # dde =_Day_data[i][]
-    # for i in range(len(user.values)):
-    #     if user.loc[i]['id'] in _Day_data[]
-    #     # for j in _Day_data[i]['注册用户ID']:
-    #     #     if j in user and :
-
+                aa[ge][be] += 1
+            print(aa)
 
 
 
