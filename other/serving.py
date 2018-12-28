@@ -10,7 +10,7 @@ class todo:
 
         self.myclient = pymongo.MongoClient('mongodb://localhost:27017/')
 
-        self.mydb = self.myclient["runoobdb"]
+        self.mydb = self.myclient["swarm"]
 
         self.info = info
         self.type = type

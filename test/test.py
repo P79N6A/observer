@@ -8,3 +8,10 @@ import json
 with open("test.json",'r',encoding='utf-8') as json_file:
     model=json.load(json_file)
     print(model['fav'])
+
+
+
+
+db_name = {'剧目':'plans'}
+
+def

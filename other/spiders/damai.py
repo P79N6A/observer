@@ -33,11 +33,16 @@ class Spider(object):
 
     # 主函数
     def todo(self):
-        # 解析演出列表页面，返回所有演出的基本信息以及地址id`（clean过的）,并保存为 get_url.csv
+        # 解析演出列表页面，返回所有演出的基本信息以及地址id（clean过的）,并保存为 get_url.csv
         # _list = self.get_list()
 
-        # 逐个地址获取演出的详细信息
-        self.get_info()
+        #和_list中的 showslist.csv 做比较，如果列表中已经有了，就删除，返回没有添加的DataFrame
+        _clean_list= self.clean()
+
+        # 逐个地址获取演出的详细信息，将详细的信息添加进来，返回完整的DataFrame
+        _good_info = self.get_info()
+
+
 
     # 获取需要爬去的演出列表地址，并保存为：get_url.csv
     def get_list(self):
@@ -68,7 +73,9 @@ class Spider(object):
                   'projectid': need_spider_data[j]['projectid'],
                   'imgurl': need_spider_data[j]['imgurl'],
                   '最低票价': need_spider_data[j]['price'],
-                  '最高票价': need_spider_data[j]['pricehigh']}
+                  '最高票价': need_spider_data[j]['pricehigh'],
+                  # '剧名':re.search('《[^》]+》',_j['标题'],flags=0).group()
+                  }
 
             _clean_list.append(_j)
 
@@ -76,8 +83,11 @@ class Spider(object):
         print(_clean_list)
 
         # 保存内容到
-        Save(_clean_list, 'get_url.csv')
+        Save(_clean_list, 'info_drama.csv')
         return _clean_list
+
+    def clean(self):
+        return 1
 
     # 获取列表中每条页面的有用信息,并保存在原来的文件中，并保存到
     def get_info(self):
