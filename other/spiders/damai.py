@@ -2,8 +2,9 @@
 # 传入加载豆瓣地址，进行内容解析并储存信息，生成爬虫报告
 
 # 加载header信息
+import re
 import time
-
+from lxml import etree
 import pandas as pd
 
 from other.url_info import URL_Info
@@ -19,9 +20,6 @@ import csv
 from bs4 import BeautifulSoup as BS
 
 from other.Item import list_to_csv as Save
-
-
-# 加载保存库
 
 
 class Spider(object):
@@ -40,20 +38,6 @@ class Spider(object):
 
         # 逐个地址获取演出的详细信息
         self.get_info()
-
-        # # 轮询获取单个页面的数据，并储存到列表中
-        # _infos = []
-        # for i in _list:
-        #     # time.sleep(5)
-        #
-        #     _info = get_info(i['url'])
-        #
-        #     # 因为测试，所以只获取第一个就跳出了
-        #     break
-        #
-        # # 保存活动数据到？，还没想好保存在哪儿
-
-        # print()
 
     # 获取需要爬去的演出列表地址，并保存为：get_url.csv
     def get_list(self):
@@ -95,23 +79,23 @@ class Spider(object):
         Save(_clean_list, 'get_url.csv')
         return _clean_list
 
-    # 获取列表中每条页面的有用信息，并保存到
+    # 获取列表中每条页面的有用信息,并保存在原来的文件中，并保存到
     def get_info(self):
         _data = pd.DataFrame(
-            pd.read_csv('/Users/apple/Documents/observer/other/spiders/get_url.csv', header=0, encoding='UTF-8'))
+            pd.read_csv('/Users/tama1/Documents/ob/other/spiders/get_url.csv', header=0, encoding='UTF-8'))
 
         # # 增加是否抓取详情的列
         _data['蜘蛛状态'] = False
         # print(test)
 
-        #建立容器
-        gat_info_list=[]
+        # 建立容器
+        gat_info_list = []
 
         # 遍历列表
         for i in _data.iterrows():
 
             # 如果本条数据没有被爬取，则爬取
-            if i[1]['蜘蛛状态']==False:
+            if i[1]['蜘蛛状态'] == False:
                 # 拼接地址
                 _url = self._url_header + str(i[1]['projectid']) + '.html'
                 # print(_url)
@@ -120,10 +104,11 @@ class Spider(object):
                 _url_info = URL_Info(_url).damai()
 
                 # 解析页面
-                _html = pares(_url_info)
-                print(_html)
+                # _html = pares(_url_info)
+                # print(_html)
+
                 # 测试用
-                #     _html = BS("""<!DOCTYPE html>
+                _test = """<!DOCTYPE html>
                 #
                 # <html xmlns="http://www.w3.org/1999/xhtml">
                 # <head>
@@ -135,14 +120,14 @@ class Spider(object):
                 # <meta content="no-cache" http-equiv="pragma"/>
                 # <meta content="no-cache,must-revalidate" http-equiv="cache-control"/>
                 # <meta content="0" http-equiv="expires"/>
-                # <title>武汉话剧歌剧 舞台剧《剑网3·曲云传》武汉站【网上订票】– 大麦网</title>
-                # <meta content="2018-12-14 00:14:51" name="create-time">
-                # <meta content="武汉话剧歌剧,舞台剧《剑网3·曲云传》武汉站,大麦网" name="keywords">
-                # <meta content="大麦网（Damai.cn）武汉话剧歌剧 舞台剧《剑网3·曲云传》武汉站将于2019-01-13 14:30在武汉琴台大剧院上演，大麦网为武汉琴台大剧院话剧歌剧 舞台剧《剑网3·曲云传》武汉站门票代理，更多门票价格及订票详情请咨询大麦网武汉站." name="description">
+                # <title>武汉话剧歌剧 黑色喜剧《驴得水》武汉站【网上订票】– 大麦网</title>
+                # <meta content="2018-12-28 00:31:49" name="create-time">
+                # <meta content="武汉话剧歌剧,黑色喜剧《驴得水》武汉站,大麦网" name="keywords">
+                # <meta content="大麦网（Damai.cn）武汉话剧歌剧 黑色喜剧《驴得水》武汉站将于2019-01-06在武汉琴台大剧院上演，大麦网为武汉琴台大剧院话剧歌剧 黑色喜剧《驴得水》武汉站门票代理，更多门票价格及订票详情请咨询大麦网武汉站." name="description">
                 # <meta content="0.5" name="aplus-auto-exp-visible"/>
                 # <meta content="500" name="aplus-auto-exp-duration"/>
                 # <meta content='[{"logkey":"/damai_pc.default.project_qr_purchase","tag":"div","filter":"data-spm-auto","props":["item_id"]}]' name="aplus-auto-exp"/>
-                # <link href="//dui.dmcdn.cn/??dm_2015/goods/css/style.css?v5.14.0,damai_v2/login_register3.0/css/style.css?v5.14.0" rel="stylesheet" type="text/css"/>
+                # <link href="//dui.dmcdn.cn/??dm_2015/goods/css/style.css?v5.28.0,damai_v2/login_register3.0/css/style.css?v5.28.0" rel="stylesheet" type="text/css"/>
                 # <link href="//g.alicdn.com/??damai/pc-wx/0.1.0/index.css" rel="stylesheet" type="text/css"/>
                 # <style type="text/css">
                 # .chat-view-xiaoneng-version{opacity:0;}
@@ -154,7 +139,7 @@ class Spider(object):
                 # .jiathis_style .jiathis_txt {float: left;font-size: 12px;line-height: 18px !important;text-decoration: none;}
                 # </style>
                 # <script type="text/javascript">
-                # var projectInfo = {"ProjectID":171016,"CityID":586,"Name":"舞台剧《剑网3·曲云传》武汉站","ShowTime":"2019-01-13 14:30","Price":188.00,"SiteStatus":3,"VenueName":"武汉琴台大剧院","IsOnlyXuanZuo":true,"QuestionPass":false,"TicketValidateType":0,"htmlName":null,"Tabcontrol":0,"IsShowStartTime":false,"StartTicketTime":"\/Date(1544500800000)\/","SellStartTime":"\/Date(1544436064000)\/","OptimizationTicket":0};
+                # var projectInfo = {"ProjectID":171739,"CityID":586,"Name":"黑色喜剧《驴得水》武汉站","ShowTime":"2019-01-06","Price":80.00,"SiteStatus":3,"VenueName":"武汉琴台大剧院","IsOnlyXuanZuo":true,"QuestionPass":false,"TicketValidateType":0,"htmlName":null,"Tabcontrol":0,"IsShowStartTime":false,"StartTicketTime":"\/Date(1545113426000)\/","SellStartTime":"\/Date(1545113403000)\/","OptimizationTicket":0};
                 # var hostName = "wuhan", itemDomain = "piao.damai.cn", categoryId = 3, is_show_perform_calendar = 0;
                 # is_show_perform_calendar = 1;
                 # var PrivelegePId=108944;
@@ -166,10 +151,10 @@ class Spider(object):
                 # <script exparams="clog=o&amp;aplus&amp;sidx=aplusSidex&amp;ckx=aplusCkx" id="beacon-aplus" src="//g.alicdn.com/alilog/mlog/aplus_v2.js" type="text/javascript"></script>
                 # <div class="g-hd" style="position:static;">
                 # <div class="g-hdc">
-                # <input id="Hidden1" type="hidden" value="%e8%88%9e%e5%8f%b0%e5%89%a7%e3%80%8a%e5%89%91%e7%bd%913%c2%b7%e6%9b%b2%e4%ba%91%e4%bc%a0%e3%80%8b%e6%ad%a6%e6%b1%89%e7%ab%99"/>
-                # <input id="Title" type="hidden" value="我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『舞台剧《剑网3·曲云传》武汉站』,时间是2019-01-13 14:30，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;"/>
-                # <input id="NameCN" type="hidden" value="%ce%e8%cc%a8%be%e7%a1%b6%bd%a3%cd%f83%a1%a4%c7%fa%d4%c6%b4%ab%a1%b7%ce%e4%ba%ba%d5%be"/>
-                # <input id="LinkCN" type="hidden" value="https%3a%2f%2fpiao.damai.cn%2f171016.html"/>
+                # <input id="Hidden1" type="hidden" value="%e9%bb%91%e8%89%b2%e5%96%9c%e5%89%a7%e3%80%8a%e9%a9%b4%e5%be%97%e6%b0%b4%e3%80%8b%e6%ad%a6%e6%b1%89%e7%ab%99"/>
+                # <input id="Title" type="hidden" value="我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『黑色喜剧《驴得水》武汉站』,时间是2019-01-06，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;"/>
+                # <input id="NameCN" type="hidden" value="%ba%da%c9%ab%cf%b2%be%e7%a1%b6%c2%bf%b5%c3%cb%ae%a1%b7%ce%e4%ba%ba%d5%be"/>
+                # <input id="LinkCN" type="hidden" value="https%3a%2f%2fpiao.damai.cn%2f171739.html"/>
                 # <input id="cityId" type="hidden" value="586"/>
                 # <input id="cityName" type="hidden" value="武汉"/>
                 # <input id="CategoryID" type="hidden" value="3"/>
@@ -223,7 +208,7 @@ class Spider(object):
                 # <div class="hd">
                 # <!-- 面包屑 begin -->
                 # <p class="m-crm">
-                # <strong>舞台剧《剑网3·曲云传》武汉站</strong>
+                # <strong>黑色喜剧《驴得水》武汉站</strong>
                 # </p>
                 # <!-- 面包屑 end -->
                 # </div>
@@ -232,7 +217,7 @@ class Spider(object):
                 # <div class="m-poster">
                 # <!-- 项目图 begin -->
                 # <div class="m-picbox">
-                # <img alt="舞台剧《剑网3·曲云传》武汉站" height="373" original="//pimg.dmcdn.cn/perform/project/1710/171016_n.jpg" title="舞台剧《剑网3·曲云传》武汉站" width="277"/>
+                # <img alt="黑色喜剧《驴得水》武汉站" height="373" original="//pimg.dmcdn.cn/perform/project/1717/171739_n.jpg" title="黑色喜剧《驴得水》武汉站" width="277"/>
                 # </div>
                 # <!-- 项目图 end -->
                 # <!-- 分享 begin -->
@@ -240,9 +225,9 @@ class Spider(object):
                 # <span class="txt">分享到：</span>
                 # <!-- JiaThis Button BEGIN -->
                 # <div class="jiathis_style">
-                # <a class="jiathis_button_tsina" data-spm-click="gostr=/damai_pc.default.click;localid=share_0;dclicktitle=微博&amp;ditem_id=171016" href="http://service.weibo.com/share/share.php?title=我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『舞台剧《剑网3·曲云传》武汉站』,时间是2019-01-13 14:30，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;&amp;url=https%3a%2f%2fpiao.damai.cn%2f171016.html&amp;source=bookmark&amp;appkey=3588246140&amp;pic=https%3A%2F%2Fpimg.dmcdn.cn%2Fperform%2Fproject%2F1710%2F171016_n.jpg&amp;ralateUid=1722647874" target="_blank" title="分享到微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
-                # <a class="jiathis_button_weixin" data-spm-click="gostr=/damai_pc.default.click;localid=share_1;dclicktitle=微信&amp;ditem_id=171016" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin"></span></a>
-                # <a class="jiathis_button_qzone" data-spm-click="gostr=/damai_pc.default.click;localid=share_2;dclicktitle=QQ空间&amp;ditem_id=171016" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https%3A%2F%2Fpiao.damai.cn%2F171016.html&amp;title=我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『舞台剧《剑网3·曲云传》武汉站』,时间是2019-01-13 14:30，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;&amp;pics=http%3A%2F%2Fpimg.dmcdn.cn%2Fperform%2Fproject%2F1710%2F171016_n.jpg&amp;summary=" target="_blank" title="分享到QQ空间"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+                # <a class="jiathis_button_tsina" data-spm-click="gostr=/damai_pc.default.click;localid=share_0;dclicktitle=微博&amp;ditem_id=171739" href="http://service.weibo.com/share/share.php?title=我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『黑色喜剧《驴得水》武汉站』,时间是2019-01-06，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;&amp;url=https%3a%2f%2fpiao.damai.cn%2f171739.html&amp;source=bookmark&amp;appkey=3588246140&amp;pic=https%3A%2F%2Fpimg.dmcdn.cn%2Fperform%2Fproject%2F1717%2F171739_n.jpg&amp;ralateUid=1722647874" target="_blank" title="分享到微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+                # <a class="jiathis_button_weixin" data-spm-click="gostr=/damai_pc.default.click;localid=share_1;dclicktitle=微信&amp;ditem_id=171739" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin"></span></a>
+                # <a class="jiathis_button_qzone" data-spm-click="gostr=/damai_pc.default.click;localid=share_2;dclicktitle=QQ空间&amp;ditem_id=171739" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https%3A%2F%2Fpiao.damai.cn%2F171739.html&amp;title=我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『黑色喜剧《驴得水》武汉站』,时间是2019-01-06，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;&amp;pics=http%3A%2F%2Fpimg.dmcdn.cn%2Fperform%2Fproject%2F1717%2F171739_n.jpg&amp;summary=" target="_blank" title="分享到QQ空间"><span class="jiathis_txt jtico jtico_qzone"></span></a>
                 # </div>
                 # <!-- JiaThis Button END -->
                 # </div>
@@ -252,11 +237,11 @@ class Spider(object):
                 # <!-- 项目模块 begin -->
                 # <div class="m-goods">
                 # <h2 class="tt" data-spm="click">
-                # <span class="txt">舞台剧《剑网3·曲云传》武汉站</span>
+                # <span class="txt">黑色喜剧《驴得水》武汉站</span>
                 # </h2>
                 # <h3 class="stt">
                 # <span class="quotl"></span>
-                # <span class="txt">剑网3·曲云传</span>
+                # <span class="txt">驴得水</span>
                 # <span class="quotr"></span>
                 # </h3>
                 # <!-- 时间轴 begin -->
@@ -274,7 +259,7 @@ class Spider(object):
                 # <!-- 时间轴 end -->
                 # <!-- 产品模块 begin -->
                 # <div class="m-product m-product-2 -m-product-1 j_goodsDetails">
-                # <div class="m-goodstips m-goodstips-2" id="projectStatusDescn">
+                # <div class="m-goodstips m-goodstips-2" id="projectStatusDescn" style="display:none;">
                 # <div class="hd">
                 # <i class="ico"></i>
                 # <span class="txt txt-status" data-status="售票中">
@@ -283,8 +268,7 @@ class Spider(object):
                 # <div class="bd">
                 # <div class="tips">
                 # <div class="box z-hide"><p class="itm">
-                # 														本场演出将于【12月11日 12:00】开售
-                # 														</p></div>
+                # </p></div>
                 # <div class="ops"><span class="btnsel"></span></div>
                 # </div>
                 # </div>
@@ -343,7 +327,7 @@ class Spider(object):
                 # <ul class="lst"></ul>
                 # </div>
                 # <div class="ops">
-                # <a class="u-btn u-btn-c1 u-btn-choose" data-spm-click="gostr=/damai_pc.default.click;localid=buyselectseatbtn;ditem_id=171016" href="javascript:;" id="btnXuanzuo" style="display:none;">选座购买</a>
+                # <a class="u-btn u-btn-c1 u-btn-choose" data-spm-click="gostr=/damai_pc.default.click;localid=buyselectseatbtn;ditem_id=171739" href="javascript:;" id="btnXuanzuo" style="display:none;">选座购买</a>
                 # </div>
                 # </div>
                 # <!-- 购物车模块 end -->
@@ -406,7 +390,7 @@ class Spider(object):
                 # <a id="privilegeAnchor" name="projectPrivilege"></a>
                 # <div class="m-qrcode"><!-- 大麦网客户端二维码 -->
                 # <h3 class="tt"><span id="ErWeiMaTips">手机扫一扫<br/>下单更快捷</span></h3>
-                # <p class="ct"><img alt="大麦网客户端" height="108" original="//static.dmcdn.cn/Erweima/1710/171016.jpg" width="109"/></p>
+                # <p class="ct"><img alt="大麦网客户端" height="108" original="//static.dmcdn.cn/Erweima/1717/171739.jpg" width="109"/></p>
                 # </div>
                 # <div class="m_heighlight_tip"></div>
                 # </div>
@@ -419,7 +403,7 @@ class Spider(object):
                 # <div class="m-sdbox m-showtime">
                 # <h2 class="tt">演出时间</h2>
                 # <div class="ct">
-                # <span class="txt">2019-01-13 14:30</span>
+                # <span class="txt">2019-01-06</span>
                 # <a class="u-btn u-btn-cal" href="javascript:;" id="rili" onclick="showcalendar(event, this); return false;" onfocus="showcalendar(event, this);"><i>日历</i></a>
                 # </div>
                 # </div>
@@ -540,7 +524,7 @@ class Spider(object):
                 # <table class="m-table2">
                 # <tbody>
                 # <tr>
-                # <td class="bg" width="90">演出时间</td><td>2019-01-13 14:30</td> <td class="bg" width="90">演出场馆</td><td width="200">武汉琴台大剧院</td> </tr><tr> <td class="bg" width="90">演出时长</td><td>约70分钟</td> <td class="bg" width="90">入场时间</td><td width="200">演出前约30分钟</td> </tr><tr> </tr><tr> </tr><tr> </tr><tr> <td class="bg">限购</td><td>选座购买每单限6张</td> <td class="bg">儿童入场提示</td><td>儿童凭票入场<br/></td> </tr><tr> <td class="bg">禁止携带物品</td>
+                # <td class="bg" width="90">演出时间</td><td>2019-01-06</td> <td class="bg" width="90">演出场馆</td><td width="200">武汉琴台大剧院</td> </tr><tr> <td class="bg" width="90">演出时长</td><td>约70分钟</td> <td class="bg" width="90">入场时间</td><td width="200">演出前约30分钟</td> </tr><tr> </tr><tr> </tr><tr> </tr><tr> <td class="bg">限购</td><td>选座购买每单限6张</td> <td class="bg">儿童入场提示</td><td>不建议14岁以下儿童观看<br/></td> </tr><tr> <td class="bg">禁止携带物品</td>
                 # <td>由于安保和版权的原因，大多数演出、展览及比赛场所禁止携带食品、饮料、专业摄录设备、打火机等物品，请您注意现场工作人员和广播的提示，予以配合</td>
                 # <td class="bg">付款时效提醒</td>
                 # <td>购票下单成功后需在15分钟内完成支付，未支付成功的订单，将在下单15分钟后系统自动取消，所选价位将自动释放后重新点亮，大家可及时刷新购票页面进行购买。</td>
@@ -548,28 +532,20 @@ class Spider(object):
                 # <td>所需票价若为灰色，说明已经售完。您可以在当前页面进行缺货登记，后期如果有票会以短信形式及时通知。</td>
                 # <td class="bg">发票说明</td>
                 # <td>发票由现场提供，演出当天请持门票到演出场馆开具</td>
-                # </tr> <tr> <td class="bg">实名制</td>
-                # <td>无需实名制购票</td>
-                # <td class="bg">座位类型</td>
+                # </tr> <tr> <td class="bg">座位类型</td>
                 # <td>请按门票对应位置，有序对号入座</td>
-                # </tr> <tr> <td class="bg">物品寄存</td>
+                # <td class="bg">物品寄存</td>
                 # <td>无寄存处，请自行保管携带物品</td>
-                # <td class="bg">有无中文字幕</td>
+                # </tr> <tr> <td class="bg">有无中文字幕</td>
                 # <td>演出现场无字幕</td>
-                # </tr> <tr> <td class="bg">演出语言</td>
+                # <td class="bg">演出语言</td>
                 # <td>普通话</td>
-                # <td class="bg">主演演员（团体）</td>
-                # <td>文晓依，杨子璇，李璐<br/></td>
-                # </tr> <tr> <td class="bg">大麦网首次开售时全场可售门票总张数</td>
-                # <td>200张</td>
-                # <td class="bg">退换说明</td>
+                # </tr> <tr> <td class="bg">主演演员（团体）</td>
+                # <td>周申，刘露<br/></td>
+                # <td class="bg">大麦网首次开售时全场可售门票总张数</td>
+                # <td>300张</td>
+                # </tr> <tr> <td class="bg">退换说明</td>
                 # <td>票品不支持退换。如无法正常观看，还请自行处理，给您带来不便敬请谅解</td>
-                # </tr> <tr> <td class="bg">票品类型</td>
-                # <td>纸质票</td>
-                # <td class="bg">入场方式</td>
-                # <td>纸质票入场</td>
-                # </tr> <tr> <td class="bg">取票方式</td>
-                # <td>快递配送</td>
                 # <td class="bg"></td><td></td></tr>
                 # </tbody>
                 # </table>
@@ -579,82 +555,14 @@ class Spider(object):
                 # <dl class="infoitm">
                 # <dt class="tt"><span class="txt">项目介绍</span></dt>
                 # <dd class="ct">
-                # <div class="pre"><p>
-                # <br/>
-                # </p>
-                # <h4>
+                # <div class="pre"><h4>
                 # 	演出介绍
                 # </h4>
-                # <p>
-                # <br/>
-                # </p>
-                # <p>
-                # 	西山居官方授权，浣沙文化制作出品
-                # </p>
-                # 舞台视觉呈现多维度全息投影，大程度丰富演出空间<br/>
-                # 流动空间舞台技术应用，《剑网3》游戏场景还原呈现<br/>
-                # 体味最具魅力的戏剧舞台，共赴身临其境的视听盛宴<br/>
-                # <h4>
-                # 	特别福利
-                # </h4>
-                # 凡购买588元、788元、988元门票的观众，可随演出票获得《剑网3》游戏【舞云飞·永久】挂件一个。<br/>
-                # 凡购买388元、288元、188元门票的观众，可随演出票获得《剑网3》游戏【舞云飞·有效期90天】挂件一个。<br/>
-                # *演出结束后一人一票凭票于兑换处领取【舞云飞】激活码，兑换处设在剧院一楼大厅内，有工作人员引导*<br/>
-                # <h4>
-                # 	故事梗概
-                # </h4>
-                # 曲云是当年名扬天下的七秀之一昭秀，正所谓："舞低杨柳楼心月，歌尽桃花扇底风"，曲云将一颗芳心系到藏剑山庄二庄主石中剑叶晖的身上。叶晖当时正值青春年少，意气风发，与曲云真正是郎才女貌，比翼双飞，羡煞多少旁人。然而天有不测风云，就在两人正在憧憬美好未来，一个神秘老人的到来打断了他们的美梦……<br/>
-                # 我们的故事也由此展开，在这盛唐之下的繁华，武林动荡，江湖中暗流涌动，情缘二字，交织出一曲曲侠气与爱的壮丽长歌。在江湖大义前，曲云该如何抉择，怎样才能不负所爱之人，从秀丽江南到神秘苗疆，青丝暮雪写成彼此传说。<br/>
-                # 剑侠情缘，江湖一路有你。<br/>
-                # <h4>
-                # 	精彩看点
-                # </h4>
-                # 遵循以原本的游戏设定为基础，用更加宽广的视角关注流动的视觉形象，同时寻找与剧情的精神体量相当的视觉逻辑轨迹，把镜框式舞台表现为一个流动的空间，将被提炼出的虚拟世界与现实世界的视觉符号相结合，按照故事顺序编排在舞台呈现中，让观众多角度的去感受这部作品的视觉形象张力，还有精彩的故事、有趣的互动，炫酷的舞美、灯光设计，流光溢彩的服饰和令人惊叹的多媒体效果。<br/>
-                # 高度还原的游戏场景和故事剧情，让你笑着流泪，哭着感动！<br/>
-                # <strong> </strong><br/>
-                # <strong>舞台剧OST音乐原声专辑</strong><br/>
-                # 舞台剧出品人罗晓音跨界担纲舞台剧《剑网3·曲云传》音乐总监，并亲自操刀8首宣传曲，邀请众多明星王珮瑜、刘惜君、周深、黄龄、徐良、苏诗丁、刘思涵8位歌手，联手制作舞台剧OST音乐专辑，已在腾讯音乐同步发行。<br/>
-                #  <br/>
-                # <strong>主创团队</strong><br/>
-                # 出品人、音乐总监：罗晓音 ／ 监制：郭炜炜 ／ 制作人：沐可歆<br/>
-                # 运营总监：刘百灵／市场总监：拉姆／演出总监：薛诗薇<br/>
-                # 编剧：王非一／导演：王冠汉／视觉总监：王瑜<br/>
-                # 舞美设计：秦冠杰／灯光设计指导：谭华／多媒体项目总监：周瀛<br/>
-                # 武术指导：刘凯／舞蹈指导：曲慧佳／造型设计：刘嘉茜<br/>
-                #  <br/>
-                # 舞台监督：罗霁忺／执行导演：刘柏辰<br/>
-                # 灯光设计：王震、唐一飞／多媒体总设计：沈倩然<br/>
-                # 音乐设计：缪敬、陶子／音效设计及操控：吴灿<br/>
-                # 偶设计及制作：义山文化／道具设计：胡易非<br/>
-                # 威压监制：魏继宁／威压设计：刘光慧、王彬<br/>
-                # 副导演：张璨／场记：柴世雄<br/>
-                # 多媒体制作经理：韩冰倩／音乐制作助理：齐觊<br/>
-                # 执行舞台监督：韩磊／助理舞台监督：陈志鹏、罗杰骏一<br/>
-                # 灯光编程：袁圣／服化：刘辉团队／道具操作：李晓静<br/>
-                # 话筒操控：蔡扬、解惠惠、左杨／多媒体操控：蔡建引、万益博、李涛<br/>
-                #  <br/>
-                # 策划：项红玉、龙敏婕／企宣及运营分析：陈坚／平面及海报设计：马琦／行政助理：王蓉 孙利<br/>
-                #  <br/>
-                # 舞美制作及多媒体技术：瀚裕实业／多媒体制作：菜猫工作室<br/>
-                # 服装制作：多特工作室／发型及特 效化妆制作：仁哲团队<br/>
-                # 道具制作：于洋、未来工作室/威亚设备及技术：苡安文化<br/>
-                # 灯光设备及技术：拾玖度文化、舞美界／音响设备及技术：泊笠文化<br/>
-                # <strong> </strong><br/>
-                # <strong>演员：</strong><br/>
-                # 文晓依（醋醋）／杨子璇／李璐（林景） <br/>
-                # 朱新锐／张姝阳／籍兴凯／殷凯／刘柏辰／戴文超<br/>
-                # 郭冠彤／周岭南／刘欧楠／周相宜／汪业栋／胡海峰／何铭海／张申／孙懿／梁开禹<br/>
-                # 张璨／吴玥嫱／万晓蕾／徐珠珠／蒲文晖／王甜甜／关胜理<br/>
-                #  注：名单仅供参考，以现场实际为准。<br/>
-                # <strong>特别鸣谢</strong><br/>
-                # 剑网3官方团队<br/>
-                # "曲云传"字体设计：狸曰／DM视觉支持：艺秀轩<br/>
-                #  影像记录：亿蝶文化／定妆照及海报设计：葱摄影<br/>
-                # 大宁剧院／瀚裕实业／菜猫工作室／上海电影艺术学院<br/>
-                #  <br/>
-                # 剑侠情缘，江湖一路有你，<br/>
-                # 感谢每一位陪伴同行的侠士。<br/>
-                # <br/></div>
+                # 　　民国时期的一个乡村学校，由于严重缺水，校长将一头驴虚报成英语  老师，来为学校挑水。面临上级的检查，大家决定让一个铁匠来冒充  这个叫"驴得水"的英语老师。但是上级却对这位"驴"老师刨根问  底。眼看事情要败露，大家只能用更多的谎言去弥补。于是，事件的发展越来越超乎校长和老师们的预料……<br/>
+                # <strong>　　导演/编剧 周申： </strong><br/>
+                # 　　2006年独立指导小剧场话剧《朱丽小姐》联合导演话剧《三姊妹》  2007年（商业展示）自编自导小型音乐短剧《浪漫夜晚》  联合导演小剧场话剧《秃头歌女》  2008年编剧并联合导演音乐浪漫喜剧《如果，我不是我》<br/>
+                # <strong>　　导演/编剧 刘露：</strong><br/>
+                # 　　中央戏剧学院  导演系本科、导演系研究生  代表作：  《三姊妹》《秃头歌女》《如果我不是我》</div>
                 # </dd>
                 # </dl>
                 # <dl class="infoitm">
@@ -1094,7 +1002,7 @@ class Spider(object):
                 # </div>
                 # <div class="bd">
                 # <div class="m-viewseat" style="background:#fff url(img/loading.gif) no-repeat center center;">
-                # <div class="seat" style="padding:20px 60px;width:220px; height: 220px;"><img alt="" lazy-src="//piao.damai.cn/ShowBarcode.aspx?content=https%3A%2F%2Fpiao.damai.cn%2F171016.html" style="width:220px; height: 220px; display:none;"/></div>
+                # <div class="seat" style="padding:20px 60px;width:220px; height: 220px;"><img alt="" lazy-src="//piao.damai.cn/ShowBarcode.aspx?content=https%3A%2F%2Fpiao.damai.cn%2F171739.html" style="width:220px; height: 220px; display:none;"/></div>
                 # </div>
                 # </div>
                 # <div style="background:#fff;border-top:1px solid #e6e6e6; padding:8px 0px 8px 20px">
@@ -1160,7 +1068,7 @@ class Spider(object):
                 # <!-- 固定侧栏 end -->
                 # <script src="//dui.dmcdn.cn/dm_2015/goods/js/jquery-1.8.2.min.js" type="text/javascript"></script>
                 # <script type="text/javascript">
-                #         var performCount = 1;
+                #         var performCount = 2;
                 #     </script>
                 # <iframe border="0" frameborder="no" id="mapview" name="mapview" scrolling="no" style="display:none;"></iframe>
                 # <script type="text/javascript">
@@ -1174,12 +1082,13 @@ class Spider(object):
                 # <!-- 日历插件 end -->
                 # <script type="text/javascript">
                 # var projectDates={};
-                #  jQuery("#rili").attr("data-value", '2019.01.13'); projectDates['D20190113']=true;
+                #  jQuery("#rili").attr("data-value", '2019.01.06'); projectDates['D20190106']=true;
+                # projectDates['D20190106']=true;
                 # showCalendar = 1;
                 # </script>
-                # <script src="//dui.dmcdn.cn/??dm_2015/goods/site/js/common-min.js?v5.14.0,dm_2015/goods/site/js/search-min.js?v5.14.0,dm_2015/goods/site/js/widgetUIDs-min.js?v5.14.0,dm_2015/goods/site/js/calendarSettings-min.js,dm_2015/goods/site/js/calendar-min.js,dm_2015/goods/site/js/weixin-min.js,dm_2015/goods/site/js/json2-min.js,dm_2015/goods/site/js/datepicker-min.js,dm_2015/goods/site/js/app-min.js?v5.14.0" type="text/javascript"></script>
-                # <script src="/js/min/item-min.js?v5.14.0" type="text/javascript"></script>
-                # <script src="/js/min/qa-min.js?v5.14.0" type="text/javascript"></script>
+                # <script src="//dui.dmcdn.cn/??dm_2015/goods/site/js/common-min.js?v5.28.0,dm_2015/goods/site/js/search-min.js?v5.28.0,dm_2015/goods/site/js/widgetUIDs-min.js?v5.28.0,dm_2015/goods/site/js/calendarSettings-min.js,dm_2015/goods/site/js/calendar-min.js,dm_2015/goods/site/js/weixin-min.js,dm_2015/goods/site/js/json2-min.js,dm_2015/goods/site/js/datepicker-min.js,dm_2015/goods/site/js/app-min.js?v5.28.0" type="text/javascript"></script>
+                # <script src="/js/min/item-min.js?v5.28.0" type="text/javascript"></script>
+                # <script src="/js/min/qa-min.js?v5.28.0" type="text/javascript"></script>
                 # <script src="//www.damai.cn/staticfile/Announcement/Announcement.js?937492837" type="text/javascript"></script>
                 # <script type="text/javascript">
                 #     var title = $("#Title").val();
@@ -1215,7 +1124,7 @@ class Spider(object):
                 # 		});
                 # 		dplus.define('page', function(page){
                 # 			page.setType('project');//设置页面类型
-                # 			page.setTitle("舞台剧《剑网3·曲云传》武汉站");//设置页面标题,不填默认取document.title，建议填演出名
+                # 			page.setTitle("黑色喜剧《驴得水》武汉站");//设置页面标题,不填默认取document.title，建议填演出名
                 # 			page.setCategory(['话剧歌剧', '话剧歌剧']);//该演出对应的三级类目
                 # 			page.setTags([]);//该演出的其他TAG
                 # 			page.view({
@@ -1270,32 +1179,27 @@ class Spider(object):
                 # <script src="//g.alicdn.com/mtb/lib-mtop/2.3.16/mtop.js"></script>
                 # <script src="//g.alicdn.com/??damai/pc-wx/0.1.4/index.js"></script>
                 # </body>
-                # </html>""", 'html.parser')
+                # </html>"""
+                _html = BS(_test, 'html.parser')
+                dd = etree.HTML(_test)
 
                 # 建立信息字典，单条信息是字典
 
-                #获取有用信息
-                _info = {'图片地址': 'https:' + str(_html.find('div', class_='m-picbox').img.get('original')),
-                         '标题': _html.find('h2', class_='tt').span.text.strip(),
-                         '副标题': _html.find('h3', class_='stt').findAll('span')[1].text.strip(),
-                         '售票状态': _html.find('span', class_='txt-status').text.strip(),
-                         '演出时间': _html.find('div', class_='m-infobase').findAll('tr')[0].findAll('td')[1].text,
-                         '票价信息': _html.find('div', class_='m-choose-price').span.text,
-                         '演出场地': _html.find('div', class_='m-infobase').findAll('tr')[0].findAll('td')[3].text,
-                         '演出时长': _html.find('div', class_='m-infobase').findAll('tr')[1].findAll('td')[1].text,
-                         '演出语言': _html.find('div', class_='m-infobase').findAll('tr')[10].findAll('td')[1].text,    #这个要获取，但不要管它
-                         '演出字幕': _html.find('div', class_='m-infobase').findAll('tr')[9].findAll('td')[3].text,     #这个要获取，但不要管它
-                         '主要演员': _html.find('div', class_='m-infobase').findAll('tr')[10].findAll('td')[3].text,
-                         '演出介绍': _html.find('div', class_='m-infobase').find('div', class_='pre')}
+                # 获取有用信息
+                i[1]['演出时长'] = _html.find('div', class_='m-infobase').findAll('tr')[1].findAll('td')[1].text
+                i[1]['演出语言'] = _html.find('div', class_='m-infobase').findAll('tr')[9].findAll('td')[3].text
+                i[1]['演出字幕'] = _html.find('div', class_='m-infobase').findAll('tr')[9].findAll('td')[1].text
+                i[1]['主要演员'] = _html.find('div', class_='m-infobase').findAll('tr')[10].findAll('td')[1].text
+                i[1]['演出介绍'] = _html.find('div', class_='m-infobase').find('div', class_='pre').contents  # 显示子节点
+                i[1]['剧名']: re.search('《[^》]+》', i[1]['标题'], flags=0).group()
+                # gat_info_list.append(_info)
+                i[1]['蜘蛛状态'] = True
+                print(i[1])
 
-                # print(_info)
-                gat_info_list.append(_info)
-                i[1]['蜘蛛状态'] =True
-            # print('结束：', i)
             break
             time.sleep(5)
 
-        #保存到
+        # 保存到
         Save(gat_info_list, 'info_list.csv')
 
         return gat_info_list
