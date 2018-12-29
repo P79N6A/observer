@@ -19,30 +19,36 @@ import csv
 # 加载解析HTML库
 from bs4 import BeautifulSoup as BS
 
-from other.Item import list_to_csv as Save
+from other.writers import list_to_csv as Save
+from other.spiders.get_url import get_url  # 导入获取地址的库
 
 
 class Spider(object):
     # 构造请求头等
-    def __init__(self, URL):
-        self.url = URL_Info(URL).damai()
+    def __init__(self):
+        self.url = 'https://search.damai.cn/searchajax.html'  # 大麦网接受POST请求的地址
 
-        # 默认地址头
-        self._url_header = 'https://piao.damai.cn/'
+        self._url_header = 'https://piao.damai.cn/'  # 默认地址头
+
+        self.listName = 'info_drama.csv'  # 第一次抓去之后，就可以放到这个里面了
         # print(self.url)
+
+        self.re = 'https://search.damai.cn/searchajax.html'  # 抓去的大麦地址
 
     # 主函数
     def todo(self):
-        # 解析演出列表页面，返回所有演出的基本信息以及地址id（clean过的）,并保存为 get_url.csv
-        # _list = self.get_list()
+        # 解析演出列表页面，返回包含演出基本信息的数组
+        _get_list = get_url(self.re).todo()
+        print(_get_list)
 
-        #和_list中的 showslist.csv 做比较，如果列表中已经有了，就删除，返回没有添加的DataFrame
-        _clean_list= self.clean()
+        # 去重之后放到ListName这个文件中,是第一次获取数据，并返回去重后到数据
+        Save(_get_list, self.listName)
+
+        # 和_list中的 showslist.csv 做比较，如果列表中已经有了，就删除，返回没有添加的DataFrame
+        _clean_list = self.clean()
 
         # 逐个地址获取演出的详细信息，将详细的信息添加进来，返回完整的DataFrame
         _good_info = self.get_info()
-
-
 
     # 获取需要爬去的演出列表地址，并保存为：get_url.csv
     def get_list(self):
@@ -61,7 +67,7 @@ class Spider(object):
         # clean数据
         _clean_list = []
 
-        # 提取内容
+        # 提取内容那
         for j in range(len(need_spider_data)):
             _j = {'标题': need_spider_data[j]['name'],
                   '副标题': need_spider_data[j]['subhead'],
@@ -83,7 +89,7 @@ class Spider(object):
         print(_clean_list)
 
         # 保存内容到
-        Save(_clean_list, 'info_drama.csv')
+
         return _clean_list
 
     def clean(self):
@@ -1309,7 +1315,4 @@ def save(self):
 #     return need_spider_data
 
 if __name__ == '__main__':
-    url = 'https://search.damai.cn/searchajax.html'
-
-    _i = Spider(url)
-    _i.todo()
+    _i = Spider().todo()
