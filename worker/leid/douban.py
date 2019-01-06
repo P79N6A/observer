@@ -3,7 +3,7 @@
 # 还需要增加去重功能
 # 还需要增加爬虫报告
 # 加载URL地址
-from other.spiders import URL_Info
+from worker.leid import URL_Info
 
 # 加载解析地址库
 import requests
@@ -13,7 +13,7 @@ from requests import RequestException
 from bs4 import BeautifulSoup as BS
 
 # 加载保存库
-from other.serving import todo
+from worker.serving import todo
 
 
 # 输入豆瓣地址，todo开始爬虫，保存信息并打印日志

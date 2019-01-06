@@ -8,7 +8,7 @@ def list_to_csv(List):
     # 读取列表内容
     _data = pd.DataFrame(List)
     # _data.head()
-    NAME = curPath+'/tm51/test.csv'
+    NAME = curPath+'/tm51/history.csv'
     # 保存csv
     _data.to_csv(NAME,index=False,header=False, encoding='UTF-8')
 

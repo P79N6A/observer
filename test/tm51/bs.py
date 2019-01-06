@@ -304,7 +304,7 @@ def chanjian():
         j['内容'] = t3[d].string.rstrip().lstrip()
         _list.append(j)
 
-    # print(len(_list), _list)
+    # print(len(bookcase), bookcase)
     return _list
 
 

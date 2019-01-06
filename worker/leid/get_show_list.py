@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# 传入加载豆瓣地址，进行内容解析并储存信息，生成爬虫报告
+# 通过从阅读者那里获取内容，并对内容进行解析，同时生成爬虫报告
 
 # 加载header信息
 import re
@@ -7,7 +7,7 @@ import time
 from lxml import etree
 import pandas as pd
 
-from other.url_info import URL_Info
+from worker.url_info import URL_Info
 
 # 加载解析地址库
 import requests
@@ -19,36 +19,97 @@ import csv
 # 加载解析HTML库
 from bs4 import BeautifulSoup as BS
 
-from other.writers import list_to_csv as Save
-from other.spiders.get_url import get_url  # 导入获取地址的库
+# 导入获取地址的库
+# from worker.writers import save_list as Save
+from worker.agency import get_post
 
 
 class Spider(object):
     # 构造请求头等
     def __init__(self):
-        self.url = 'https://search.damai.cn/searchajax.html'  # 大麦网接受POST请求的地址
+        # 大麦网接受POST请求的地址
+        self.post_url = 'https://search.damai.cn/searchajax.html'
 
-        self._url_header = 'https://piao.damai.cn/'  # 默认地址头
+        # 以后要试图用别到方法获取
+        self.Cookie = 'isg=BKys-EXc3E7Cn82CThRo44Q6f4zeZVAPNQZk9QbtuNf6EUwbLnUgn6KiNVmpgohn; l=aB8neGmpyhCp3pDBtManBsRP-xrxygBP2j0yxMazZiYGdP8ZuXKbBjno-Vw6d_qC55oy_X-iI; x5sec=7b226d65632d67756964652d7765623b32223a226330353961323833626333396639623439346663663365343461633235313234434d4341782b4546454a617937346a353176585946673d3d227d; UM_distinctid=15aa9009428293-0103a30182f46e8-1a441228-13c680-15aa9009429337; cn_7415364c9dab5n09ff68_dplus=%7B%22distinct_id%22%3A%20%2215aa9009428293-0103a30182f46e8-1a441228-13c680-15aa9009429337%22%2C%22initial_view_time%22%3A%20%221488889067%22%2C%22initial_referrer%22%3A%20%22http%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzA4NjMyMzIyMA%3D%3D%26mid%3D2654063564%26idx%3D1%26sn%3Db2c9e26ab4628436e9dc1ff38f8e05d5%26scene%3D0%22%2C%22initial_referrer_domain%22%3A%20%22mp.weixin.qq.com%22%2C%22sp%22%3A%20%7B%22%24recent_outside_referrer%22%3A%20%22%24direct%22%2C%22%24_sessionid%22%3A%200%2C%22%24_sessionTime%22%3A%201546617582%2C%22%24dp%22%3A%200%2C%22%24_sessionPVTime%22%3A%201546617582%7D%7D; x_hm_tuid=PGrpHppNc7p6qeO6rXzlt1Xkss1FsDkItpzuBytBQ5KWbMnMwqH0Nz0UiMR82FQq; _uab_collina=154633349240746853818272; destCity=%u6B66%u6C49; cna=W5Y0EQTl42YCARsRRUVaKCov; damai.cn_email="wapu@qq.com"; damai.cn_nickName=%E4%B9%9F%E9%97%A8%E7%9A%84%E9%97%A8; PHPStat_Return_Count_10000001=1; PHPStat_Return_Time_10000001=1492404093845; PHPStat_Cookie_Global_User_Id=_ck17040701013914617714059138794; PHPStat_First_Time_10000001=1491498099371'
+
+        # 请求内容
+        self.data = {
+            "cty": "武汉",
+            "ctl": "话剧歌剧",
+            "tsg": "0",
+            "order": "0"
+        }
+
+        # 上级页面
+        self.Referer = 'https://search.damai.cn/search.htm'
+
+        # 默认地址头
+        self._url_header = 'https://piao.damai.cn/'
 
         self.listName = 'info_drama.csv'  # 第一次抓去之后，就可以放到这个里面了
         # print(self.url)
 
         self.re = 'https://search.damai.cn/searchajax.html'  # 抓去的大麦地址
 
+        #步骤参数
+        self.steps = 0
+
+        # 设置返回值
+        self._value=[]
+
     # 主函数
-    def todo(self):
+    def _do(self):
+
         # 解析演出列表页面，返回包含演出基本信息的数组
-        _get_list = get_url(self.re).todo()
-        print(_get_list)
+        _get_post = get_post(URL=self.post_url, DATA=self.data, COOKIE=self.Cookie, REFERER=self.Referer).todo()
+        print('获取页面信息成功\n')
+
+        # 获取有用信息
+        for j in range(len(_get_post)):
+            # 为了让代码更简洁，做了一个赋值
+            _info = _get_post[j]
+
+            # 获取有用的信息,属性
+            _j = {'标题': _info['name'],
+                  '副标题': _info['subhead'],
+                  '地点城市': _info['venuecity'],
+                  '演出场所': _info['venue'],
+                  '演出时间': _info['showtime'],
+                  '演出状态': _info['showstatus'],
+                  '演出类型': _info['subcategoryname'],
+                  'projectid': _info['projectid'],
+                  'imgurl': _info['imgurl'],
+                  '最低票价': _info['price'],
+                  '最高票价': _info['pricehigh'],
+                  '信息属性': self.steps
+                  }
+
+            # 添加剧名
+            if bool(re.search('《[^》]+》', _info['name'], flags=0)):  # 如果搜得到《》，则赋值到'剧名'
+                _j['剧名'] = re.search('《[^》]+》', _info['name'], flags=0).group()
+            else:  # 如果提取不到《》，则写入日志
+                # 之后在分析是，如果是空值，则不处理
+                _j['剧名'] = None
+                with open("Running_log.txt", 'a+', encoding='utf-8') as _log:
+                    text= '\n获取剧名失败，需要特殊处理：'+str(_info['name'])
+                    _log.write(text)
+
+            self._value.append(_j)
+
+    @property
+    def get_value(self):
+        self._do()
+        return self._value
 
         # 去重之后放到ListName这个文件中,是第一次获取数据，并返回去重后到数据
-        Save(_get_list, self.listName)
+        # _useful_url = Save(_get_url, self.listName)
 
         # 和_list中的 showslist.csv 做比较，如果列表中已经有了，就删除，返回没有添加的DataFrame
-        _clean_list = self.clean()
+        # _clean_list = self.clean()
 
         # 逐个地址获取演出的详细信息，将详细的信息添加进来，返回完整的DataFrame
-        _good_info = self.get_info()
+        # _good_info = self.get_info()
 
     # 获取需要爬去的演出列表地址，并保存为：get_url.csv
     def get_list(self):
@@ -80,7 +141,7 @@ class Spider(object):
                   'imgurl': need_spider_data[j]['imgurl'],
                   '最低票价': need_spider_data[j]['price'],
                   '最高票价': need_spider_data[j]['pricehigh'],
-                  # '剧名':re.search('《[^》]+》',_j['标题'],flags=0).group()
+                  '剧名': re.search('《[^》]+》', _j['标题'], flags=0).group()
                   }
 
             _clean_list.append(_j)
@@ -92,13 +153,10 @@ class Spider(object):
 
         return _clean_list
 
-    def clean(self):
-        return 1
-
     # 获取列表中每条页面的有用信息,并保存在原来的文件中，并保存到
     def get_info(self):
         _data = pd.DataFrame(
-            pd.read_csv('/Users/tama1/Documents/ob/other/spiders/get_url.csv', header=0, encoding='UTF-8'))
+            pd.read_csv('/Users/tama1/Documents/ob/worker/readers/get_url.csv', header=0, encoding='UTF-8'))
 
         # # 增加是否抓取详情的列
         _data['蜘蛛状态'] = False
@@ -1315,4 +1373,4 @@ def save(self):
 #     return need_spider_data
 
 if __name__ == '__main__':
-    _i = Spider().todo()
+    _i = Spider().to_do()

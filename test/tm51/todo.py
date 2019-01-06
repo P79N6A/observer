@@ -21,11 +21,11 @@ def main():
     _html = parsing_page(_url)
 
     # # 获取活动列表的地址列表
-    # _list = list_page(_html)
+    # bookcase = list_page(_html)
     #
     # # 在活动列表中获取单个活动的地址列表
     # activity_list = list()
-    # for i in _list:
+    # for i in bookcase:
     #     # 解析新地址
     #     _url['url'] = i
     #     _html = parsing_page(_url)
