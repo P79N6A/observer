@@ -12,7 +12,7 @@
 # 更新内容
 
 # from worker.writers import update_list   as update_list
-from worker.readers import get_show_list
+from worker.readers import get_list, get_info
 from worker.writers import entry_show_list
 
 
@@ -24,23 +24,18 @@ class controller(object):
 
         # 第一次抓去之后，就可以放到这个里面了
         self.listName = 'info_drama.csv'
-        
-        # 默认地址头
-        self._url_header = 'https://piao.damai.cn/'
 
-        # 主函数
-
+    # 主函数
     def to_do(self):
         # 调用函数，获取演出列表
-        _get_show_list = get_show_list().get_value
+        # _get_show_list = get_list().get_value
         # print(_get_show_list)
 
         # 将列表中的信息写入数据库，写入时会进r行去重操作
-        _entry_show_list = entry_show_list(_get_show_list).get_value
+        # _entry_show_list = entry_show_list(_get_show_list).get_value
 
         # 抓取更详细的内容，也是通过大麦
-        _get_info =
-
+        _get_info = get_info().updata()
 
         # 抓取周边信息，通过百度，调用更多的爬虫
 
