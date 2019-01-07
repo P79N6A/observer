@@ -3,7 +3,7 @@
 import requests
 from requests import RequestException
 
-from other import url_info as _config
+from worker import url_info as _config
 from bs4 import BeautifulSoup as bs
 
 

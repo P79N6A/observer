@@ -1,4 +1,4 @@
-from other.spiders import damai
+from worker.leid import get_show_list
 
 
 class execute():
@@ -7,5 +7,5 @@ class execute():
             '大麦':['https://search.damai.cn/searchajax.html']
         }
     def toDo(self):
-        a = damai.Spider(self.url['大麦'])
+        a = get_show_list.Spider(self.url['大麦'])
         a.todo()
