@@ -59,5 +59,8 @@ def get_path():
     curPath =os.path.abspath(__file__)
     print(curPath)
 
+def words():
+    dd={'ddd':11,'fff':222}
+    print(list(dd.items()))
 if __name__ == '__main__':
-    get_path()
+    words()

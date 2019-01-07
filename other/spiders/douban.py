@@ -19,7 +19,13 @@ from other.serving import todo
 # 输入豆瓣地址，todo开始爬虫，保存信息并打印日志
 class Spider:
     def __init__(self, URL):
-        self.url = URL_Info(URL).douban()
+
+        self.headers = {
+            "User-Agent": user_agent.generate_user_agent(),  # 随机生成的
+            "Cookie": "",
+            "Referer": "https://www.douban.com/location/wuhan/events/future-all"
+        }
+        self.info = {'url': self.url, 'headers': headers, 'proxies': self.proxies}
 
     # 主函数
     def todo(self):
