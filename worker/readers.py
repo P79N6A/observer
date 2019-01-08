@@ -122,16 +122,22 @@ class get_info():
 
         # 逐个查询
         for i in _list:
+            # 拼接查询地址
             _url = self._url_header + str(i['projectid']) + '.html'
-            print(_url)
+            # print(_url)
+
+            # 获取源代码
             _get_info = self._get_info(_url)
+
+            # 获取有用信息list
             updata_data = self._extract(_get_info)
+            # print('返回内容：',updata_data)
 
             # 更新内容
             self.data_table.update({'projectid': i['projectid']}, {'$set': updata_data})
-            print(i['标题'])
-            time.sleep(5)  # 设置5秒定时，避免反爬
-            break
+            print('完成更新 %s'%i['标题'])
+            time.sleep(10)  # 设置5秒定时，避免反爬
+
 
     # 获取页面内容
     def _get_info(self, Url):
@@ -143,26 +149,47 @@ class get_info():
                 # 自行转码
                 response.encoding = 'UTF-8'
                 # 解析内容
-                page_source = BS(response.text, 'lxml')
+                page_source = BS(response.text, "lxml")
 
-                print(response.text)
+                # print(response.text)
                 return page_source
             else:
                 print('页面请求状态码：', response.status_code)
                 return None
         except:
-            print('在获取页面内容时出现错误：')
+            print('在获取页面内容时出现错误：',response.status_code)
             # 向工作日志中写入内容
             return None
 
     # 提炼页面内容，返回列表内容
     def _extract(self, Info):
-        # fanhuizhi
-        _list = dict(演出时长=Info.find('td',string='演出时长').next_sibling.next_sibling.text,
-                     演出语言=Info.find('td',string='演出语言').next_sibling.next_sibling.text,
-                     演出字幕=Info.find('td',string='演出字幕').next_sibling.next_sibling.text,
-                     主要演员=Info.find('div', class_='m-infobase').findAll('tr')[11].findAll('td')[1].text,
-                     演出介绍=Info.find('div', class_='m-infobase').find('div', class_='pre').text,信息属性=1)
+        # 返回值
+        _list = {}
+
+        #采集表格中的数据
+        _h = []
+
+        for i in Info.find_all('tr'):
+            for j in i.find_all('td'):
+                _h.append(j.text)
+
+        if '演出时长' in _h:
+            _list['演出时长']=_h[_h.index('演出时长')+1]
+
+        if '演出语言' in _h:
+            _list['演出语言']=_h[_h.index('演出语言')+1]
+
+        if '演出字幕' in _h:
+            _list['演出字幕']=_h[_h.index('演出字幕')+1]
+
+        if '主演演员（团体）' in _h:
+            _list['主演演员（团体）']=_h[_h.index('主演演员（团体）')+1]
+
+        for i in Info.find_all('div', class_='pre'):
+            if i.find('演出介绍', beg=0, end=len(i)) != -1:
+                _list['演出介绍'] = str(i.contents)
+
+        _list['信息属性'] =self.steps
 
         return _list
 
