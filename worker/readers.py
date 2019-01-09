@@ -26,7 +26,8 @@ from bs4 import BeautifulSoup as BS  # 加载解析HTML库
 from worker.agency import get_post_damai
 
 
-class get_list(object):
+# 获取大麦的演出列表
+class get_show_list(object):
     # 构造请求头等
     def __init__(self):
         # 大麦网接受POST请求的地址
@@ -42,13 +43,21 @@ class get_list(object):
             "tsg": "0",
             "order": "0"
         }
+        self.url = URL  # 接受POST请求的地址
+        self.headers = {
+            "User-Agent": user_agent.generate_user_agent(),  # 随机生成的,
+            "cookie": COOKIE,
+            "referer": REFERER
+        }
+        self.data = DATA  # 请求内容
+        self.proxy_dict = {
+            # "http": "180.118.86.4:9000/",
+            # "https": "180.118.86.4:9000/"
+        }  # 这里需要制造代理
+
 
         # 上级页面
         self.Referer = 'https://search.damai.cn/search.htm'
-
-        # 第一次抓去之后，就可以放到这个里面了
-        self.listName = 'info_drama.csv'
-        # print(self.url)
 
         # 步骤参数
         self.steps = 0
@@ -57,10 +66,10 @@ class get_list(object):
         self._value = []
 
     # 主函数
-    def _do(self):
+    def _main(self):
         # 解析演出列表页面，返回包含演出基本信息的数组
-        _get_post = get_post_damai(URL=self.post_url, DATA=self.data, COOKIE=self.Cookie, REFERER=self.Referer).todo()
-        print('获取页面信息成功\n')
+        _get_post = get_post_damai(URL=self.post_url, DATA=self.data, COOKIE=self.Cookie, REFERER=self.Referer).get_value
+        print('获取页面信息成功')
 
         # 获取有用信息
         for j in range(len(_get_post)):
@@ -87,7 +96,25 @@ class get_list(object):
 
     @property
     def get_value(self):
-        self._do()
+        try:  # 如果被反扒，则解析json时会出错
+            _response = requests.post(url=self.url, headers=self.headers, proxies=self.proxy_dict, data=self.data,
+                                      verify=True)  # verify是否验证服务器的SSL证书)
+            # print(_response.status_code,_response.text)
+
+            _dict_data = json.loads(_response.text)  # 将字符串数据转换成字典数据，
+            _get_post = _dict_data["pageData"]["resultData"]  # 将需要的爬取的字典数据存储在变量中
+            # print('成功获取json:',_dict_data)
+            print('成功获取json')
+
+            print('完成提取数据的任务')
+            return _get_post  # 返回数组
+        except:
+            # 这部分还没有完善
+            print('被墙了')
+            return None
+    @property
+    def get_value(self):
+        self._main()
 
         return self._value
 
@@ -135,9 +162,8 @@ class get_info():
 
             # 更新内容
             self.data_table.update({'projectid': i['projectid']}, {'$set': updata_data})
-            print('完成更新 %s'%i['标题'])
+            print('完成更新 %s' % i['标题'])
             time.sleep(10)  # 设置5秒定时，避免反爬
-
 
     # 获取页面内容
     def _get_info(self, Url):
@@ -157,7 +183,7 @@ class get_info():
                 print('页面请求状态码：', response.status_code)
                 return None
         except:
-            print('在获取页面内容时出现错误：',response.status_code)
+            print('在获取页面内容时出现错误：', response.status_code)
             # 向工作日志中写入内容
             return None
 
@@ -166,7 +192,7 @@ class get_info():
         # 返回值
         _list = {}
 
-        #采集表格中的数据
+        # 采集表格中的数据
         _h = []
 
         for i in Info.find_all('tr'):
@@ -174,25 +200,25 @@ class get_info():
                 _h.append(j.text)
 
         if '演出时长' in _h:
-            _list['演出时长']=_h[_h.index('演出时长')+1]
+            _list['演出时长'] = _h[_h.index('演出时长') + 1]
 
         if '演出语言' in _h:
-            _list['演出语言']=_h[_h.index('演出语言')+1]
+            _list['演出语言'] = _h[_h.index('演出语言') + 1]
 
         if '演出字幕' in _h:
-            _list['演出字幕']=_h[_h.index('演出字幕')+1]
+            _list['演出字幕'] = _h[_h.index('演出字幕') + 1]
 
         if '主演演员（团体）' in _h:
-            _list['主演演员（团体）']=_h[_h.index('主演演员（团体）')+1]
+            _list['主演演员（团体）'] = _h[_h.index('主演演员（团体）') + 1]
 
         for i in Info.find_all('div', class_='pre'):
             if i.find('演出介绍', beg=0, end=len(i)) != -1:
                 _list['演出介绍'] = str(i.contents)
 
-        _list['信息属性'] =self.steps
+        _list['信息属性'] = self.steps
 
         return _list
 
 
 if __name__ == '__main__':
-    _i = Spider().to_do()
+    _i = get_show_list().get_value

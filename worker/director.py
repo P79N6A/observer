@@ -12,7 +12,7 @@
 # 更新内容
 
 # from worker.writers import update_list   as update_list
-from worker.readers import get_list, get_info
+from worker.readers import get_show_list, get_info
 from worker.writers import entry_show_list
 
 
@@ -27,8 +27,8 @@ class controller(object):
 
     # 主函数
     def to_do(self):
-        # 调用函数，获取演出列表
-        _get_show_list = get_list().get_value
+        # 调用函数，获取演出:List
+        _get_show_list = get_show_list().get_value
         # print(_get_show_list)
 
         # 将列表中的信息写入数据库，写入时会进r行去重操作

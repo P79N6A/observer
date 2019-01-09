@@ -25,23 +25,7 @@ class get_post_damai:
             # "https": "180.118.86.4:9000/"
         }  # 这里需要制造代理
 
-    def todo(self):
-        try:  # 如果被反扒，则解析json时会出错
-            _response = requests.post(url=self.url, headers=self.headers, proxies=self.proxy_dict, data=self.data,
-                                      verify=True)  # verify是否验证服务器的SSL证书)
-            # print(_response.status_code,_response.text)
 
-            _dict_data = json.loads(_response.text)  # 将字符串数据转换成字典数据，
-            _get_post = _dict_data["pageData"]["resultData"]  # 将需要的爬取的字典数据存储在变量中
-            # print('成功获取json:',_dict_data)
-            print('成功获取json')
-
-            print('完成提取数据的任务')
-            return _get_post  # 返回数组
-        except:
-            # 这部分还没有完善
-            print('被墙了')
-            return None
 
 
 
