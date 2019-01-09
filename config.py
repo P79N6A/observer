@@ -1,4 +1,5 @@
 # -* - coding: UTF-8 -* -
+#这里要做一个获取config的库，这样可以直接通过函数，将参数变成字典，调用出来
 from configparser import ConfigParser
 
 
