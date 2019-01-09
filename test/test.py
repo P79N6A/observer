@@ -10,6 +10,11 @@ def json():
 
     db_name = {'剧目': 'plans'}
 
+#字符串转时间
+def ddddd():
+    import datetime
+    date_str = "2016-11-30 13:53:59"
+    print(datetime.datetime.strptime(date_str , "%Y-%m-%d %H:%M:%S").time())
 
 # 处理文件到读写
 def text():
@@ -490,6 +495,73 @@ def fenxi():
         print(items[i])
     wc.generate(text)
 
+#分词测试
+def fdfdf():
+    import pandas as pd
+    # 加载解析HTML库
+    from bs4 import BeautifulSoup as BS
+    import jieba.analyse
+
+    info = BS(open('data1.xml', 'r', encoding='utf-8'), 'html.parser')
+    fog = info.find_all('row')
+
+    inpu = []
+    sirtl = {}
+    for i in fog:
+        n = i.find_all('field')
+        ondu = {}
+        ondu['id'] = i.find('field', class_='id').get_text()
+        ondu['subject'] = n[3].get_text()
+        ondu['message'] = n[4].get_text()
+        ondu['views'] = n[5].get_text()
+        ondu['replies'] = n[6].get_text()
+        ondu['hots'] = n[7].get_text()
+
+        # _fenci = jieba.lcut(ondu['message'])
+        _fenci = jieba.analyse.extract_tags(ondu['message'], topK=20, withWeight=False)
+
+        # print(ondu)
+        # 分词内容
+        counts = {}
+
+        for word in _fenci:
+            if len(word) == 1:
+                continue
+            else:
+                counts[word] = counts.get(word, 0) + 1
+
+        for i in counts:
+            if i in sirtl:
+                sirtl[i] = sirtl[i] + counts[i]
+            else:
+                sirtl[i] = counts[i]
+
+        ondu['fenci'] = counts
+        inpu.append(ondu)
+        # print(ondu)
+        # break
+
+    # 停用词
+    ddd = []
+    stopd = open('tingyongci.txt', 'r', encoding='utf-8').readlines()
+    for i in stopd:
+        ddd.append(i)
+
+    _deg = []
+    for i in sirtl.items():
+        if i not in ddd:
+            _deg.append(i)
+
+    _deg.sort(key=lambda x: x[1], reverse=True)
+    print(_deg)
+
+    # for j in ondu:
+    #     j['fenci'].
+
+    # ewwe=open('dde.txt','w',encoding='utf-8')
+    # ewwe.write(str(inpu))
+    # ewwe.close()
+    # info.close()
 
 # 停用此测试
 def stopkey():
@@ -1744,10 +1816,139 @@ $(document).on("click", ".xiaonengService", function() {
         print(i)
 
 
+def ggeee():
+    import pandas as pd
+    import os
 
+    # 获得当前路径的上级路径
+    curPath = os.path.dirname(os.getcwd())
+    print(curPath)
+
+    def list_to_csv(List):
+        # 读取列表内容
+        _data = pd.DataFrame(List)
+        # _data.head()
+        NAME = curPath + '/tm51/history.csv'
+        # 保存csv
+        _data.to_csv(NAME, index=False, header=False, encoding='UTF-8')
+
+        print(_data, '\n', _data.values)
+
+    def list_to_db():
+        print(1)
+
+    def csv_to_db():
+        print('1')
+
+    def db_to_csv():
+        print('1')
+
+    def csv_to_data():
+        con = pd.DataFrame(pd.read_csv(curPath + '/res/contents.csv', header=None, encoding='UTF-8')).values
+        doi = pd.DataFrame(pd.read_csv(curPath + '/res/doings.csv', header=None, encoding='UTF-8')).values
+        yun = pd.DataFrame(pd.read_csv(curPath + '/res/yundong.csv', header=0, encoding='UTF-8')).values
+        #
+        # print('列表数：',len(doi[468:]),'\n',doi[468])
+        # print('列表数：',len(con[468:]),'\n',con[468:])
+        # print('列表数：',len(yun[0:]),'\n',yun[0])
+
+        # #测试两个表中的数据是否相同
+        # c = 0
+        # for i in range(402):
+        #     a = doi[i+468][2]
+        #     b = yun[i][1]
+        #     if a==b:
+        #         c +=1
+        #     # break
+        # print(c)
+
+        # 看看原来的运动表是否也是这样的数字，如果是的话，再校对一遍，然后就可以添加内容了
+        _re = []
+        for i in range(len(con[468:])):
+            # print(len(con[i+468]))
+            _de = []
+
+            a = eval(con[i + 468][2])
+            b = yun[i]
+
+            for j in range(len(a)):
+                a[j]['title'] = b[j * 3 + 4]
+
+            _de.append(str(con[i + 468][0]))
+            _de.append(str(con[i + 468][1]))
+            _de.append(str(a).replace(' ', ''))
+            _de.append(str(con[i + 468][3]))
+            _de.append(str(con[i + 468][4]))
+
+            _re.append(_de)
+            # print(_de)
+            # break
+
+        print(_re)
+
+        return _re
+
+        # 做完之后，去掉文本中的空格
+
+    if __name__ == '__main__':
+        list_to_csv(csv_to_data())
+        # print(curPath)
+
+
+# 若将数据写入txt文件时使用 \n 无法换行则使用 \r\n(回车+换行)
+def osdd():
+    _data = 20190107
+    path = "res/"+str(_data)
+
+    # 判断路径是否存在
+    # 存在     True
+    # 不存在   False
+    isExists = os.path.exists(path)
+
+    # 判断结果
+    if not isExists:
+        os.makedirs(path)
+
+    print(path)
+
+#逐行读取txt
+def dgggd():
+    de = open('./tm51/res/50/56776.txt').readlines()
+
+    print(len(de))
+    i =0
+    while i<5:
+        i+=1
+
+        print(de[i])
+
+#读取文件列表
+def dwww():
+    file_50 = os.listdir('./res/50')
+
+
+def  ccc():
+    t = open('test.txt','r',encoding='utf-8').read()
+    # print(type(t))
+    # for i in t:
+    #     print(i)
+    #     for j in i:
+    #         print(j)
+    #         break
+    #     break
+    f =eval(t)
+    for i in f:
+        print(i)
+        for j in i:
+            print(j)
+            break
+        break
+
+#文件查询
+def yide():
+    ddd=open('./res/actin_list.txt','r',encoding='utf-8').read()
+    gg=eval(ddd)
+    print(type(gg),gg['startAPP'])
 
 if __name__ == '__main__':
-    # get_db().save()
-
-    # tiqu()
-    dddd()
+    yide()

@@ -1,15 +1,11 @@
 # coding=utf-8
 
-
 from bs4 import BeautifulSoup
 
 from test.douban.todo import jiexichanjian
 from test.douban.todo import shipu
 
 # from test.douban import Dog
-
-
-
 
 # 解析能不能吃/做的页面代码
 def eat():
