@@ -19,10 +19,10 @@ def ddddd():
 # 处理文件到读写
 def text():
     # a+是接着写，w+是覆盖
-    with open("test.txt", 'a+', encoding='utf-8') as test:
+    with open("res/test.txt", 'a+', encoding='utf-8') as test:
         # dd = test.read() + '99'  # 读取内容，然后处理后，覆盖源文件
         test.write('测试数据')
-        test.close()
+
 
 #字符
 def zifu():
@@ -1951,4 +1951,4 @@ def yide():
     print(type(gg),gg['startAPP'])
 
 if __name__ == '__main__':
-    yide()
+    text()

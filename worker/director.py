@@ -2,14 +2,6 @@
 ##########################################
 # 导演，控制目前所有的内容的完成，作为总控台，完成所有分配任务
 ##########################################
-# 加载header信息
-
-# 加载解析地址库
-
-# 加载解析HTML库
-
-# 导入获取地址的库
-# 更新内容
 
 # from worker.writers import update_list   as update_list
 from worker.readers import get_show_list, get_info
@@ -27,17 +19,14 @@ class controller(object):
 
     # 主函数
     def to_do(self):
-        # 调用函数，获取演出:List
-        _get_show_list = get_show_list().get_value
-        # print(_get_show_list)
+        _get_show_list = get_show_list().get_value  # 调用函数，获取演出:List
 
-        # 将列表中的信息写入数据库，写入时会进r行去重操作
-        _entry_show_list = entry_show_list(_get_show_list).get_value
+        _entry_show_list = entry_show_list(_get_show_list).get_value# 将列表中的信息写入数据库，写入时会进r行去重操作
 
-        # 抓取更详细的内容，也是通过大麦
-        _get_info = get_info().updata()
+        _get_info = get_info().updata()# 抓取更详细的内容，也是通过大麦
 
         # 抓取周边信息，通过百度，调用更多的爬虫
+
 
         # 通过文本分析，提取剧目对应的关键词，然后形成词云，展示出来
         # _get_list = get_url(self.re).todo()  # 解析演出列表页面，返回包含演出基本信息的数组   可以改变下思路，将这一步变成获取新的演出列表，把获取信息放在写入类中，让写入类调用阅读类

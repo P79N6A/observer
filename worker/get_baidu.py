@@ -6,6 +6,8 @@
 # from other.spiders import URL_Info
 
 # 随机生成user_agent
+from urllib.parse import urlparse
+
 import user_agent
 
 # 加载解析地址库
@@ -16,50 +18,53 @@ from requests import RequestException
 from bs4 import BeautifulSoup as BS
 
 # 加载保存库
-from other.serving import todo
+# from other.serving import todo
 
 
 # 输入豆瓣地址，todo开始爬虫，保存信息并打印日志
-class Spider:
-    def __init__(self):
-        self.URL_Headers='https://www.baidu.com/s?ie=UTF-8&wd='
+class get_news:
+    def __init__(self,Word):
+        self.URL_Headers='https://www.baidu.com/s?ie=UTF-8&wd=' #地址头
+
         self.headers = {
             "User-Agent": user_agent.generate_user_agent(),  # 随机生成的
-            "Cookie": "",
-            "Referer": ""
         }
-        self.proxies = {
-            # "http": "http://47.93.56.0:3128",
-            # "http": "http://39.135.24.12:80",
-        }
-
+        self.word = Word
     # 主函数
     def todo(self):
-        sou ='《杏仁豆腐心》'
-        ddd= self.URL_Headers+sou
-        he = self.get_parse(ddd)
-        ge = he.find_all('h3',class_='t')
-        gdd = he.find('div',id='page').find('a',class_='n')
-        print(ge)
-        print(gdd)
 
-        下一页& pn = 10
+        _parse = self._parse(self.URL_Headers+self.word)#获取百度代码
+        _data = _parse.find_all('h3',class_='t')
+        print('显示内容：',len(_data))
+        for i in _data:
+            dd=urlparse(i.find('a').get('href'))
+            print(dd)
+            print('\n')
+
+            break
+
+
+        # _pages = _parse.find('div',id='page').find('a',class_='n')
+        # print('显示页码部位：',_pages)
+
+
+
 
 
     # 返回页面的源代码,会因为反爬虫，所以需要额外做判断，之后要把这部分单独做出来
-    def get_parse(self,text):
+    def _parse(self,text):
         try:
-            response = requests.get(text, headers=self.headers, proxies=self.proxies, timeout=1)
-            if response.status_code == 200:
+            _response = requests.get(text, headers=self.headers, timeout=1)
+            if _response.status_code == 200:
                 # 自行转码
-                response.encoding = 'UTF-8'
+                _response.encoding = 'UTF-8'
                 # 解析内容
-                page_source = BS(response.text, 'html.parser')
+                page_source = BS(_response.text, 'html.parser')
 
                 # print(response.text)
                 return page_source
             else:
-                print(response.status_code)
+                print(_response.status_code)
                 return None
         except RequestException:
             # 向工作日志中写入内容
@@ -203,5 +208,5 @@ def get_info(case_url):
 if __name__ == '__main__':
 
 
-    _i = Spider()
-    _i.todo()
+    _i = get_news('周杰伦').todo()
+

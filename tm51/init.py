@@ -122,7 +122,7 @@ def get_shu():
     _list={}
     for i in clist:
         print(i+':'+str(len(clist[i])))
-        # bookcase[i.key]
+        # res[i.key]
 
 if __name__ == '__main__':
     #保存内容到数据库

@@ -93,7 +93,7 @@ class entry_show_list:
 #
 #     # 在大麦中获取内容的更详细信息
 #     def update_list(self, listName='info_drama.csv', headers='https://piao.damai.cn/'):
-#         _list = pd.DataFrame(pd.read_csv("bookcase/" + listName, header=0, encoding='utf-8'))  # 读取CSV，以后是读取数据库
+#         _list = pd.DataFrame(pd.read_csv("res/" + listName, header=0, encoding='utf-8'))  # 读取CSV，以后是读取数据库
 #
 #         for n, i in _list.iterrows():
 #             if i['信息属性'] == 0:  # 如果信息属性为0，则表示没有从大麦中获取数据，

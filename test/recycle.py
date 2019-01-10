@@ -167,8 +167,8 @@ def entry_list(List, listName='history.csv'):
     _list = []  # 返回值
     _data = pd.DataFrame(List)  # 将传入的数组变成DataFrame
 
-    if os.path.exists("bookcase/" + listName):  # 如果文件存在，则直接保存
-        test = pd.DataFrame(pd.read_csv("bookcase/" + listName, encoding='utf-8'))  # 将原文件转换成DataFrame
+    if os.path.exists("res/" + listName):  # 如果文件存在，则直接保存
+        test = pd.DataFrame(pd.read_csv("res/" + listName, encoding='utf-8'))  # 将原文件转换成DataFrame
         # print(_data.iterrows())
         # 遍历列表
         for i in _data.iterrows():
@@ -186,12 +186,12 @@ def entry_list(List, listName='history.csv'):
                 else:  # 完全相同
                     print('完全重复的：', _i['剧名'])
 
-        test.to_csv("bookcase/" + listName, header=True, index=False)
+        test.to_csv("res/" + listName, header=True, index=False)
 
         print('更新了列表内容')
         return test
     else:  # 如果文件不存在，则直接保存并返回内容
-        _data.to_csv("bookcase/" + listName, header=True, index=False)
+        _data.to_csv("res/" + listName, header=True, index=False)
 
         print('没有原始文件，列表内容全部保存')
         return _data
