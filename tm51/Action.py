@@ -1,12 +1,17 @@
 # coding=utf-8
-# 转换内容 ，并提取数据
-import os
+
+#公共库
+import os# 转换内容 ，并提取数据
 from datetime import datetime
 
-from requests import RequestException
+#私有库
+from tm51.tool import get_value,get_id ,new_flie,out_com,only_one
+
 
 from bs4 import BeautifulSoup as bs
 import time
+
+from datetime import datetime
 
 # 自己人的账号
 com_name = eval(open('./res/actin_list.txt','r',encoding='utf-8').read())
@@ -34,17 +39,19 @@ def dd(self):
     print('一共有 %d 个用户，用户ID为：%s' % (len(value) , value))
 
 # 提取列表中的UID列表
-class get_value:
+class get_value0:
     def __init__(self):
         self._forum_thread = './res/forum_thread.xml'
         self._forum_thread_txt = './res/forum_thread.txt'
 
         self._user_action_report = './res/user_action_report.xml'
         self._user_action_report_txt = './res/user_action_report.txt'
+        self._user_action_report_list = './res/user_action_report_list.txt'
 
         self._user_count = './res/user_count.xml'
         self._user_count_txt = './res/user_count.txt'
 
+    #将xml转成list
     def _get_value(self , Path):
         # 将内容格式化
         _text = open(Path , 'r' , encoding='utf-8').read()
@@ -61,6 +68,9 @@ class get_value:
             _re.append(_j)
             # print(_re)
         return _re
+
+
+
 
     @property  # 提取'../res/forum_thread.xml'中的内容
     def forum_thread(self):
@@ -102,6 +112,44 @@ class get_value:
 
         return _value
 
+    @property
+    def user_action_report_list(self):
+        isExists = os.path.exists(self._user_action_report_list)
+
+        if isExists:  # 存在则读取内容
+            _file = open(self._user_action_report_list , 'r' , encoding='utf-8').read()
+            _value = eval(str(_file))
+            print('调用文件：_user_action_report_list')
+
+            return _value
+
+        else:  # 不存在，则转换xml
+            _value = self._get_value(self._user_action_report)
+
+            #创建
+            _list={}
+
+            #今天的日期
+            _today = datetime.today().date()
+            for i in _value:
+                #当天和现在的距离天数
+                _days=str((_today-datetime.strptime(i['created_at'] , "%Y-%m-%d %H:%M:%S").date()).days)
+
+                #建立key
+                if _days not in _list.keys():
+                    _list[_days] =[]
+
+                _list[ _days ].append(i)
+
+
+            # 并保存到txt
+            _file = open(self._user_action_report_list , 'w' , encoding='utf-8')
+            _file.write(str(_list))
+            _file.close()
+            print('创建文件：_user_action_report_list')
+
+            return _list
+
     @property  # 提取'../res/forum_thread.xml'中的内容
     def user_count(self):
         isExists = os.path.exists(self._user_count_txt)
@@ -121,9 +169,10 @@ class get_value:
             print('创建文件：user_action_report.txt')
 
         return _value
+
 # 工具组件
 class Tool:
-    # 获取列表中的uid
+    # 获取列表中的某个参数，去重
     def get_uid(self , Data,Key):  # 提取用户ID、并去除0
         if Key in Data[0].keys():
             print('列表中包含%s'%Key)
@@ -136,6 +185,7 @@ class Tool:
             if '0' in _value:
                 _value.remove('0')
 
+            print('提取 %s 完成，一共有 %s 条内容'% (Key,len(_value)) )
             return _value
         else:
             print('列表中不包含%s' % Key)
@@ -168,6 +218,7 @@ class Tool:
                 value.append(i)
 
         return value
+
 
 
 # 查看没有发帖的用户在做什么，保存到了res文件夹
@@ -302,13 +353,84 @@ def numbers(Path):
 
 #获取童梦币前dd名
 def top():
-    _v_user_count = get_value().user_count
-    dd= Tool().get_uid(_v_user_count,'coin')
+    _v_user_action_report = get_value().user_action_report
+    dd= Tool().get_uid(_v_user_action_report,'coin')
     print(dd)
+
+
+#近7天，只来过一次的用户的名单
+def days():
+    #创建数据文件夹
+    _action = Tool().new_flie('action')
+
+    #获取用户操作记录的数据
+    _file =get_value('user_action_report')
+
+    #获取想要的字段
+    _list = get_id(_file,['device_id','action_type','created_at'])
+    _list = only_one(_list,True)#去重
+
+    #获取只有date的部分,删除设备ID，获取数据中只登录一天的用户ID列表
+    _list_0 =[]
+    for i in _list: #获取只有date的部分,删除设备ID
+        i[ 'created_at' ] =datetime.strptime(i[ 'created_at' ] , "%Y-%m-%d %H:%M:%S").date()
+        i.pop('device_id')
+        _list_0.append(i)
+    _list = only_one(_list,True)#去重
+
+    _a ={}  #给每个设备计数
+    for i in _list_0:
+        if i['device_id'] not in _a:
+            _a[i['device_id']] =1
+        else:
+            _a[i['device_id']] +=1
+    _list_1=[]  #只登录一天的用户设备ID
+    for i in _a:#如果数字为1，则记录下来
+        if _a[i] ==1:
+            _list_1.append(i)
+    print('获取了只登录一天的用户设备ID，共%s个'%len(_list_1))
+
+    #提取数据
+    for i in _list_1:
+        # 用于保存一个用户到所有操作
+        _one_list = [ ]
+        for j in _list:
+            if i ==j['device_id']:
+                _i_1 = {}
+                _i_1[ 'created_at' ] = j[ 'created_at' ]
+                _i_1[ 'action_type' ] = j[ 'action_type' ]
+
+                _one_list.append(_i_1)
+
+        # 根据用户操作到次数，分文件夹保存数据
+        if len(_one_list) <= 50:
+            with open('%s/50_%s.txt' % (_action , i) , 'w+' , encoding='utf-8') as _save:
+                for i in _one_list:
+                    for j in range(len(i)):
+                        _save.write(str(i[ j ]))
+                        _save.write(' ')
+                    _save.write('\r\n')
+        elif len(_list) > 50 and len(_list) <= 100:
+            with open('%s/100_%s.txt' % (_action , i) , 'w+' , encoding='utf-8') as _save:
+                for i in _list:
+                    for j in range(len(i)):
+                        _save.write(str(i[ j ]))
+                        _save.write(' ')
+                    _save.write('\r\n')
+        else:
+            with open('%s/200_%s.txt' % (_action , i) , 'w+' , encoding='utf-8') as _save:
+                for i in _list:
+                    for j in range(len(i)):
+                        _save.write(str(i[ j ]))
+                        _save.write(' ')
+                    _save.write('\r\n')
+
+        print('设备ID：%s 操作了 %s 次'%(i,len(_one_list)))
+
 
 if __name__ == '__main__':
     # action()
     # numbers(50)
     # numbers(100)
     # numbers(1000)
-    top()
+    days()

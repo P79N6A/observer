@@ -10,11 +10,7 @@ def json():
 
     db_name = {'剧目': 'plans'}
 
-#字符串转时间
-def ddddd():
-    import datetime
-    date_str = "2016-11-30 13:53:59"
-    print(datetime.datetime.strptime(date_str , "%Y-%m-%d %H:%M:%S").time())
+
 
 # 处理文件到读写
 def text():
@@ -151,14 +147,20 @@ def tiqu():
     print(bool(re.search('《[^》]+》', test, flags=0)))
 
 
-# 时间计算的实验
-def time():
-    import datetime
-    a = '2018-02-20'
-    b = '2018-03-20'
-    startTime = datetime.datetime.strptime(a, '%Y-%m-%d')
-    endTime = datetime.datetime.strptime(b, '%Y-%m-%d')
-    print(startTime - endTime)
+#字符串转时间的系列实验
+def _datetime():
+    from datetime import datetime
+    datetime_str = "2016-11-30 13:53:59"
+    date_str = '2018-02-20'
+    time_str = '13:53:59'
+
+    print(datetime.strptime(date_str , "%Y-%m-%d").date())
+    print(datetime.strptime(time_str , "%H:%M:%S").time())
+    print(datetime.strptime(datetime_str , "%Y-%m-%d %H:%M:%S"))
+
+    startTime = datetime.strptime('2018-02-20', '%Y-%m-%d')
+    endTime = datetime.strptime('2018-03-20', '%Y-%m-%d')
+    print((startTime - endTime).days)
 
 
 # 去掉头尾的空格
@@ -1951,4 +1953,4 @@ def yide():
     print(type(gg),gg['startAPP'])
 
 if __name__ == '__main__':
-    text()
+    _datetime()
