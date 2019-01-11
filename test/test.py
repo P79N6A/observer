@@ -1948,7 +1948,7 @@ def  ccc():
 
 #文件查询
 def yide():
-    ddd=open('./res/actin_list.txt','r',encoding='utf-8').read()
+    ddd=open('./res/action_list.txt','r',encoding='utf-8').read()
     gg=eval(ddd)
     print(type(gg),gg['startAPP'])
 

@@ -1,23 +1,14 @@
 # coding=utf-8
 
-#公共库
-import os# 转换内容 ，并提取数据
+# 公共库
+import os  # 转换内容 ，并提取数据
 from datetime import datetime
-
-#私有库
-from tm51.tool import get_value,get_id ,new_flie,out_com,only_one
-
-
 from bs4 import BeautifulSoup as bs
 import time
-
 from datetime import datetime
 
-# 自己人的账号
-com_name = eval(open('./res/actin_list.txt','r',encoding='utf-8').read())
-
-#操作和名字对应表
-actin_list = eval(open('./res/actin_list.txt','r',encoding='utf-8').read())
+# 私有库
+from tm51.tool import get_value , get_id , new_folder , out_com , only_one , change_action
 
 
 # 判断最近50个发日记的人的名单
@@ -37,188 +28,6 @@ def dd(self):
             value.append(i.find_all('field')[ 1 ].text)
 
     print('一共有 %d 个用户，用户ID为：%s' % (len(value) , value))
-
-# 提取列表中的UID列表
-class get_value0:
-    def __init__(self):
-        self._forum_thread = './res/forum_thread.xml'
-        self._forum_thread_txt = './res/forum_thread.txt'
-
-        self._user_action_report = './res/user_action_report.xml'
-        self._user_action_report_txt = './res/user_action_report.txt'
-        self._user_action_report_list = './res/user_action_report_list.txt'
-
-        self._user_count = './res/user_count.xml'
-        self._user_count_txt = './res/user_count.txt'
-
-    #将xml转成list
-    def _get_value(self , Path):
-        # 将内容格式化
-        _text = open(Path , 'r' , encoding='utf-8').read()
-        _switch = _text.replace('field name=' , 'field class=')
-        _list = bs(_switch , 'lxml').find_all('row')
-
-        # 格式化为列表
-        _re = [ ]
-        for i in _list:
-            _j = {}
-            for j in i.find_all('field'):
-                _j[ j.get('class')[ 0 ] ] = j.text
-
-            _re.append(_j)
-            # print(_re)
-        return _re
-
-
-
-
-    @property  # 提取'../res/forum_thread.xml'中的内容
-    def forum_thread(self):
-        isExists = os.path.exists(self._forum_thread_txt)
-
-        if isExists:  # 存在则读取内容
-            _file = open(self._forum_thread_txt , 'r' , encoding='utf-8').read()
-            _value = eval(str(_file))
-            print('调用文件：_forum_thread_txt')
-
-        else:  # 不存在，则转换xml
-            _value = self._get_value(self._forum_thread)
-
-            # 并保存到txt
-            _file = open(self._forum_thread_txt , 'w' , encoding='utf-8')
-            _file.write(str(_value))
-            _file.close()
-            print('创建文件：_forum_thread_txt')
-
-        return _value
-
-    @property
-    def user_action_report(self):
-        isExists = os.path.exists(self._user_action_report_txt)
-
-        if isExists:  # 存在则读取内容
-            _file = open(self._user_action_report_txt , 'r' , encoding='utf-8').read()
-            _value = eval(str(_file))
-            print('调用文件：_user_action_report_txt')
-
-        else:  # 不存在，则转换xml
-            _value = self._get_value(self._user_action_report)
-
-            # 并保存到txt
-            _file = open(self._user_action_report_txt , 'w' , encoding='utf-8')
-            _file.write(str(_value))
-            _file.close()
-            print('创建文件：_user_action_report_txt')
-
-        return _value
-
-    @property
-    def user_action_report_list(self):
-        isExists = os.path.exists(self._user_action_report_list)
-
-        if isExists:  # 存在则读取内容
-            _file = open(self._user_action_report_list , 'r' , encoding='utf-8').read()
-            _value = eval(str(_file))
-            print('调用文件：_user_action_report_list')
-
-            return _value
-
-        else:  # 不存在，则转换xml
-            _value = self._get_value(self._user_action_report)
-
-            #创建
-            _list={}
-
-            #今天的日期
-            _today = datetime.today().date()
-            for i in _value:
-                #当天和现在的距离天数
-                _days=str((_today-datetime.strptime(i['created_at'] , "%Y-%m-%d %H:%M:%S").date()).days)
-
-                #建立key
-                if _days not in _list.keys():
-                    _list[_days] =[]
-
-                _list[ _days ].append(i)
-
-
-            # 并保存到txt
-            _file = open(self._user_action_report_list , 'w' , encoding='utf-8')
-            _file.write(str(_list))
-            _file.close()
-            print('创建文件：_user_action_report_list')
-
-            return _list
-
-    @property  # 提取'../res/forum_thread.xml'中的内容
-    def user_count(self):
-        isExists = os.path.exists(self._user_count_txt)
-
-        if isExists:  # 存在则读取内容
-            _file = open(self._user_count_txt , 'r' , encoding='utf-8').read()
-            _value = eval(str(_file))
-            print('调用文件：user_action_report.txt')
-
-        else:  # 不存在，则转换xml
-            _value = self._get_value(self._user_count)
-
-            # 并保存到txt
-            _file = open(self._user_count_txt , 'w' , encoding='utf-8')
-            _file.write(str(_value))
-            _file.close()
-            print('创建文件：user_action_report.txt')
-
-        return _value
-
-# 工具组件
-class Tool:
-    # 获取列表中的某个参数，去重
-    def get_uid(self , Data,Key):  # 提取用户ID、并去除0
-        if Key in Data[0].keys():
-            print('列表中包含%s'%Key)
-            _value = [ ]
-            for i in Data:
-                if i[ Key ] not in _value:
-                    # print(type(i[ 'uid' ]))
-                    _value.append(i[ Key ])
-
-            if '0' in _value:
-                _value.remove('0')
-
-            print('提取 %s 完成，一共有 %s 条内容'% (Key,len(_value)) )
-            return _value
-        else:
-            print('列表中不包含%s' % Key)
-
-            return
-
-    # 新建文件夹
-    def new_flie(self , Name):
-        path = "./res/" + str(Name)
-        # 判断路径是否存在
-        isExists = os.path.exists(path)
-
-        # print(isExists)
-        # 判断结果
-        if not isExists:
-            os.makedirs(path)
-
-        return path
-
-    def out_com(self , List):
-        # 排出内容人员的用户名
-        _v = [ ]
-        for i in com_name:
-            _v.append(str(i[ 0 ]))
-
-        # 排出内容人员
-        value = [ ]
-        for i in List:
-            if i not in _v:
-                value.append(i)
-
-        return value
-
 
 
 # 查看没有发帖的用户在做什么，保存到了res文件夹
@@ -275,7 +84,7 @@ def action():
         # 根据用户操作到次数，分文件夹保存数据
         if len(_list) <= 50:
             # 创建文件
-            _save = open('%s/%s.txt' % (file_50,_uid) , 'w+' , encoding='utf-8')
+            _save = open('%s/%s.txt' % (file_50 , _uid) , 'w+' , encoding='utf-8')
             for i in _list:
                 for j in range(len(i)):
                     _save.write(str(i[ j ]))
@@ -284,7 +93,7 @@ def action():
             _save.close()
         elif len(_list) > 50 and len(_list) <= 100:
             # 创建文件
-            _save = open('%s/%s.txt' % (file_100,i) , 'w+' , encoding='utf-8')
+            _save = open('%s/%s.txt' % (file_100 , i) , 'w+' , encoding='utf-8')
             for i in _list:
                 for j in range(len(i)):
                     _save.write(str(i[ j ]))
@@ -293,7 +102,7 @@ def action():
             _save.close()
         else:
             # 创建文件
-            _save = open('%s/%s.txt' % (file_1000,i) , 'w+' , encoding='utf-8')
+            _save = open('%s/%s.txt' % (file_1000 , i) , 'w+' , encoding='utf-8')
             for i in _list:
                 for j in range(len(i)):
                     _save.write(str(i[ j ]))
@@ -351,86 +160,138 @@ def numbers(Path):
 
     _end.close()
 
-#获取童梦币前dd名
-def top():
-    _v_user_action_report = get_value().user_action_report
-    dd= Tool().get_uid(_v_user_action_report,'coin')
-    print(dd)
 
+# 近7天，只来过一次的用户的名单
+class DaysLostUser:
+    def __init__(self):
+        self.path = 'res/action'  # 创建数据文件夹,并返回path
 
-#近7天，只来过一次的用户的名单
-def days():
-    #创建数据文件夹
-    _action = Tool().new_flie('action')
+        self.data = []  # 获取用户操作记录的数据
 
-    #获取用户操作记录的数据
-    _file =get_value('user_action_report')
+        self.mini_list = []  # 获取想要的字段
 
-    #获取想要的字段
-    _list = get_id(_file,['device_id','action_type','created_at'])
-    _list = only_one(_list,True)#去重
+        self.class_list = [ 20 , 50 , 100 , 150 ]  # 根据操作次数分文件夹保存
 
-    #获取只有date的部分,删除设备ID，获取数据中只登录一天的用户ID列表
-    _list_0 =[]
-    for i in _list: #获取只有date的部分,删除设备ID
-        i[ 'created_at' ] =datetime.strptime(i[ 'created_at' ] , "%Y-%m-%d %H:%M:%S").date()
-        i.pop('device_id')
-        _list_0.append(i)
-    _list = only_one(_list,True)#去重
+    # 显示只登录一天的用户设备ID
+    @property
+    def _get_user_list(self):
+        clean_list = [ ]
+        for i in self.mini_list:  # 获取只有date的部分,删除操作记录
+            _i_list_date = {}
+            _i_list_date[ 'created_at' ] = datetime.strptime(i[ 'created_at' ] , "%Y-%m-%d %H:%M:%S").date()
+            _i_list_date[ 'device_id' ] = i[ 'device_id' ]
+            clean_list.append(_i_list_date)
 
-    _a ={}  #给每个设备计数
-    for i in _list_0:
-        if i['device_id'] not in _a:
-            _a[i['device_id']] =1
-        else:
-            _a[i['device_id']] +=1
-    _list_1=[]  #只登录一天的用户设备ID
-    for i in _a:#如果数字为1，则记录下来
-        if _a[i] ==1:
-            _list_1.append(i)
-    print('获取了只登录一天的用户设备ID，共%s个'%len(_list_1))
+        clean_list = only_one(clean_list , False)  # 去重
+        # print('_list_date：%s' % clean_list[ 0 ])
 
-    #提取数据
-    for i in _list_1:
-        # 用于保存一个用户到所有操作
-        _one_list = [ ]
-        for j in _list:
-            if i ==j['device_id']:
-                _i_1 = {}
-                _i_1[ 'created_at' ] = j[ 'created_at' ]
-                _i_1[ 'action_type' ] = j[ 'action_type' ]
+        _times = {}  # 给每个设备计数
+        for i in clean_list:
+            if i[ 'device_id' ] not in _times:
+                _times[ i[ 'device_id' ] ] = 1
+            else:
+                _times[ i[ 'device_id' ] ] += 1
+        print('设备计数:完成，数据条数：%s' % len(_times))
 
-                _one_list.append(_i_1)
+        _list = [ ]  # 只登录一天的用户设备ID
+        for i in _times:  # 如果数字为1，则记录下来
+            if _times[ i ] == 1:
+                _list.append(i)
+        print('获取只登录一天的设备信息：完成，数据条数：%s' % len(_list))
+        # print('_list_1：%s' % _list[ 0 ])
 
-        # 根据用户操作到次数，分文件夹保存数据
-        if len(_one_list) <= 50:
-            with open('%s/50_%s.txt' % (_action , i) , 'w+' , encoding='utf-8') as _save:
-                for i in _one_list:
-                    for j in range(len(i)):
-                        _save.write(str(i[ j ]))
+        return _list
+
+    # 将数据分类放入不同的文件夹
+    def _classify(self , list , userId):
+        for j in self.class_list: #遍历判断是否符合条件
+            if len(list) < j:
+                _paht = new_folder('%s/%s' % (self.path , str(j)))
+
+                with open('%s/%s.txt' % (_paht , userId) , 'w' , encoding='utf-8') as _save:
+                    for i in list:
+                        _save.write(str(datetime.strptime(i[ 'created_at' ] , "%Y-%m-%d %H:%M:%S").time()))
                         _save.write(' ')
-                    _save.write('\r\n')
-        elif len(_list) > 50 and len(_list) <= 100:
-            with open('%s/100_%s.txt' % (_action , i) , 'w+' , encoding='utf-8') as _save:
-                for i in _list:
-                    for j in range(len(i)):
-                        _save.write(str(i[ j ]))
-                        _save.write(' ')
-                    _save.write('\r\n')
-        else:
-            with open('%s/200_%s.txt' % (_action , i) , 'w+' , encoding='utf-8') as _save:
-                for i in _list:
-                    for j in range(len(i)):
-                        _save.write(str(i[ j ]))
-                        _save.write(' ')
-                    _save.write('\r\n')
+                        _save.write(i[ 'action_type' ])
+                        _save.write('\r\n')
 
-        print('设备ID：%s 操作了 %s 次'%(i,len(_one_list)))
+                print(userId,len(list))
+                return  #不加这个就会不停判断
 
+    def make_file(self):
+        self.path = new_folder('res/action')  # 创建数据文件夹,并返回path
+
+        self.data = get_value('user_action_report')  # 获取用户操作记录的数据
+
+        self.mini_list = get_id(self.data , [ 'device_id' , 'action_type' , 'created_at' ])  # 获取想要的字段
+
+        user_list = self._get_user_list  # 返回设备ID列表
+
+        # 提取数据
+        for i in user_list:
+            # 用于保存一个用户到所有操作
+            _one_list = [ ]
+            for j in self.mini_list:
+                if i == j[ 'device_id' ]:
+                    _one_list.append(dict(created_at=j[ 'created_at' ] , action_type=j[ 'action_type' ]))
+
+            # 转换为可以看懂的中文
+            _one_list = change_action(_one_list)
+
+            # 根据用户操作到次数，分文件夹保存数据
+            self._classify(_one_list , i)
+
+    # 统计不同的操作的数量
+    def total_action(self):
+        for num in self.class_list:
+            _file_path = '%s/%s'%(self.path , str(num))  # 文件夹路径
+            # print(_file_path)
+
+            _file_list = os.listdir(_file_path)  # 文件名列表
+            # print(_file_list)
+
+            print('设备数：%s' % len(_file_list))
+
+            _file_times = {}  # 所有操作进行计数
+            _times = 0  # 总操作次数
+
+            for i in _file_list:  # 遍历文件表
+                with open('%s/%s' % (_file_path , i) , 'r' , encoding='utf-8') as _file:
+                    _list = _file.readlines()
+
+                    for j in _list:
+                        _d = j.split(" ")
+                        print(_d)
+                        if _d[ 1 ] not in _file_times:
+                            _file_times[ _d[ 1 ] ] = 1
+                            _times +=1
+                        else:
+                            _file_times[ _d[ 1 ] ] += 1
+                            _times += 1
+            print('总操作次数:%s'%_times)
+
+            _top3_action = [ ]  # 操作最多前三名。0：操作名次，1：操作次数，2：占百分比
+
+            #排序获取数据
+            top3_list=sorted(_file_times.items(),key=lambda items:items[1],reverse=True)[:8]
+            print(top3_list)
+            for i in top3_list:
+                _top3_action.append([str(i[0]),str(i[1])])
+            print(_top3_action)
+
+            # 打印数据
+            with open('%s/%s.txt' % (self.path , num) , 'w' , encoding='utf-8') as save_file:
+                save_file.write('统计独立设备数：%s，总操作次数：%s。人平均操作次数：%s\r\n'%(len(_file_list),_times,_times/len(_file_list)))
+                save_file.write('操作最多前三名：\r\n' )
+                for i in _top3_action:
+                    save_file.write('%s %s次 %.2f%%\r\n' % (i[0].replace('\n', ''),i[1],int(i[1])/_times*100))
+
+                save_file.write('############################################\r\n')
+
+                #单条数据
+                for num in sorted(_file_times.items(),key=lambda items:items[1],reverse=True):
+                    save_file.write('%s %s %.2f%%\r\n' % (num[0].replace('\n', '') , num[1] , num[1]/_times*100))
 
 if __name__ == '__main__':
-    # action()
-    # numbers(50)
-    # numbers(100)
-    # numbers(1000)
-    days()
+    # DaysLostUser().make_file()
+    DaysLostUser().total_action()

@@ -2,7 +2,8 @@
 import os
 from bs4 import BeautifulSoup as BS
 
-#私有库
+
+# 私有库
 
 # 将xml转成list，并返回。如果有对应文件，则直接获取
 def get_value(Name):
@@ -41,50 +42,56 @@ def get_value(Name):
         return _list
 
 
-# 获取列表中的某些参数
+# 提取数据中的指定字段，Data：list，Key_list：list
 def get_id(Data , Key_list):
     for i in Key_list:
-        if Key_list in Data[ 0 ].keys():  # 判断Key是否在Data中
-            print('列表%s中包含%s' % (Data , Key_list))
+        if i in Data[ 0 ]:  # 判断Key是否在Data中
+            print('列表中包含%s' % i)
         else:
-            print('列表%s中不包含%s' % (Data , Key_list))
+            print('列表中不包含%s' % i)
             return
 
     # 遍历Data，采集对应内容，去重
     _list = [ ]
     for i in Data:
-        _one={}#单条信息
+        _one = {}  # 单条信息
         for j in Key_list:
-            _one[j] =i[j]
+            _one[ j ] = i[ j ]
 
         _list.append(_one)
 
     print('提取 %s 完成，一共有 %s 条内容' % (str(Key_list) , len(_list)))
     return _list
 
-#去重
-def only_one(List,No_False=None):
-    _list=[]
+
+# 去重
+def only_one(List , No_False=None):
+    _list = [ ]
     for i in List:
         if i not in _list:
             _list.append(i)
-    print('去重结束,减少了 %s 个' % (len(List)-len(_list)))
+    print('去重结束,减少了 %s 个' % (len(List) - len(_list)))
 
     if No_False:
-        _list.remove(0)
-        _list.remove('')
+        if 0 in _list:
+            _list.remove(0)
+
+        if '' in _list:
+            _list.remove('')
     print('去除空置')
 
     return _list
 
 
 # 新建文件夹
-def new_flie(Name):
-    path = "res/" + str(Name)
-
+def new_folder(path):
     if not os.path.exists(path):  # 如果文件夹不存在，则新建
         os.makedirs(path)
+        # print('新建文件夹%s成功' % path)
+    # else:
+        # print('文件夹%s已存在' % path)
     return path
+
 
 # 排出内容人员的用户名
 def out_com(List):
@@ -100,5 +107,18 @@ def out_com(List):
     return _value
 
 
+# 动作转换为文字
+def change_action(list):
+    # 动作
+    action_list = eval(open('res/action_list.txt' , 'r' , encoding='utf-8').read())
+
+    for i in list:
+        if i[ 'action_type' ] in action_list:
+            i[ 'action_type' ] = action_list[ i[ 'action_type' ] ]
+
+    print('转换完成')
+    return list
+
+
 if __name__ == '__main__':
-    out_com ()
+    out_com()
