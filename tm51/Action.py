@@ -11,26 +11,7 @@ from datetime import datetime
 from tm51.tool import get_value , get_id , new_folder , out_com , only_one , change_action
 
 
-# 判断最近50个发日记的人的名单
-def dd(self):
-    _list = bs(self.text , 'lxml').find_all('row')
-
-    # 排出内容人员的用户名
-    _v = [ ]
-    for i in com_name:
-        _v.append(str(i[ 0 ]))
-
-    # 排出内容人员
-    value = [ ]
-    for i in _list:
-        if i.find_all('field')[ 1 ].text not in _v:
-            _g = {'帖子id':i.find_all('field')[ 0 ].text , '用户ID':i.find_all('field')[ 1 ].text}
-            value.append(i.find_all('field')[ 1 ].text)
-
-    print('一共有 %d 个用户，用户ID为：%s' % (len(value) , value))
-
-
-# 查看没有发帖的用户在做什么，保存到了res文件夹
+# 在用户操作表，但排出在发帖表、日记表、回复表中的用户，
 def action():
     # 创建文件夹
     file_50 = Tool().new_flie(50)
@@ -161,7 +142,7 @@ def numbers(Path):
     _end.close()
 
 
-# 近7天，只来过一次的用户的名单
+# xml中只出现一次的设备的操作记录，并生成操作次数统计报告
 class DaysLostUser:
     def __init__(self):
         self.path = 'res/action'  # 创建数据文件夹,并返回path
@@ -223,8 +204,9 @@ class DaysLostUser:
 
         self.data = get_value('user_action_report')  # 获取用户操作记录的数据
 
-        self.mini_list = get_id(self.data , [ 'device_id' , 'action_type' , 'created_at' ])  # 获取想要的字段
+        self.mini_list = get_id('user_action_report', [ 'device_id' , 'action_type' , 'created_at' ])  # 获取想要的字段
 
+        self.mini_list = get_id(self.data , [ 'device_id' , 'action_type' , 'created_at' ])  # 获取想要的字段
         user_list = self._get_user_list  # 返回设备ID列表
 
         # 提取数据
@@ -261,7 +243,7 @@ class DaysLostUser:
 
                     for j in _list:
                         _d = j.split(" ")
-                        print(_d)
+                        # print(_d)
                         if _d[ 1 ] not in _file_times:
                             _file_times[ _d[ 1 ] ] = 1
                             _times +=1
@@ -292,6 +274,12 @@ class DaysLostUser:
                 for num in sorted(_file_times.items(),key=lambda items:items[1],reverse=True):
                     save_file.write('%s %s %.2f%%\r\n' % (num[0].replace('\n', '') , num[1] , num[1]/_times*100))
 
+    # #单独处理
+    # def clean_list(self):
+
+
+
+
 if __name__ == '__main__':
-    # DaysLostUser().make_file()
+    DaysLostUser().make_file()
     DaysLostUser().total_action()

@@ -8,13 +8,15 @@ from bs4 import BeautifulSoup as BS
 # 将xml转成list，并返回。如果有对应文件，则直接获取
 def get_value(Name):
     if os.path.exists('res/%s.txt' % Name):  # 存在则读取内容
+        print('运气很好，有对应的文件，开始读取……')
         _file = open('res/%s.txt' % Name , 'r' , encoding='utf-8').read()
         _list = eval(_file)
 
-        print('调用文件：res/%s.txt' % Name)
+        print('读取成功：res/%s.txt' % Name)
         return _list
 
     else:  # 不存在，则转换xml
+        print('没有找到文件，要开始转译文件，去做点别的吧……')
         # 提取xml中的内容
         _file_1 = open('res/%s.xml' % Name , 'r' , encoding='utf-8').read()
         _file_2 = _file_1.replace('field name=' , 'field class=')
@@ -44,6 +46,65 @@ def get_value(Name):
 
 # 提取数据中的指定字段，Data：list，Key_list：list
 def get_id(Data , Key_list):
+    for i in Key_list:
+        if i in Data[ 0 ]:  # 判断Key是否在Data中
+            print('列表中包含%s' % i)
+        else:
+            print('列表中不包含%s' % i)
+            return
+
+    # 遍历Data，采集对应内容，去重
+    _list = [ ]
+    for i in Data:
+        _one = {}  # 单条信息
+        for j in Key_list:
+            _one[ j ] = i[ j ]
+
+        _list.append(_one)
+
+    print('提取 %s 完成，一共有 %s 条内容' % (str(Key_list) , len(_list)))
+    return _list
+
+# 提取数据中的指定字段，Data：list，Key_list：list
+def get_id(Name , Key_list):
+    if os.path.exists('res/%s_mini.txt' % Name):  # 存在则读取内容
+        print('运气很好，有对应的文件，开始读取……')
+        _file = open('res/%s.txt' % Name , 'r' , encoding='utf-8').read()
+        _list = eval(_file)
+
+        print('读取成功：res/%s.txt' % Name)
+        return _list
+
+    else:  # 不存在，则转换xml
+        print('没有找到文件，要开始转译文件，去做点别的吧……')
+        # 提取xml中的内容
+        _file_1 = open('res/%s.xml' % Name , 'r' , encoding='utf-8').read()
+        _file_2 = _file_1.replace('field name=' , 'field class=')
+        _file_3 = BS(_file_2 , 'lxml').find_all('row')
+
+        # 格式化为列表
+        _list = [ ]
+
+        # 提取数据添加到_list
+        for i in _file_3:
+            # 单条信息是个字典
+            _i = {}
+
+            for j in i.find_all('field'):
+                _name = j.get('class')[ 0 ]  # 获取单条属性的class名,class可能是数组
+                _i[ _name ] = j.text
+
+            _list.append(_i)
+
+        # 并保存到txt
+        with open('res/%s.txt' % Name , 'w' , encoding='utf-8') as _file:
+            _file.write(str(_list))
+
+        print('创建文件：res/%s.txt' % Name)
+        return _list
+
+
+
     for i in Key_list:
         if i in Data[ 0 ]:  # 判断Key是否在Data中
             print('列表中包含%s' % i)

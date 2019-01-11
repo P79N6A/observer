@@ -14,6 +14,8 @@ def json():
 
 # 处理文件到读写
 def text():
+    #https://blog.csdn.net/ztf312/article/details/47259805
+
     # a+是接着写，w+是覆盖
     with open("res/test.txt", 'a+', encoding='utf-8') as test:
         # dd = test.read() + '99'  # 读取内容，然后处理后，覆盖源文件
