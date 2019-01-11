@@ -1,15 +1,11 @@
 # -*- coding: UTF-8 -*-
-# 传入豆瓣地址，进行内容解析并储存信息
-# 还需要增加去重功能
-# 还需要增加爬虫报告
-# 加载URL地址
-# from other.spiders import URL_Info
 
-# 随机生成user_agent
-from urllib.parse import urlparse
+# 公共库
+from urllib.parse import urlparse  #拆分URL
+import user_agent# 随机生成user_agent
+import time
 
-import user_agent
-
+from worker.leid.pretender import proxy  # 获取代理IP
 # 加载解析地址库
 import requests
 from requests import RequestException
@@ -17,58 +13,64 @@ from requests import RequestException
 # 加载解析HTML库
 from bs4 import BeautifulSoup as BS
 
+
 # 加载保存库
 # from other.serving import todo
 
 
 # 输入豆瓣地址，todo开始爬虫，保存信息并打印日志
 class get_news:
-    def __init__(self,Word):
-        self.URL_Headers='https://www.baidu.com/s?ie=UTF-8&wd=' #地址头
+    def __init__(self, word):
+        self.URL_Headers = 'https://www.baidu.com/s?ie=UTF-8&wd='  # 地址头
+        self.headers = {"User-Agent": user_agent.generate_user_agent()}  # 随机生成的
+        self.proxy_dict = {"http": proxy().get_one}  # 这里需要制造代理
+        self._parse = self._get_parse(self.URL_Headers + word)  # 获取百度代码
 
-        self.headers = {
-            "User-Agent": user_agent.generate_user_agent(),  # 随机生成的
-        }
-        self.word = Word
+
     # 主函数
-    def todo(self):
-
-        _parse = self._parse(self.URL_Headers+self.word)#获取百度代码
-        _data = _parse.find_all('h3',class_='t')
-        print('显示内容：',len(_data))
-        for i in _data:
-            dd=urlparse(i.find('a').get('href'))
-            print(dd)
-            print('\n')
-
-            break
-
+    def main(self):
+        self._get_list()  # 提取有用信息
 
         # _pages = _parse.find('div',id='page').find('a',class_='n')
         # print('显示页码部位：',_pages)
 
-
-
-
-
     # 返回页面的源代码,会因为反爬虫，所以需要额外做判断，之后要把这部分单独做出来
-    def _parse(self,text):
+    def _get_parse(self, path):
         try:
-            _response = requests.get(text, headers=self.headers, timeout=1)
+            _response = requests.get(path, headers=self.headers)
             if _response.status_code == 200:
                 # 自行转码
                 _response.encoding = 'UTF-8'
                 # 解析内容
                 page_source = BS(_response.text, 'html.parser')
 
-                # print(response.text)
+                print('搜索 %s 成功')
+                time.sleep(3)
                 return page_source
             else:
                 print(_response.status_code)
-                return None
+                return
         except RequestException:
             # 向工作日志中写入内容
-            return None
+            return
+
+    # 返回搜索结果的真实地址列表，parse：百度搜索代码
+    def _get_list(self):
+        _data = self._parse.find_all('h3', class_='t')  # 提取搜索结果区域
+
+        _list = []
+        for i in _data:  # 提取地址
+            _href = str(i.find('a').get('href'))
+            print(_href)
+            with requests.get(_href,allow_redirects=True) as _response:
+                page_source = BS(_response.text, 'html.parser')
+                df =page_source.find('link',rel="canonical")
+                # ddf = _response.headers['Location']
+                print(df)
+            # _list.append(ddf)
+            time.sleep(3)
+            # break
+        return _list
 
 
 # 爬取活动列表页面的地址列表，返回列表，包含所有活动列表页面的URL地址
@@ -206,7 +208,4 @@ def get_info(case_url):
 
 
 if __name__ == '__main__':
-
-
-    _i = get_news('周杰伦').todo()
-
+    _i = get_news('杏仁豆腐心').main()
