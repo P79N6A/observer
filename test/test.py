@@ -1930,9 +1930,9 @@ def dgggd():
 def dwww():
     file_50 = os.listdir('./res/50')
 
-
-def  ccc():
-    t = open('test.txt','r',encoding='utf-8').read()
+#打开文件，并转换成代码
+def  get_code():
+    t = open('res/code.txt','r',encoding='utf-8').read()
     # print(type(t))
     # for i in t:
     #     print(i)
@@ -1950,9 +1950,46 @@ def  ccc():
 
 #文件查询
 def yide():
-    ddd=open('./res/action_list.txt','r',encoding='utf-8').read()
+    # ddd=open('./res/action_list.txt','r',encoding='utf-8').read()
+    # gg=eval(ddd)
+    # print(type(gg),gg['startAPP'])
+    ddd=open('res/test.txt','r',encoding='utf-8').read()
     gg=eval(ddd)
-    print(type(gg),gg['startAPP'])
+    print(len(gg))
+
+
+#字符串切片变成列表
+def str_to_list():
+    test ='/location/drama/30256059/comments'
+    print(test.split('/'))
+
+    a = [{"situation": 1, "level": 4, "description": "准妈妈很适合吃包子，包子皮是发面食品，富含B族维生素，而且很容易消化。包子搭配了多种蔬菜和肉类，能够为准妈妈提供各种营养。"},
+         {"situation": 2, "level": 4, "description": "坐月子能吃包子，包子皮是发面食品，比较容易消化，适合月子期间食用。"},
+         {"situation": 3, "level": 4, "description": "一般情况下，包子都会同时搭配多种蔬菜和肉类，能够做到基本的膳食平衡，适合哺乳妈妈。"},
+         {"situation": 4, "level": 4,
+          "description": "包子可以通过改变面皮和馅料，做出很多花样来，促排期间和移植后吃包子改善饮食搭配，为人体提供各种营养，所以试管期间是可以吃包子的！"}]
+
+    for i in a:
+        i['title'] = '测试数据'
+
+    print(str(a).replace(' ', ''))
+
+
+#拆解提取URL
+def to_url():
+    from urllib.parse import urlparse  # 拆分URL
+    it =['http://mini.eastday.com/a/180714221632914-2.html', 'http://image.baidu.com/search/index?tn=baiduimage&ct=201326592&lm=-1&cl=2&ie=gb18030&word=%D0%D3%C8%CA%B6%B9%B8%AF%D0%C4&fr=ala&ala=1&alatpl=adress&pos=0&hs=2&xthttps=000000', 'http://www.piaoniu.com/activity/65867', 'https://m.piaoniu.com/activity/65867', 'http://piao.jd.com/114927.html', 'https://piao.damai.cn/161166.html', 'http://blog.sina.com.cn/s/blog_6d9713960102yjm3.html', 'http://www.dahepiao.com/news1/yanchu/2018120958827.html', 'http://www.nuomi.com/deal/c00vtx214.html', 'https://www.228.com.cn/ticket-448679229.html', 'http://epaper.oeeee.com/epaper/A/html/2019-01/12/content_1300.htm', 'http://www.51goupiao.com/t_10839.html', 'http://m.dahepiao.com/news/2018122059666.html', 'http://www.yidianzixun.com/article/0J7c4Uf5', 'https://jingyan.baidu.com/article/17bd8e52ff4ed385ab2bb8c6.html', 'http://www.ypiao.com/t_62898/', 'https://www.meishij.net/tianpindianxin/xingrendoufu_11.html', 'http://www.dianping.com/toutiao/75855435', 'https://www.xinshipu.com/zuofadaquan/6752/', 'https://m.nuomi.com/w/expired/p00vuaieu', 'http://blog.sina.com.cn/s/blog_4dbc922e0102ykor.html', 'http://heju.jinciwei.cn/426401.html', 'http://www.dahepiao.com/yanchupiaowu1/hj/2018120858779.html', 'http://wemedia.ifeng.com/88288519/wemedia.shtml', 'http://mini.eastday.com/a/181117184905524-3.html', 'https://www.xiaohongshu.com/discovery/item/598c206ea9b2ed283b192e0d', 'https://www.228.com.cn/ticket-508914816.html', 'https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=https%3A%2F%2Fweibo.com%2F1762768245%2FHbnIWyCi7&domain=.weibo.com&ua=php-sso_sdk_client-0.6.28&_rand=1547273333.9928', 'http://bangumi.tv/person/14879', 'https://jingyan.baidu.com/article/ed15cb1b2b9f2f1be2698149.html']
+    print(len(it))
+
+    for i in it:
+
+        # print(i)
+        # print(urlparse(i))
+        # print(urlparse(i).netloc,)
+        # print(urlparse(i).path.split('/'))
+        # break
+        if urlparse(i).netloc =='blog.sina.com.cn':
+            print(i)
 
 if __name__ == '__main__':
-    _datetime()
+    yide()
