@@ -46,7 +46,7 @@ def get_list(self):
 # 获取列表中每条页面的有用信息,并保存在原来的文件中，并保存到
 def get_info(self):
     _data = pd.DataFrame(
-        pd.read_csv('/Users/tama1/Documents/ob/worker/leid/get_url.csv', header=0, encoding='UTF-8'))
+        pd.read_csv('/Users/tama1/Documents/ob/worker/readers/get_url.csv', header=0, encoding='UTF-8'))
 
     # # 增加是否抓取详情的列
     _data['蜘蛛状态'] = False
