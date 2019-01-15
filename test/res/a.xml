@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+
+<!--
+-
+- Sequel Pro XML dump
+- Version 4541
+-
+- http://www.sequelpro.com/
+- https://github.com/sequelpro/sequelpro
+-
+- Host: 10.47.121.92 (MySQL 5.6.40-log)
+- Database: tmdb_report
+- Generation Time Time: 2019-01-14 10:03:09 +0000
+-
+-->
+
+<resultset statement="select *
+from `user_action_report`
+where created_at BETWEEN '20181201'  and '20181231'" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<row>
+		<field name="id">2199706</field>
+		<field name="from_client">3</field>
+		<field name="client_version">24</field>
+		<field name="app_version">2.1.1</field>
+		<field name="action_type">clickForumPost</field>
+		<field name="uid">6061074</field>
+		<field name="device_id">00000000-4a22-4437-ffff-ffffff57a0e8</field>
+		<field name="info"></field>
+		<field name="remote_ip">219.134.181.166</field>
+		<field name="created_at">2018-12-01 00:00:05</field>
+	</row>
+
+	<row>
+		<field name="id">2199707</field>
+		<field name="from_client">2</field>
+		<field name="client_version">12.1</field>
+		<field name="app_version">2.2.1</field>
+		<field name="action_type">requestData</field>
+		<field name="uid">6061422</field>
+		<field name="device_id">5486F261-322A-4F0D-B965-9FB81ED26BAC</field>
+		<field name="info"></field>
+		<field name="remote_ip">183.213.197.13</field>
+		<field name="created_at">2018-12-01 00:00:06</field>
+	</row>
+
+	<row>
+		<field name="id">2199708</field>
+		<field name="from_client">2</field>
+		<field name="client_version">12.1</field>
+		<field name="app_version">2.2.1</field>
+		<field name="action_type">siteSearchResults</field>
+		<field name="uid">6061422</field>
+		<field name="device_id">5486F261-322A-4F0D-B965-9FB81ED26BAC</field>
+		<field name="info"></field>
+		<field name="remote_ip">183.213.197.13</field>
+		<field name="created_at">2018-12-01 00:00:06</field>
+	</row>
+
+	<row>
+		<field name="id">2199709</field>
+		<field name="from_client">2</field>
+		<field name="client_version">12.1</field>
+		<field name="app_version">2.2.1</field>
+		<field name="action_type">requestData</field>
+		<field name="uid">6061422</field>
+		<field name="device_id">5486F261-322A-4F0D-B965-9FB81ED26BAC</field>
+		<field name="info"></field>
+		<field name="remote_ip">183.213.197.13</field>
+		<field name="created_at">2018-12-01 00:00:07</field>
+	</row>
+
+	<row>
+		<field name="id">2199710</field>
+		<field name="from_client">2</field>
+		<field name="client_version">12.1</field>
+		<field name="app_version">2.2.1</field>
+		<field name="action_type">requestData</field>
+		<field name="uid">6061422</field>
+		<field name="device_id">5486F261-322A-4F0D-B965-9FB81ED26BAC</field>
+		<field name="info"></field>
+		<field name="remote_ip">183.213.197.13</field>
+		<field name="created_at">2018-12-01 00:00:20</field>
+	</row>
+
+	<row>
+		<field name="id">2199711</field>
+		<field name="from_client">2</field>
+		<field name="client_version">12.1</field>
+		<field name="app_version">2.2.1</field>
+		<field name="action_type">requestData</field>
+		<field name="uid">6061422</field>
+		<field name="device_id">5486F261-322A-4F0D-B965-9FB81ED26BAC</field>
+		<field name="info"></field>
+		<field name="remote_ip">183.213.197.13</field>
+		<field name="created_at">2018-12-01 00:00:31</field>
+	</row>
+
+	<row>
+		<field name="id">2199712</field>
+		<field name="from_client">2</field>
+		<field name="client_version">12.1</field>
+		<field name="app_version">2.2.1</field>
+		<field name="action_type">siteHome</field>
+		<field name="uid">6061422</field>
+		<field name="device_id">5486F261-322A-4F0D-B965-9FB81ED26BAC</field>
+		<field name="info"></field>
+		<field name="remote_ip">183.213.197.13</field>
+		<field name="created_at">2018-12-01 00:00:32</field>
+	</row>
+
+	<row>
+		<field name="id">2199713</field>
+		<field name="from_client">2</field>
+		<field name="client_version">12.1</field>
+		<field name="app_version">2.2.1</field>
+		<field name="action_type">clickHomePost</field>
+		<field name="uid">6061422</field>
+		<field name="device_id">5486F261-322A-4F0D-B965-9FB81ED26BAC</field>
+		<field name="info"></field>
+		<field name="remote_ip">183.213.197.13</field>
+		<field name="created_at">2018-12-01 00:00:38</field>
+	</row>
+
+	<row>
+		<field name="id">2199714</field>
+		<field name="from_client">2</field>
+		<field name="client_version">12.1</field>
+		<field name="app_version">2.2.1</field>
+		<field name="action_type">sitePostContent</field>
+		<field name="uid">6061422</field>
+		<field name="device_id">5486F261-322A-4F0D-B965-9FB81ED26BAC</field>
+		<field name="info"></field>
+		<field name="remote_ip">183.213.197.13</field>
+		<field name="created_at">2018-12-01 00:00:38</field>
+	</row>
+
+	<row>
+		<field name="id">2199715</field>
+		<field name="from_client">2</field>
+		<field name="client_version">12.1</field>
+		<field name="app_version">2.2.1</field>
+		<field name="action_type">requestData</field>
+		<field name="uid">6061422</field>
+		<field name="device_id">5486F261-322A-4F0D-B965-9FB81ED26BAC</field>
+		<field name="info"></field>
+		<field name="remote_ip">183.213.197.13</field>
+		<field name="created_at">2018-12-01 00:00:38</field>
+	</row>
+
+	<row>
+		<field name="id">2199716</field>
+		<field name="from_client">3</field>
+		<field name="client_version">24</field>
+		<field name="app_version">2.1.1</field>
+		<field name="action_type">clickForumPost</field>
+		<field name="uid">6061074</field>
+		<field name="device_id">00000000-4a22-4437-ffff-ffffff57a0e8</field>
+		<field name="info"></field>
+		<field name="remote_ip">219.134.181.166</field>
+		<field name="created_at">2018-12-01 00:00:40</field>
+	</row>
+
+	<row>
+		<field name="id">2199717</field>
+		<field name="from_client">3</field>
+		<field name="client_version">23</field>
+		<field name="app_version">2.2.0</field>
+		<field name="action_type">startAPP</field>
+		<field name="uid">6036716</field>
+		<field name="device_id">00000000-07a5-5516-ffff-ffff87f8dc80</field>
+		<field name="info"></field>
+		<field name="remote_ip">117.136.32.110</field>
+		<field name="created_at">2018-12-01 00:00:58</field>
+	</row>
+
+	<row>
+		<field name="id">2199718</field>
+		<field name="from_client">3</field>
+		<field name="client_version">23</field>
+		<field name="app_version">2.2.0</field>
+		<field name="action_type">siteGroupHome</field>
+		<field name="uid">6036716</field>
+		<field name="device_id">00000000-07a5-5516-ffff-ffff87f8dc80</field>
+		<field name="info"></field>
+		<field name="remote_ip">117.136.32.110</field>
+		<field name="created_at">2018-12-01 00:00:58</field>
+	</row>
+
+	<row>
+		<field name="id">2199719</field>
+		<field name="from_client">3</field>
+		<field name="client_version">23</field>
+		<field name="app_version">2.2.0</field>
+		<field name="action_type">siteNews</field>
+		<field name="uid">6036716</field>
+		<field name="device_id">00000000-07a5-5516-ffff-ffff87f8dc80</field>
+		<field name="info"></field>
+		<field name="remote_ip">117.136.32.110</field>
+		<field name="created_at">2018-12-01 00:00:58</field>
+	</row>
+
+	<row>
+		<field name="id">2199720</field>
+		<field name="from_client">3</field>
+		<field name="client_version">23</field>
+		<field name="app_version">2.2.0</field>
+		<field name="action_type">popUp</field>
+		<field name="uid">6036716</field>
+		<field name="device_id">00000000-07a5-5516-ffff-ffff87f8dc80</field>
+		<field name="info"></field>
+		<field name="remote_ip">117.136.32.110</field>
+		<field name="created_at">2018-12-01 00:00:58</field>
+	</row>
+
+	<row>
+		<field name="id">2199721</field>
+		<field name="from_client">3</field>
+		<field name="client_version">23</field>
+		<field name="app_version">2.2.0</field>
+		<field name="action_type">siteFeedback</field>
+		<field name="uid">6036716</field>
+		<field name="device_id">00000000-07a5-5516-ffff-ffff87f8dc80</field>
+		<field name="info"></field>
+		<field name="remote_ip">117.136.32.110</field>
+		<field name="created_at">2018-12-01 00:01:00</field>
+	</row>
+
+	<row>
+		<field name="id">2199722</field>
+		<field name="from_client">3</field>
+		<field name="client_version">24</field>
+		<field name="app_version">2.1.1</field>
+		<field name="action_type">clickForumPost</field>
+		<field name="uid">6061074</field>
+		<field name="device_id">00000000-4a22-4437-ffff-ffffff57a0e8</field>
+		<field name="info"></field>
+		<field name="remote_ip">219.134.181.166</field>
+		<field name="created_at">2018-12-01 00:01:14</field>
+	</row>
+
+	<row>
+		<field name="id">2199723</field>
+		<field name="from_client">3</field>
+		<field name="client_version">24</field>
+		<field name="app_version">2.1.1</field>
+		<field name="action_type">clickForumPost</field>
+		<field name="uid">6061074</field>
+		<field name="device_id">00000000-4a22-4437-ffff-ffffff57a0e8</field>
+		<field name="info"></field>
+		<field name="remote_ip">219.134.181.166</field>
+		<field name="created_at">2018-12-01 00:01:25</field>
+	</row>

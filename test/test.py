@@ -140,13 +140,7 @@ def zifu():
     # print
     # "PI=%*.*f" % (06, 3, math.pi)  # output: PI=_3.142
 
-# 用正则提取内容
-def tiqu():
-    import re
-    test = '口碑佳作《驴得水》被许多剧迷称作"神剧"'
 
-    # _info = re.search('《[^》]+》', test, flags=0).group()
-    print(bool(re.search('《[^》]+》', test, flags=0)))
 
 
 #字符串转时间的系列实验
@@ -1991,5 +1985,78 @@ def to_url():
         if urlparse(i).netloc =='blog.sina.com.cn':
             print(i)
 
+#画图
+def plt():
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+
+
+
+    x = np.array([ 1 , 6 , 3 , 4 , 5 , 6 , 7 , 8 ])
+    y = np.array([ 3 , 5 , 7 , 6 , 2 , 6 , 10 , 15 ])
+    plt.scatter(x , y , s = 75, alpha = 0.5)  # 折线 1 x 2 y 3 color
+    # plt.plot(x , y , 'g' , lw=10)  # 4 line w
+    # # 折线 饼状 柱状
+    # x = np.array([ 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 ])
+    # y = np.array([ 13 , 25 , 17 , 36 , 21 , 16 , 10 , 15 ])
+    # plt.bar(x , y , 0.2 , alpha=1 , color='b')  # 5 color 4 透明度 3 0.9
+    plt.show()
+
+#可以对包含元组对列表进行去重！！！太棒了
+def tiqu():
+    # t=('22',22,33,44)
+    # t1 = ('22' , 22 , 33 , 44)
+    # t2 = ('22' , 22 , 33 , 44)
+    # d = [t,t1,t2]
+    # b=set(d)
+    # print(list(b))
+    t=()
+    t1 = (22,)
+    t2 = (33,)
+
+    print(t+t1+t2)
+
+# 用正则提取内容
+def retest():
+    import re
+
+    with open('res/a.xml','r') as file:
+        txt = file.read()
+
+    p=re.compile(r'<row>((?:.|\n)*?)</row>') #提取row的列表
+    # p=re.compile(r'<field name="%s">(.*?)</field>'%b)
+    a = p.findall(txt)# 提取
+    for i in a:
+        b = 'from_client'
+        e=re.findall(r'<field name="%s">(.*?)</field>'%b,i)
+
+        print(e[0])
+    test = '口碑佳作《驴得》水》被许多剧迷称作"神剧"'
+
+    # _info = re.search('《[^》]+》', test, flags=0).group()
+    print(re.findall('《.*》', test, flags=0))
+
+#分类排序
+def  ddggee():
+    t=[3,6,9,13]
+    listd= [(2,3),(1,45),(22,3),(6,34),(9,3)]
+
+    d1=[]
+    d2=[]
+    d3=[]
+    d4=[]
+
+    a = 0
+    for i in listd:
+        if i[0]>t[a]:
+            a +=1
+        
+
+
+
+
+    print(sorted(listd))
+
 if __name__ == '__main__':
-    fenci()
+    ddggee()

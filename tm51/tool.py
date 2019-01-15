@@ -1,7 +1,7 @@
 # 公共库
 import os
 from bs4 import BeautifulSoup as BS
-
+import re
 
 # 私有库
 
@@ -9,21 +9,36 @@ from bs4 import BeautifulSoup as BS
 def xml_to_mini(name, key_list):
     if os.path.exists('res/%s.xml' % name):  # 存在则读取内容
         print('找到xml文件，开始读取……')
-        _file = open('res/%s.xml' % name, 'r', encoding='utf-8').read()
-        _file_clean = _file.replace('field name=', 'field class=')
-        _file_bs = BS(_file_clean, 'lxml').find_all('row')
 
+        #避免大文件导致的错误，所以逐行读取
+        _file = ''
+        # 打开含中文的文本
+        with open('res/%s.xml' % name, 'r', encoding='utf-8') as file:
+            # 按行读取
+            while True:
+                _i = file.readline()
+                _file += _i
+                # 读取完，循环结束
+                if len(_i) == 0:
+                    break
+
+        # 提取row的列表
+        row=re.compile(r'<row>((?:.|\n)*?)</row>')
+        _row=row.findall(_file)
+
+        # 提取数据添加到元组
         _list = []# 格式化为列表
+        for i in _row:
+            _i = () # 单条信息是个元组
 
-        # 提取数据添加到_list
-        for i in _file_bs:
-            _i = {}# 单条信息是个字典
+            for _k in key_list: #b
+                #提取对应字段的数据
+                _key = re.compile(r'<field name="%s">(.*?)</field>'%_k)
+                _i =_key.findall(i)[0]
 
-            for j in i.find_all('field'):
-                _name = j.get('class')[0]  # 获取单条属性的class名,class可能是数组
-                if _name in key_list: #如果是需要提取的内容，则赋值
-                    _i[_name] = j.text
             _list.append(_i)
+
+        # print('转换成功：%s'%len(_list))
 
         # 并保存到txt
         with open('res/%s_mini.txt' % name, 'w', encoding='utf-8') as _file:
@@ -38,12 +53,12 @@ def xml_to_mini(name, key_list):
 
 # 提取数据中的指定字段，Data：list，Key_list：list
 def extract_id(data, key_list):
-    for i in key_list:
-        if i in data[0]:  # 判断Key是否在Data中
-            print('列表中包含%s' % i)
-        else:
-            print('列表%s中不包含%s' % (data[0], i))
-            return
+    # for i in key_list:
+    #     if i in data[0]:  # 判断Key是否在Data中
+    #         print('列表中包含%s' % i)
+    #     else:
+    #         print('列表%s中不包含%s' % (data[0], i))
+    #         return
 
     # 遍历Data，采集对应内容，去重
     _list = []
@@ -54,30 +69,31 @@ def extract_id(data, key_list):
 
         _list.append(_one)
 
-    print('提取 %s 完成，一共有 %s 条内容' % (str(Key_list), len(_list)))
+    print('提取 %s 完成，一共有 %s 条内容' % (str(key_list), len(_list)))
     return _list
 
 
-# 传入文件名和要提取的字段，自动转换xml，自动生产mini版本
+# 传入文件名和要提取的字段，按照字段的顺序，自动转换xml为txt，返回包含元组的列表
 def get_mini(name, key_list):
     if os.path.exists('res/%s_mini.txt' % name):  # 是否存在mini版，存在则读取内容
         print('运气很好，有对应的nimi文件，开始读取……')
-        _file = open('res/%s_mini.txt' % name, 'r', encoding='utf-8').read()
-        _list = eval(_file)
+
+        with open('res/%s_mini.txt' % name, 'r', encoding='utf-8') as file:
+            _list = eval(file.read())
 
         print('读取成功：res/%s_mini.txt' % name)
         return _list
-    elif os.path.exists('res/%s.txt' % name):  # 是否存在完整版，存在，则转换xml
-        print('没有找到mini文件，要开始转译mini文件，需要花点时间……')
-        # 提取xml中的内容
-        _file = open('res/%s.txt' % name, 'r', encoding='utf-8').read()
-
-        _list = extract_id(_file, key_list)
-
-        print('读取成功：res/%s_mini.txt' % name)
-        return _list
+    # elif os.path.exists('res/%s.txt' % name):  # 是否存在完整版，存在，则转换xml
+    #     print('没有找到mini文件，要开始转译mini文件，需要花点时间……')
+    #     # 提取xml中的内容
+    #     _file = open('res/%s.txt' % name, 'r', encoding='utf-8').read()
+    #
+    #     _list = extract_id(_file, key_list)
+    #
+    #     print('读取成功：res/%s_mini.txt' % name)
+    #     return _list
     else:  # 没有文件，则自己生产吧
-        print('没有找到任何文件，要开始转译文件xml，会花费大量时间……')
+        print('没有找到任何文件，要开始转译文件xml，稍等')
         _list=xml_to_mini(name, key_list)
 
         print('读取成功：res/%s_mini.txt' % name)
@@ -86,21 +102,24 @@ def get_mini(name, key_list):
 
 # 去重
 def only_one(List, No_False=None):
-    _list = []
-    for i in List:
-        if i not in _list:
-            _list.append(i)
-    print('去重结束,减少了 %s 个' % (len(List) - len(_list)))
+    print('开始进行去重操作')
+    # _list = []
+    # for i in List:
+    #     if i not in _list:
+    #         _list.append(i)
+    # print('去重结束,减少了 %s 个' % (len(List) - len(_list)))
+    #
+    # if No_False:
+    #     if 0 in _list:
+    #         _list.remove(0)
+    #
+    #     if '' in _list:
+    #         _list.remove('')
+    # print('去除空置')
+    #
+    # return _list
 
-    if No_False:
-        if 0 in _list:
-            _list.remove(0)
-
-        if '' in _list:
-            _list.remove('')
-    print('去除空置')
-
-    return _list
+    return list(set(List))
 
 
 # 新建文件夹
@@ -128,16 +147,19 @@ def out_com(List):
 
 
 # 动作转换为文字
-def change_action(list):
-    # 动作
-    action_list = eval(open('res/action_list.txt', 'r', encoding='utf-8').read())
+def change_action(list,key_list):
+    # 读取动作列表
+    with open('res/action_list.txt', 'r', encoding='utf-8') as action:
+        _action=eval(action.read())
 
-    for i in list:
-        if i['action_type'] in action_list:
-            i['action_type'] = action_list[i['action_type']]
+    key_site = key_list.index('action_type')
+    for i in list:#遍历列表，在_action列表中可以找到，则变成中文，如果不在则默认不变
+        if i[key_site] in _action:
+            i[key_site] = _action[i[key_site]]
 
     print('转换完成')
     return list
+
 
 
 if __name__ == '__main__':
