@@ -1,9 +1,10 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 
 # 公共库
 import os  # 转换内容 ，并提取数据
 from datetime import datetime
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
 
 # 私有库
 from tm51.tool import get_mini , new_folder , action_to_cn
@@ -39,19 +40,18 @@ class c():
                         break
                     a +=1
         print(_dict)
-
+        font = FontProperties(fname='res/simheittf.ttf' , size=10)
+        # plt.rc('font' , family=font)
         labels = "我在备孕","准备试管","前期检查","降调","促排","取卵移植","黄体支持","我怀孕啦","宝宝生啦"
         explode = [ 0.05 , 0 , 0 , 0,0,0,0,0,0]  # 0.1 凸出这部分，
         plt.axes(aspect=1)  # set this , Figure is round, otherwise it is an ellipse
         # autopct ，show percet
+        plt.rcParams['font.family'] = ['Arial Unicode MS']  # 解决中文乱码
         plt.pie(x=_dict , labels=labels , explode=explode , autopct='%3.1f %%' ,
-                shadow=True , labeldistance=1.1 , startangle=90 , pctdistance=0.6
+                shadow=False , labeldistance=1.1 , startangle=90 , pctdistance=0.6)
 
-                )
-        # from matplotlib.font_manager import FontProperties
-        # font = FontProperties(fname='/Library/Fonts/Hanzipen.ttc' , size=10)
-        # plt.rc('font',family=font)
-
+        plt.axis('equal')
+        # plt.legend()
         plt.show()
 
 
