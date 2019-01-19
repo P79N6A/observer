@@ -5,14 +5,12 @@ import os  # 转换内容 ，并提取数据
 from datetime import datetime
 
 # 私有库
-from typing import Dict,Any
-
-from tm51.tool import get_mini,new_folder,action_to_cn
+from tm51.tool import get_mini,new_folder,action_to_cn,make_pie,dde
 
 class_list = [20,50,100,150]  # 根据操作次数分文件夹保存
 tops_num = 8  # 设置显示前几名的内容
 _split_ = '\t'  # 统计报告的分隔符号
-path = 'res/action'
+path = 'res/user_action_report'
 
 
 # xml中只出现一次的设备的操作记录，并生成操作次数统计报告
@@ -21,77 +19,10 @@ class action_count:
         self.name = 'user_action_report'
         self.path = new_folder('res/%s' % self.name)  # 创建数据文件夹,并返回path
 
-        self.useful_key = ['device_id','created_at','action_type','uid']  # 设置需要获取的字段
+        # self.useful_key = ['from_client','client_version','app_version','action_type','uid','device_id','info','remote_ip','created_at']  # 全字段
+        self.useful_key = ['action_type','uid','device_id','created_at']  # 简版字段
 
         self.mini_list = []  # 转换数据，获取想要的字段
-
-    # 提取只登录一天的用户设备ID列表
-    @property
-    def _only_1day_user_list(self):
-        clean_list = []  # 提取时间中的日期和设备ID
-        print('全表信息条数：%s' % len(self.mini_list))
-        for i in self.mini_list:
-            _device_id = i[self.useful_key.index('device_id')]
-            _created_at = datetime.strptime(i[self.useful_key.index('created_at')],"%Y-%m-%d %H:%M:%S").date()
-
-            _i = (str(_device_id),str(_created_at))  # 做成元组，可以快速去重
-            # print('dange%s'%str(_i))
-            clean_list.append(_i)
-
-        _clean_list = list(set(clean_list))  # 去重，使得每个设备ID一天只有一条记录
-        print('去重结束，单设备登录天次%s' % len(_clean_list))
-
-        # 给每个设备计数，统计每个设备ID登录了多少天
-        machine_list = {}
-        for i in _clean_list:
-            if i[0] not in machine_list:
-                machine_list[i[0]] = 1
-            else:
-                machine_list[i[0]] += 1
-        print('总设备数:%s' % len(machine_list))
-
-        # 只登录一天的用户设备ID
-        day_machine_list = []
-        for i in machine_list:  # 如果数字为1，则记录下来
-            if machine_list[i] == 1:
-                day_machine_list.append(i)
-        print('获取只登录一天的设备信息：完成，数据条数：%s' % len(day_machine_list))
-
-        # 返回设备ID的列表
-        return day_machine_list
-
-    # 根据用户列表做单独处理，然后调用分类
-    def user_to_list(self,list):
-
-        # 遍历设备ID列表，并统计每个设备id的动作
-        for i_list in list:
-
-            # 用于保存一个用户的所有操作
-            _one_list = []
-            for i_mini in self.mini_list:
-                if i_list == i_mini[0]:
-                    _tuple = (i_mini[1],i_mini[2])  # 生成一个元组，元组中的0：时间，1：动作
-                    _one_list.append(_tuple)  # 添加一个元组
-            # print('单个用户的所有操作%s'%_one_list)
-
-            # 根据用户操作的次数，分文件夹保存数据，_one_list：动作列表，i_list：设备名字
-            for j in class_list:  # 遍历分段的数值判断是否符合条件
-                if len(_one_list) < j:
-                    _paht = new_folder('%s/%s' % (self.path,str(j)))
-
-                    with open('%s/%s.txt' % (_paht,i_list),'w',encoding='utf-8') as _save:
-                        for i in _one_list:
-                            action_time = i[0]  # 提取用户时间
-                            action_cn = action_to_cn(i[1])  # 在这里做中文翻译
-
-                            _save.write('%s\t%s\r' % (action_time,action_cn))  # 写入数据
-
-                    # print('用户%s：%s'%(i_list, len(_one_list)))
-                    break  # 不加这个就会不停判断，导致重复放入不同的文件夹
-
-    # 可以单独执行，调整列表中的数据
-    def _clean_list(self):
-        pass
 
     # 传入要求，来判断用户登录的天数，返回符合条件的用户列表
     def get_list(self,mark_value,work_type='is'):
@@ -109,7 +40,7 @@ class action_count:
         print('去重成，剩余条数：%s' % len(use_list))
 
         # 给每个设备计数，统计每个设备ID登录了多少天
-        login_times: Dict[Any,int] = {}
+        login_times = {}
         for i in use_list:
             if i[0] in login_times:
                 login_times[i[0]] += 1
@@ -117,7 +48,7 @@ class action_count:
                 login_times[i[0]] = 1
         print('计数成功，统计条数:%s' % len(login_times))
 
-        # 筛选出数量和传入数值符合的内容
+        # 筛选出数量和传入数值符合的内容，元素是带有key和数字的元组
         useful_list = []
         if work_type == 'up':  # 筛选大于标准值的内容
             for key,value in login_times.items():
@@ -137,6 +68,95 @@ class action_count:
         print('生成列表，数据条数：%s' % len(useful_list))
         # 输入号码和数量
         return useful_list
+
+    # 提取uid，并生成每个uid的操作记录列表
+    def get_list_by_uid(self):
+        print('开始生成uid文件')
+        site_field = self.useful_key.index('uid')
+
+        # 获取所有UID
+        uid_list = []
+        for i in self.mini_list:
+            if i[site_field] == '0':  # 去掉游客0
+                continue
+
+            _uid = str(i[site_field])  # 获取用户ID
+            _date = str(datetime.strptime(i[3],"%Y-%m-%d %H:%M:%S").date())  # 获取操作日期
+
+            _i = (_uid,_date)
+            uid_list.append(_i)  # 添加记录
+
+        # 去重，使得每个ID一天只有一条记录
+        uid_list = list(set(uid_list))
+        print('本月独立用户登录天/次：%s' % len(uid_list))
+
+        # 给每个设备计数，统计每个设备ID登录了多少天
+        login_times = {}
+        for i in uid_list:
+            if i[0] in login_times:
+                login_times[i[0]] += 1
+            else:
+                login_times[i[0]] = 1
+        print('本月独立用户:%s' % len(login_times))
+
+        uid_path = new_folder('%s/%s' % (self.path,'uid'))  # 新建文件夹
+
+        # 根据login_times，生成文件夹，并根据uid生成独立文件夹
+        for _k,_v in login_times.items():
+            # 建立文件，保存内容
+            with open('%s/%02d_%s.txt' % (uid_path,int(_v),_k),'w',encoding='utf-8') as file:
+
+                # 遍历数据表，符合条件，则添加到_one_list
+                for i_mini in self.mini_list:
+                    if _k == i_mini[site_field]:
+                        action_time = i_mini[3]  # 提取用户时间
+                        action_cn = action_to_cn(i_mini[0])  # 在这里做中文翻译
+
+                        file.write('%s\t%s\r' % (action_time,action_cn))  # 写入数据
+                # print('单个用户的所有操作%s'%_one_list)
+
+    # 获取device_id列表
+    def get_list_by_device_id(self):
+        print('开始生成device_id文件')
+        site_field = self.useful_key.index('device_id')  # device_id 的位置
+
+        # 获取所有UID
+        uid_list = []
+        for i in self.mini_list:
+            _uid = str(i[site_field])  # 获取用户ID
+            _date = str(datetime.strptime(i[3],"%Y-%m-%d %H:%M:%S").date())  # 获取操作日期
+
+            _i = (_uid,_date)
+            uid_list.append(_i)  # 添加记录
+
+        # 去重，使得每个device_id一天只有一条记录
+        uid_list = list(set(uid_list))  # 去重
+        print('本月独立设备登录天/次：%s' % len(uid_list))
+
+        # 给每个设备计数，统计每个设备ID登录了多少天
+        login_times = {}
+        for i in uid_list:
+            if i[0] in login_times:
+                login_times[i[0]] += 1
+            else:
+                login_times[i[0]] = 1
+        print('本月独立设备:%s' % len(login_times))
+
+        uid_path = new_folder('%s/%s' % (self.path,'device_id'))  # 新建文件夹
+
+        # 根据login_times，生成文件夹，并根据uid生成独立文件夹
+        for _k,_v in login_times.items():
+            # 建立文件，保存内容
+            with open('%s/%02d_%s.txt' % (uid_path,int(_v),_k),'w',encoding='utf-8') as file:
+
+                # 遍历数据表，符合条件，则添加到_one_list
+                for i_mini in self.mini_list:
+                    if _k == i_mini[site_field]:
+                        action_time = i_mini[3]  # 提取用户时间
+                        action_cn = action_to_cn(i_mini[0])  # 在这里做中文翻译
+
+                        file.write('%s\t%s\r' % (action_time,action_cn))  # 写入数据
+                # print('单个用户的所有操作%s'%_one_list)
 
     # 根据列表，获得对应的数据，并根据对应的的值做分类
     def extract_data(self,todo_list):
@@ -160,20 +180,24 @@ class action_count:
                     file.write('%s\t%s\r' % (action_time,action_cn))  # 写入数据
 
     # 设置要处理数据的方式，最终返回数据
-    def main(self):
-        self.mini_list = get_mini(self.name,self.useful_key)  # 生成mini文件，并获得此列表
+    def make_file(self):
+        # 生成mini文件，并获得此列表
+        self.mini_list = get_mini(self.name,self.useful_key)
         print('获取列表成功，条数:%s' % len(self.mini_list))
+
+        self.get_list_by_device_id()  # 按设备生成用户列表
+
+        self.get_list_by_uid()  # 按UID生成用户列表
 
         # 整理整个月只登录过一天的用户数据，生成报告，并保存在action文件夹中
         # only_1day_user_list = self._only_1day_user_list  # 对列表进行单独处理，获取只登录了一天的用户设备ID列表
         # self.user_to_list(only_1day_user_list)  # 根据用户列表做单独处理，并把action翻译陈中文，并保存
 
         # 整理整个月登录超过X天的用户数据，生成报告，并保存在action_day_x文件夹中
-        days = 10  # 设置最少登录次数
-        type = 'up'  # 设置为大于值的内容
-        useful_list = self.get_list(days,type)  # 获得需要的列表
-        print(useful_list)
-        self.extract_data(useful_list)  # 根据列表，搜索对应的数据
+        #
+        # useful_list = self.get_list(days,type)  # 获得需要的列表
+        # print(useful_list)
+        # self.extract_data(useful_list)  # 根据列表，搜索对应的数据
 
 
 # 统计不同操作数区间的用户，他们各种操作占有的比例
@@ -367,11 +391,11 @@ def outside_date():
         print('找不到文件夹：%s\n' % file_path)
         exit()
 
-    action_list = [{} for i in range(31)]  # 创建一个包含31个字典的list，每天list中是包含各种行为数量的字典
-
-    # 扫描文件夹，提取其中的文件夹
     file_list = os.listdir(path)  # 获取文件夹的所有文件和目录
-    print(file_list)
+    # print(file_list)
+
+    # 扫描文件夹，将内容中的操作按照时间的方式分类计数，生成列表
+    action_list = [{} for i in range(31)]  # 创建一个包含31个字典的list，每天list中是包含各种行为数量的字典
     for i in file_list:  # 遍历文件列表
         if i[0] == '.':
             continue
@@ -388,16 +412,158 @@ def outside_date():
                 else:
                     action_list[_day - 1][_action] = 1
         # break
-    print('扫描文件完成：%s' % action_list)
+    print('扫描文件完成：%s' % len(action_list))
 
+    # 将所有的操作汇集在一个表中
+    total = {}
+    for i in action_list:
+        if i:  # 如果不为空
+            for key,value in i.items():
+                if key in total:
+                    total[key] += value
+                else:
+                    total[key] = value
+
+    # print(total)
+
+    # 将汇总内容保存下来
+    with open('res/dee.txt','w') as file:
+        for key,value in total.items():
+            file.write('%s\t%s\r' % (key,value))
+
+    # 将每日操作计数，展示出来
+    for i in action_list:
+        if i:  # 如果不为空
+            key_list = []
+            value_list = []
+            for key,value in i.items():
+                key_list.append(key)
+                value_list.append(value)
+
+            # make_pie(key_list,value_list)
+        break
+
+    #
+    dfgd = dde(total,5)
+    _dict = list(dfgd.items())  # 排序后的list
+    _dict.sort(key=lambda x:x[1],reverse=True)  # 降序排序
+
+    make_pie(_dict)  # shur
+
+
+# 根据设备登录次数，生成用户报告
+def report_for_days_by_device_id(tab):
+    if not os.path.exists('%s/%s' % (path,'device_id')):  # 如果文件夹不存在，则新建
+        print('文件夹不存在，生成中……')
+        action_count().get_list_by_device_id()
+
+    file_list = os.listdir('%s/%s' % (path,'device_id'))  # 获取文件夹的所有文件和目录
+    # print(file_list)
+
+    txt_dict = [[0,0,0,0,0],[0,0,0,0,0]]  # 概括报告,第一个为设备数，第二个为次数,[0,0]中,最后一个是总的报告数
+
+    re_list = [{},{},{},{}]  # 生成列表：[{},{},{},{}] #统计用户操作次数
+    # 遍历文件列表，根据当天的操作次数，统计每种操作的次数
+    for i_file in file_list:
+        if int(i_file.split('_')[0]) == 1:  # 提取登录天数，如果等于1 则继续
+
+            txt_dict[0][-1] += 1  # 统计设备+1
+
+            with open('res/user_action_report/device_id/%s' % i_file) as file:
+                _list = file.readlines()
+
+                # 遍历每一行内容,根据操作数，统计操作数
+                for i in range(len(tab)):  # 遍历区间
+                    if len(_list) < tab[i]:  # 如果满足当前的区间,则在对应的区间统计用户的操作次数
+
+                        txt_dict[0][i] += 1  # 对应区间的设备数+1
+
+                        for i_list in _list:
+                            _key = i_list.split('\t')[1]  # 获得操作名
+                            if _key in re_list[i]:
+                                re_list[i][_key] += 1  # 对用区间的操作数 +1
+
+                                txt_dict[1][i] += 1  # 对应区间的总操作 +1
+                                txt_dict[1][-1] += 1  # 总设备数+1
+                            else:
+                                re_list[i][_key] = 1  # 对用区间的操作数 =1
+
+                                txt_dict[1][i] += 1  # 对应区间的总操作 +1
+                                txt_dict[1][-1] += 1  # 总操作数+1
+                        break
+
+    print('概括报告:%s' % txt_dict)
+
+    # 遍历后，把内容放入数据报告
+    total_dict = {}  # 数据报告,根据区间统计每个操作的数量
+    for i in range(len(re_list)):  # 获取每个区间的数值
+
+        for _i in re_list[i]:
+            if _i in total_dict:  # 如果报告中有此相操作，则把值放到对应位置
+                total_dict[_i][i] = re_list[i][_i]
+            else:  # 如果报告中没有此类操作，则新建，并把值放到对应位置
+                total_dict[_i] = [0,0,0,0]
+                total_dict[_i][i] = re_list[i][_i]
+
+    # 为了排序，所以要把字典变成列表，以后单独做
+    print('数据报告:%s' % total_dict)
+
+    ################################################################################################################################
+    # 保存total_dict数据报告
+    with open('%s/%s' % (path,'statistics_report.txt'),'w') as file:
+        # 写入表头
+        file.write('%s' % '操作类型')
+        for i in tab:
+            file.write('\t%s次' % i)
+        file.write('\r')
+
+        # 写入主体
+        for key,value in total_dict.items():
+            file.write('%s' % key.replace('\n',''))
+            for i in range(len(value)):
+                # print(value[i],txt_dict[i][1])
+                file.write('\t%.2f%%' % (value[i]/txt_dict[1][i]* 100)) #用百分比显示
+            file.write('\r')
+    print('生成数据报告')
+
+    # 保存txt_dict概括报告
+    with open('%s/%s' % (path,'mini_report.txt'),'w') as file:
+        # 写入表头
+        file.write('种类')
+        for i in tab:
+            file.write('\t%s次' % i)
+        file.write('\r')
+
+        #写入设备数
+        file.write('设备数')
+        for i in txt_dict[0]:
+            file.write('\t%s' % i)
+        file.write('\r')
+
+        #写入操作数
+        file.write('操作总数')
+        for i in txt_dict[1]:
+            file.write('\t%s' % i)
+        file.write('\r')
+
+        #写入设备/操作数
+        file.write('单设备操作数')
+        for i in range(len(txt_dict)):
+            file.write('\t%.2f' % (txt_dict[1][i]/txt_dict[0][i]))
+        file.write('\r')
+    print('生成数据报告')
 
 if __name__ == '__main__':
-    # a = action_count()
-    # a.main()  # 生成数据
+    # a = action_count()  # 生成初始文档
+    # a.make_file()  # 生成文件夹
+
+    # 输入区间，将只上线一天的设备统计并报告
+    TAB = [20,50,100,1000]
+    report_for_days_by_device_id(TAB)
 
     # create_report()  # 生成统计报告
-
+    #
     # key = '社区首页'
     # trend_key(key)
-
-    outside_date()
+    #
+    # outside_date()  # 不区分日期，统计ID的行为频率

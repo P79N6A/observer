@@ -1,11 +1,14 @@
 # coding=utf-8
+#显示了词频
+
+
 import jieba, math
 
 import jieba.analyse
 
 # jieba.cut主要有三种模式
 # 随便对一个动物园的评论进行分析
-str_text = open(u'test.txt', encoding='utf-8', errors='ignore').read()
+str_text = open(u'res/test.txt', encoding='utf-8', errors='ignore').read()
 
 paichu = {}
 words = jieba.lcut(str_text)

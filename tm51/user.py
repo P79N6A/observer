@@ -1,21 +1,30 @@
-# coding=utf-8
+import sys
+sys.path.append('../')
 
-# 公共库
-import os  # 转换内容 ，并提取数据
-from datetime import datetime
+import jieba
+import jieba.analyse
+from optparse import OptionParser
 
-# 私有库
-from tm51.tool import get_mini , new_folder , action_to_cn
+USAGE = "usage:    python extract_tags.py [file name] -k [top k]"
 
-key_list =['id','username','sex','birth','geo_id','email','mobile','head_img','salt','from_client','status','is_virtual','is_freeze','last_login_ip','last_login_time','is_new','is_pop','alipay_account','created_at','updated_at','last_at']
-name='user'
-
-
-#生成user的文件
-def to_mini():
-    get_mini(name,key_list)
+parser = OptionParser(USAGE)
+parser.add_option("-k", dest="topK")
+opt, args = parser.parse_args()
 
 
+if len(args) < 1:
+    print(USAGE)
+    sys.exit(1)
 
-if __name__ == '__main__':
-    to_mini()
+file_name = args[0]
+
+if opt.topK is None:
+    topK = 10
+else:
+    topK = int(opt.topK)
+
+content = open(file_name, 'rb').read()
+
+tags = jieba.analyse.extract_tags(content, topK=topK)
+
+print(",".join(tags))

@@ -83,8 +83,3 @@ def test_duration_time():
 
 if __name__ == '__main__':
     test_duration_time()
----------------------
-作者：阿常呓语
-来源：CSDN
-原文：https://blog.csdn.net/u010339879/article/details/82291878
-版权声明：本文为博主原创文章，转载请附上博文链接！
