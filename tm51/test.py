@@ -1,132 +1,166 @@
-# 在用户操作表，但排出在发帖表、日记表、回复表中的用户，
-def action():
-    # 创建文件夹
-    file_50 = Tool().new_flie(50)
-    file_100 = Tool().new_flie(100)
-    file_1000 = Tool().new_flie(1000)
-
-    _v_forum_thread = get_value().forum_thread  # 今天发帖的记录
-    _uid_forum_thread = Tool().get_uid(_v_forum_thread)  # 今天发帖用户的ID列表
-    print('发帖人数：%d' % len(_uid_forum_thread))
-
-    _uid_forum_thread = Tool().out_com(_uid_forum_thread)  # 排出自己人
-    print('排出自己人后，发帖人数：%d' % len(_uid_forum_thread))
-
-    # 今天操作用户的ID列表
-    _v_user_action_report = get_value().user_action_report  # 今天操作记录
-    _uid_user_action_report = Tool().get_uid(_v_user_action_report)  # 今天操作的用户列表
-    print('活跃人数：%d' % len(_uid_user_action_report))
-
-    _uid_user_action_report = Tool().out_com(_uid_user_action_report)  # 排出自己人
-    print('排出自己人后，发帖人数：%d' % len(_uid_user_action_report))
-
-    # 将今日发帖的用户从操作的用户中去除
-    _out_list = [ ]
-    for i in _uid_user_action_report:
-        if i not in _uid_forum_thread:
-            _out_list.append(i)
-
-    # 提取用户在操作中的记录
-    for _uid in _out_list:  # 逐个处理列表中的数据
-        # 用于保存一个用户到所有操作
-        _list = [ ]
-
-        # 从操作列表中提取对用用户ID的行动
-        for j in _v_user_action_report:
-
-            if _uid == j[ 'uid' ]:  # 如果在操作记录中找到这个人到ID
-                # 用于保存一条操作：时间和操作
-                _v = [ ]
-
-                # 时间
-                _v.append(datetime.strptime(j[ 'created_at' ] , "%Y-%m-%d %H:%M:%S").time())
-
-                # 动作
-                if j[ 'action_type' ] in actin_list:
-                    _v.append(actin_list[ j[ 'action_type' ] ])
-
-                # 去重
-                if _v not in _list:
-                    _list.append(_v)
-
-        # 根据用户操作到次数，分文件夹保存数据
-        if len(_list) <= 50:
-            # 创建文件
-            _save = open('%s/%s.txt' % (file_50 , _uid) , 'w+' , encoding='utf-8')
-            for i in _list:
-                for j in range(len(i)):
-                    _save.write(str(i[ j ]))
-                    _save.write(' ')
-                _save.write('\r\n')
-            _save.close()
-        elif len(_list) > 50 and len(_list) <= 100:
-            # 创建文件
-            _save = open('%s/%s.txt' % (file_100 , i) , 'w+' , encoding='utf-8')
-            for i in _list:
-                for j in range(len(i)):
-                    _save.write(str(i[ j ]))
-                    _save.write(' ')
-                _save.write('\r\n')
-            _save.close()
-        else:
-            # 创建文件
-            _save = open('%s/%s.txt' % (file_1000 , i) , 'w+' , encoding='utf-8')
-            for i in _list:
-                for j in range(len(i)):
-                    _save.write(str(i[ j ]))
-                    _save.write(' ')
-                _save.write('\r\n')
-            _save.close()
-
-        # 在这里做一个统计，用户进行了多少次操作
-        print(str(_uid) + ',' + str(len(_list)) + '\n')
-        # break
-
-    print('50条操作的用户有：' + str(len(os.listdir(file_50))))
-    print('100条操作的用户有：' + str(len(os.listdir(file_100))))
-    print('50条操作的用户有：' + str(len(os.listdir(file_1000))))
+# 公共库
+import math
+import jieba.analyse
+import re
+import nltk
 
 
-# 传入文件名，得出用户的记录条数
-def numbers(Path):
-    file_path = './res/' + str(Path)  # 文件路径
-    file_name = './res/file_' + str(Path)  # 文件名
+def dd():
+    with open('res/test1.txt','r') as file:
+        test1 = file.read()
 
-    _file_list = os.listdir(file_path)  # 文件名列表
+    with open('res/test2.txt','r') as file:
+        test2 = file.read()
+
+    # 过滤停用词
+    with open('res/stop_words.txt','r',encoding='utf-8') as file:
+        stop_words = file.read()
+
+    stop_word = re.compile('[a-zA-Z0-9]+')  # 过滤掉纯数字和字母传
+
+    txt1 = jieba.cut(test1)
+
+    #过滤停用词
+    counts = []
+    for i in txt1:
+        _bool = stop_word.match(i)
+        if i not in stop_words and not _bool:
+            counts.append(i)
+
+    print(counts)
+
+def ddf():
+    gg='xxx'
+    tet = r'%s%s'%(gg,gg)
+    print(tet)
+ddf()
 
 
+# xml中只出现一次的设备的操作记录，并生成操作次数统计报告
+class action_count:
+    def __init__(self):
+        self.name = 'user_action_report'
+        self.path = new_folder('res/%s' % self.name)  # 创建数据文件夹,并返回path
 
-    # 所有操作进行计数
-    _file_time = {}
-    for i in _file_list:
-        _file = open(file_path + '/' + i , 'r' , encoding='utf-8')
-        _list = _file.readlines()
+        self.useful_key = ['client_version','action_type','uid','device_id','created_at']  # 简版字段
 
-        for j in _list:
-            _d = j.split(" ")
-            if _d[ 1 ] not in _file_time:
-                _file_time[ _d[ 1 ] ] = 1
+        self.mini_list = []  # 转换数据，获取想要的字段
+
+    # 传入要求，来判断用户登录的天数，返回符合条件的用户列表
+    def get_list(self,mark_value,work_type='is'):
+        # 生成用于统计的列表
+        use_list = []
+        for i in self.mini_list:
+            useer_id = str(i[3])  # 获取用户ID
+            date = str(datetime.strptime(i[1],"%Y-%m-%d %H:%M:%S").date())  # 获取操作日期
+
+            _i = (useer_id,date)
+            use_list.append(_i)  # 添加记录
+
+        # 去重，使得每个ID一天只有一条记录
+        use_list = list(set(use_list))
+        print('去重成，剩余条数：%s' % len(use_list))
+
+        # 给每个设备计数，统计每个设备ID登录了多少天
+        login_times = {}
+        for i in use_list:
+            if i[0] in login_times:
+                login_times[i[0]] += 1
             else:
-                _file_time[ _d[ 1 ] ] += 1
+                login_times[i[0]] = 1
+        print('计数成功，统计条数:%s' % len(login_times))
 
-        _file.close()
+        # 筛选出数量和传入数值符合的内容，元素是带有key和数字的元组
+        useful_list = []
+        if work_type == 'up':  # 筛选大于标准值的内容
+            for key,value in login_times.items():
+                if value > mark_value:
+                    _tuple = (key,value)
+                    useful_list.append(_tuple)  # 添加元组，为了之后可以做一个相关的统计文档
+        elif work_type == 'down':  # 筛选小于标准值的内容
+            for key,value in login_times.items():
+                if value <= mark_value:
+                    _tuple = (key,value)
+                    useful_list.append(_tuple)
+        else:  # 等于标准值
+            for key,value in login_times.items():
+                if value == mark_value:
+                    _tuple = (key,value)
+                    useful_list.append(_tuple)
+        print('生成列表，数据条数：%s' % len(useful_list))
+        # 输入号码和数量
+        return useful_list
 
-    # 打印数据
-    _end = open(file_name + '.txt' , 'w' , encoding='utf-8')
+    # 根据device_id，每个device_id生成一个文件
+    def get_list_by_device_id(self):
+        print('开始生成device_id文件')
+        site_field = self.useful_key.index('device_id')  # device_id 的位置
 
-    # 操作记录的总条数
-    _times = 0
+        # 获取所有UID
+        uid_list = []
+        for i in self.mini_list:
+            _uid = str(i[site_field])  # 获取用户ID
+            _date = str(datetime.strptime(i[3],"%Y-%m-%d %H:%M:%S").date())  # 获取操作日期
 
-    _list_50 = [ ]
-    for i in _file_time:
-        # 计算总数
-        _times += _file_time[ i ]
+            _i = (_uid,_date)
+            uid_list.append(_i)  # 添加记录
 
-        # 写入到文件中
-        _end.write(str(i) + ',' + str(_file_time[ i ]))
-        _end.write('\r\n')
+        # 去重，使得每个device_id一天只有一条记录
+        uid_list = list(set(uid_list))  # 去重
+        print('本月独立设备登录天/次：%s' % len(uid_list))
 
-    _end.write('一共有：%s 个用户记录，总共有 %s 条操作记录' % (len(_file_list) , _times))
+        # 给每个设备计数，统计每个设备ID登录了多少天
+        login_times = {}
+        for i in uid_list:
+            if i[0] in login_times:
+                login_times[i[0]] += 1
+            else:
+                login_times[i[0]] = 1
+        print('本月独立设备:%s' % len(login_times))
 
-    _end.close()
+        uid_path = new_folder('%s/%s' % (self.path,'device_id'))  # 新建文件夹
 
+        # 根据login_times，生成文件夹，并根据uid生成独立文件夹
+        for _k,_v in login_times.items():
+            # 建立文件，保存内容
+            with open('%s/%02d_%s.txt' % (uid_path,int(_v),_k),'w',encoding='utf-8') as file:
+
+                # 遍历数据表，符合条件，则添加到_one_list
+                for i_mini in self.mini_list:
+                    if _k == i_mini[site_field]:
+                        action_time = i_mini[3]  # 提取用户时间
+                        action_cn = action_to_cn(i_mini[0])  # 在这里做中文翻译
+
+                        file.write('%s\t%s\r' % (action_time,action_cn))  # 写入数据
+                # print('单个用户的所有操作%s'%_one_list)
+
+    # 根据列表，获得对应的数据，并根据对应的的值做分类
+    def extract_data(self,todo_list):
+        # 遍历设备ID列表，并统计每个设备id的动作
+        for i_list in todo_list:
+            # 用于保存一个用户的所有操作
+            _one_list = []
+            for i_mini in self.mini_list:
+                # print(i_list,i_mini[3])
+                if i_list[0] == i_mini[3]:
+                    _tuple = (i_mini[1],i_mini[2])  # 生成一个元组，元组中的0：时间，1：动作
+                    _one_list.append(_tuple)  # 添加一个元组
+            # print('单个用户的所有操作%s'%_one_list)
+
+            # 建立文件，保存内容
+            with open('%s/%03d_%s.txt' % (self.path,i_list[1],i_list[0]),'w',encoding='utf-8') as file:
+                for i in _one_list:
+                    action_time = i[0]  # 提取用户时间
+                    action_cn = action_to_cn(i[1])  # 在这里做中文翻译
+
+                    file.write('%s\t%s\r' % (action_time,action_cn))  # 写入数据
+
+    # 设置要处理数据的方式，最终返回数据
+    def make_file(self):
+        # 生成mini文件，并获得此列表
+        self.mini_list = get_mini(self.name,self.useful_key)
+        print('获取列表成功，条数:%s' % len(self.mini_list))
+
+        # self.get_list_by_device_id()  # 按设备生成用户列表
+
+        self.get_list_by_uid()  # 按UID生成用户列表

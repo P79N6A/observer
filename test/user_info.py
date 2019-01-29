@@ -11,7 +11,7 @@ str_text = open(u'res/test.txt', encoding='utf-8', errors='ignore').read()
 paichu={}
 # words = jieba.analyse.extract_tags(str_text,topK=3)
 
-words = jieba.lcut(str_text,cut_all=False)
+words = jieba.cut(str_text,cut_all=False,HMM=False)
 counts ={}
 for word in words:
     if len(word) == 1:
@@ -28,6 +28,7 @@ for w,i in  _list:
     fe =fe+w+' '+str(i)+'\n'
 de= "".join(fe)
 
+print(counts)
 print(de)
 
 #

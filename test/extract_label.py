@@ -3,9 +3,12 @@
 #公共库
 import jieba.analyse #分词库
 
+
+
+#做完语料库之后，就可以用这个来做判断了
 def ddd(txt):
-    #载入自定义词库
-    jieba.load_userdict("userdict.txt")
+    # #载入自定义词库
+    # jieba.load_userdict("user_dict.txt")
 
     #载入自定义语料库
     jieba.analyse.set_idf_path("./jieba-master/extra_dict/idf.txt.big")
