@@ -383,61 +383,10 @@ def show_count_operate(list_file):
     显示在device进入帖子详情前，在什么界面，显示界面的比例
     :rtype: object
     """
-    x_list = ['首页','首页-推文','社区首页','消息页面','个人中心-帖子','用户名片界面','试管婴儿版块','喜报版块','搜索结果','童梦母婴版块','社区-全部版块','社区-精华页签',
-              '社区-最新页签','社区-热门版块']  # 统计的界面
-
-    list_all_file = {}  # 统计所有设备的界面数据
-    list_all_file_last = {}  # 统计所有设备的上一个界面数据
-
-    _plan = 0  # 进度统计
-
-    for _path in list_file:
-        with open('%s/%s' % (path_device_file,_path),'r') as file:  # 统计进入帖子详情时，用户是在什么界面
-            _file = file.readlines()
-        # print(_file)
-
-        list_all = {}  # 统计所有界面次数
-        list_last = {}  # 统计上一个界面次数
-
-        the_last = ''  # 记录上一步
-        for i in _file:
-            txt = i.strip('\n').split("\t")[3]  # 提取界面
-            if txt in x_list:  # 统计上一步界面的次数
-                the_last = txt
-            elif txt == '帖子详情':
-                list_last[the_last] = list_last.get(the_last,0) + 1
-
-            list_all[txt] = list_all.get(txt,0) + 1  # 统计所有界面的次数
-
-        for key,value in list_all.items():  # 统计总界面
-            list_all_file[key] = list_all_file.get(key,0) + value
-
-        for key,value in list_last.items():  # 统计总上一个界面
-            list_all_file_last[key] = list_all_file_last.get(key,0) + value
-
-        _plan += 1
-        print(r'更新进度 (%s/%s):%s     %s' % (_plan,len(list_file),_path,len(_file)))
-
-    total_list_all_file = 0  # 总计
-    for i in list_all_file.values():
-        total_list_all_file += i
-
-    total_list_all_file_last = 0  # 总计
-    for i in list_all_file_last.values():
-        total_list_all_file_last += i
-
-    list_all_file = list(set(list_all_file.items()))  # 排序所有设备的界面数据
-    list_all_file.sort(key=lambda x:x[1],reverse=True)
-
-    list_all_file_last = list(set(list_all_file_last.items()))  # 排序所有设备的上一个界面数据
-    list_all_file_last.sort(key=lambda x:x[1],reverse=True)
-
-    # print(list_all_file)
-    # print(list_all_file_last)
-
-    return list_all_file_last
+    pass
 
 
+#################################################   小工具   ############################################
 # 查找uid所使用的设备号，返回包含此uid的设备列表
 def find_device(uid):
     print('查找设备号')
@@ -478,6 +427,21 @@ def see_device(list_file):
             print('\r\r\r')
 
 
+# 统计用户在首页 点击功能按钮的次数
+def show_home_times():
+    with open('%s/xml/user_action_report-2018_08.xml' % path,'r') as file:
+        _file = file.read()
+
+    aa = re.findall('{&amp;quot;title&amp;quot;:((?:.|\n)*?)&',_file,flags=0)  # 提取需要的中文
+
+    txt = {}  # 统计数量
+    for i in aa:
+        txt[i] = txt.get(i,0) + 1
+
+    print(txt)
+
+
+#################################################   待整理  ############################################
 # 统计不同操作数区间的用户，他们各种操作占有的比例
 def create_report():
     total_dict = {}  # 数据报告列表
@@ -830,20 +794,6 @@ def report_for_days_by_device_id(tab):
             file.write('\t%.2f' % (txt_dict[1][i] / txt_dict[0][i]))
         file.write('\r')
     print('生成数据报告')
-
-
-# 统计用户在首页 点击功能按钮的次数
-def tiquinfo():
-    with open('%s/xml/user_action_report-2018_08.xml' % path,'r') as file:
-        _file = file.read()
-
-    aa = re.findall('{&amp;quot;title&amp;quot;:((?:.|\n)*?)&',_file,flags=0)  # 提取需要的中文
-
-    txt = {}  # 统计数量
-    for i in aa:
-        txt[i] = txt.get(i,0) + 1
-
-    print(txt)
 
 
 if __name__ == '__main__':
