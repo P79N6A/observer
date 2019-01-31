@@ -2448,16 +2448,14 @@ def retest():
     # # _info = re.search('《[^》]+》', test, flags=0).group()
     # print(re.findall('《.*》', test, flags=0))
 
-
     # an = re.compile('<field name="info">[a-zA-Z0-9]</field>')  # 纯中文
     # dd = an.search(t)
-
 
     # 判断字段是否为纯数字或字母
     with open('res/test.txt','r') as file:
         _file = file.read()
 
-    dd = re.findall('<field name="info">((?:.|\n)*?)</field>',_file,flags=0)#提取需要的信息
+    dd = re.findall('<field name="info">((?:.|\n)*?)</field>',_file,flags=0)  # 提取需要的信息
 
     print(dd)
 
@@ -2580,5 +2578,34 @@ def dds():
     print(bool('' in x_list))
 
 
+def ax3d(_list=[(2, 0, 0), (6, 1, 0), (6, 1, 0), (6, 1, 0)]):
+    # -*- coding: utf-8 -*-
+    print(_list)
+    # 加入中文显示
+    import matplotlib.font_manager as fm
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D  # 绘制三D图形
+
+    fig = plt.figure()  # 创建一张图片
+    ax3d = Axes3D(fig)
+
+    # 三个轴  x y z
+    x = list()
+    y = list()
+    z = list()
+
+    for i in _list:
+        print(i)
+        x.append(i[0])
+        y.append(i[1])
+        z.append(i[2])
+    print(x,y,z)
+    ax3d.plot_surface(x,y,z,rstride=1,cstride=1,cmap=plt.cm.spring)  # cmap还可以是summer autumn winter也可以自己配置
+    # rstride    Array row stride (step size)    步长
+    # cstride    Array column stride (step size)
+    plt.show()
+
+
 if __name__ == '__main__':
-    retest()
+    ax3d()
