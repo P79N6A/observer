@@ -1,4 +1,4 @@
-from worker.leid import get_show_list
+from worker.readers import test
 
 
 class execute():
@@ -7,5 +7,5 @@ class execute():
             '大麦':['https://search.damai.cn/searchajax.html']
         }
     def toDo(self):
-        a = get_show_list.Spider(self.url['大麦'])
+        a = test.Spider(self.url['大麦'])
         a.todo()

@@ -11,29 +11,7 @@ from requests import RequestException  # try库
 
 # 内部库
 from worker.readers.pretender import proxy  # 获取代理IP
-
-import pymongo
-
-
-
-
-
-
-
-
-
-
-# 解析豆瓣
+# 解析豆瓣-同城活动
 class douban_activity:
     def __init__(self):
         pass
-
-
-# 解析搜狐
-class get_sohu:
-    def __init__(self):
-        pass
-
-
-if __name__ == '__main__':
-    _i = get_news('杏仁豆腐心').main()

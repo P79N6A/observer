@@ -21,7 +21,7 @@ class entry_show_list:
         self._value = []  # 设置返回值
 
     @property
-    def get_value(self):
+    def main(self):
         self._do()
         print('新增 %s 条演出信息' % len(self._value))
         return self._value
@@ -82,27 +82,27 @@ class entry_show_list:
                     print('此演出是新增演出：', i['标题'])
 
 
-# class update_list:
-#     def __init__(self, List):
-#         # 数据库
-#         self.data_table = pymongo.MongoClient('mongodb://localhost:27017/')["swarm"]['show_list']
-#
-#         self.data_list = List
-#
-#         self._value = []  # 设置返回值
-#
-#     # 在大麦中获取内容的更详细信息
-#     def update_list(self, listName='info_drama.csv', headers='https://piao.damai.cn/'):
-#         _list = pd.DataFrame(pd.read_csv("res/" + listName, header=0, encoding='utf-8'))  # 读取CSV，以后是读取数据库
-#
-#         for n, i in _list.iterrows():
-#             if i['信息属性'] == 0:  # 如果信息属性为0，则表示没有从大麦中获取数据，
-#                 end = headers + str(i['projectid']) + '.html'
-#                 get_info(end)
-#
-#         # 更新列表中的内容，让他们更详细
-#         # 将超出时间的内容放在另一张表中，可以晚点做
-#         pass
+class entry_review_list:
+    def __init__(self, List):
+        # 数据库
+        self.data_table = pymongo.MongoClient('mongodb://localhost:27017/')["swarm"]['show_list']
+
+        self.data_list = List
+
+        self._value = []  # 设置返回值
+
+    # 在大麦中获取内容的更详细信息
+    def update_list(self, listName='info_drama.csv', headers='https://piao.damai.cn/'):
+        _list = pd.DataFrame(pd.read_csv("res/" + listName, header=0, encoding='utf-8'))  # 读取CSV，以后是读取数据库
+
+        for n, i in _list.iterrows():
+            if i['信息属性'] == 0:  # 如果信息属性为0，则表示没有从大麦中获取数据，
+                end = headers + str(i['projectid']) + '.html'
+                get_info(end)
+
+        # 更新列表中的内容，让他们更详细
+        # 将超出时间的内容放在另一张表中，可以晚点做
+        pass
 
 
 if __name__ == '__main__':

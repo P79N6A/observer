@@ -1,6 +1,3 @@
-def dddd():
-    from bs4 import BeautifulSoup as BS  # 加载解析HTML库
-    test = """/usr/local/bin/python3.7 /Users/apple/Documents/observer/worker/director.py
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,14 +9,14 @@ def dddd():
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache,must-revalidate">
 <meta http-equiv="expires" content="0">
-<title>武汉话剧歌剧 禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》【网上订票】– 大麦网</title> 
-<meta name="create-time" content="2019-01-07 01:31:56" />
-<meta name="keywords" content="武汉话剧歌剧,禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》,大麦网"/>
-<meta name="description" content="大麦网（Damai.cn）武汉话剧歌剧 禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》将于2018.12.29-2019.01.26在禾空间小剧场上演，大麦网为禾空间小剧场话剧歌剧 禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》门票代理，更多门票价格及订票详情请咨询大麦网武汉站."/>
+<title>武汉话剧歌剧 《愤怒的小鸟欢乐SHOW》（武汉站）【网上订票】– 大麦网</title>
+<meta name="create-time" content="2019-02-09 00:51:37" />
+<meta name="keywords" content="武汉话剧歌剧,《愤怒的小鸟欢乐SHOW》（武汉站）,大麦网"/>
+<meta name="description" content="大麦网（Damai.cn）武汉话剧歌剧 《愤怒的小鸟欢乐SHOW》（武汉站）将于2019.02.08-02.09在武汉琴台大剧院上演，大麦网为武汉琴台大剧院话剧歌剧 《愤怒的小鸟欢乐SHOW》（武汉站）门票代理，更多门票价格及订票详情请咨询大麦网武汉站."/>
 <meta name="aplus-auto-exp-visible" content="0.5">
 <meta name="aplus-auto-exp-duration" content="500">
 <meta name="aplus-auto-exp" content='[{"logkey":"/damai_pc.default.project_qr_purchase","tag":"div","filter":"data-spm-auto","props":["item_id"]}]'>
-	<link rel="stylesheet" type="text/css" href="//dui.dmcdn.cn/??dm_2015/goods/css/style.css?v1.7.1,damai_v2/login_register3.0/css/style.css?v1.7.1" />
+	<link rel="stylesheet" type="text/css" href="//dui.dmcdn.cn/??dm_2015/goods/css/style.css?v6.9.0,damai_v2/login_register3.0/css/style.css?v6.9.0" />
 <link rel="stylesheet" type="text/css" href="//g.alicdn.com/??damai/pc-wx/0.1.0/index.css"></link>
 <style type="text/css">
 .chat-view-xiaoneng-version{opacity:0;}
@@ -31,7 +28,7 @@ def dddd():
 .jiathis_style .jiathis_txt {float: left;font-size: 12px;line-height: 18px !important;text-decoration: none;}
 </style>
 <script type="text/javascript">
-var projectInfo = {"ProjectID":168874,"CityID":586,"Name":"禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》","ShowTime":"2018.12.29-2019.01.26","Price":60.00,"SiteStatus":3,"VenueName":"禾空间小剧场","IsOnlyXuanZuo":false,"QuestionPass":false,"TicketValidateType":0,"htmlName":null,"Tabcontrol":0,"IsShowStartTime":false,"StartTicketTime":"\/Date(1542469381000)\/","SellStartTime":"\/Date(1542469381000)\/","OptimizationTicket":0};
+var projectInfo = {"ProjectID":172827,"CityID":586,"Name":"《愤怒的小鸟欢乐SHOW》（武汉站）","ShowTime":"2019.02.08-02.09","Price":80.00,"SiteStatus":3,"VenueName":"武汉琴台大剧院","IsOnlyXuanZuo":true,"QuestionPass":false,"TicketValidateType":0,"htmlName":null,"Tabcontrol":0,"IsShowStartTime":false,"StartTicketTime":"\/Date(1546070686000)\/","SellStartTime":"\/Date(1546070625000)\/","OptimizationTicket":0};
 var hostName = "wuhan", itemDomain = "piao.damai.cn", categoryId = 3, is_show_perform_calendar = 0;
 is_show_perform_calendar = 1;
 var PrivelegePId=108944;
@@ -43,10 +40,10 @@ var is_show_qr_code = 0;
 <script type="text/javascript" id="beacon-aplus" src="//g.alicdn.com/alilog/mlog/aplus_v2.js"  exparams="clog=o&aplus&sidx=aplusSidex&ckx=aplusCkx"></script>
 <div class="g-hd" style="position:static;">
 <div class="g-hdc">
-<input type="hidden" value="%e7%a6%be%e7%a9%ba%e9%97%b4%e5%b0%8f%e5%89%a7%e5%9c%ba%e5%8e%9f%e5%88%9b%e6%83%8a%e6%82%9a%e7%88%86%e7%ac%91%e8%88%9e%e5%8f%b0%e5%89%a7%e2%80%94%e2%80%94%e3%80%8agoodbye%e6%97%85%e8%a1%8c%e7%a4%be%e4%b9%8b%e9%bb%91%e7%99%bd%e5%85%88%e7%94%9f%e3%80%8b" id="Hidden1"/>
-<input type="hidden" value="我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》』,时间是2018.12.29-2019.01.26，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;" id="Title"/>
-<input type="hidden" value="%ba%cc%bf%d5%bc%e4%d0%a1%be%e7%b3%a1%d4%ad%b4%b4%be%aa%e3%a4%b1%ac%d0%a6%ce%e8%cc%a8%be%e7%a1%aa%a1%aa%a1%b6goodbye%c2%c3%d0%d0%c9%e7%d6%ae%ba%da%b0%d7%cf%c8%c9%fa%a1%b7" id="NameCN"/>
-<input type="hidden" value="https%3a%2f%2fpiao.damai.cn%2f168874.html" id="LinkCN"/>
+<input type="hidden" value="%e3%80%8a%e6%84%a4%e6%80%92%e7%9a%84%e5%b0%8f%e9%b8%9f%e6%ac%a2%e4%b9%90SHOW%e3%80%8b%ef%bc%88%e6%ad%a6%e6%b1%89%e7%ab%99%ef%bc%89" id="Hidden1"/>
+<input type="hidden" value="我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『《愤怒的小鸟欢乐SHOW》（武汉站）』,时间是2019.02.08-02.09，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;" id="Title"/>
+<input type="hidden" value="%a1%b6%b7%df%c5%ad%b5%c4%d0%a1%c4%f1%bb%b6%c0%d6SHOW%a1%b7%a3%a8%ce%e4%ba%ba%d5%be%a3%a9" id="NameCN"/>
+<input type="hidden" value="https%3a%2f%2fpiao.damai.cn%2f172827.html" id="LinkCN"/>
 <input type="hidden" value="586" id="cityId"/>
 <input type="hidden" value="武汉" id="cityName"/>
 <input type="hidden" value="3" id="CategoryID" />
@@ -62,7 +59,7 @@ var is_show_qr_code = 0;
     </div>
     <!-- 城市切换 end -->
 
-    
+
     <!-- 顶部栏 begin -->
     <ul class="m-topbar">
       <li class="itm first">
@@ -98,13 +95,13 @@ var is_show_qr_code = 0;
 <div class="g-bd" data-image="" data-color="">
   <div class="g-bdc">
     <div class="g-mn">
-	  	
+
       <!-- 终极页项目信息 begin -->
       <div class="m-box m-box-col2 m-box-goods" id="projectInfo">
         <div class="hd">
           <!-- 面包屑 begin -->
           <p class="m-crm">
-            			<strong>禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》</strong>
+            			<strong>《愤怒的小鸟欢乐SHOW》（武汉站）</strong>
           </p>
           <!-- 面包屑 end -->
 		          </div>
@@ -114,38 +111,38 @@ var is_show_qr_code = 0;
           <div class="m-poster">
             <!-- 项目图 begin -->
             <div class="m-picbox">
-                <img original="//pimg.dmcdn.cn/perform/project/1688/168874_n.jpg" title="禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》" alt="禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》" width="277" height="373" />
-              
+                <img original="//pimg.dmcdn.cn/perform/project/1728/172827_n.jpg" title="《愤怒的小鸟欢乐SHOW》（武汉站）" alt="《愤怒的小鸟欢乐SHOW》（武汉站）" width="277" height="373" />
+
             </div>
             <!-- 项目图 end -->
-            
+
             <!-- 分享 begin -->
             <div class="m-share" data-spm="click">
               <span class="txt">分享到：</span>
               <!-- JiaThis Button BEGIN -->
               <div class="jiathis_style">
-                <a href="http://service.weibo.com/share/share.php?title=我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》』,时间是2018.12.29-2019.01.26，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;&url=https%3a%2f%2fpiao.damai.cn%2f168874.html&source=bookmark&appkey=3588246140&pic=https%3A%2F%2Fpimg.dmcdn.cn%2Fperform%2Fproject%2F1688%2F168874_n.jpg&ralateUid=1722647874" class="jiathis_button_tsina" title="分享到微博" target="_blank" data-spm-click="gostr=/damai_pc.default.click;localid=share_0;dclicktitle=微博&ditem_id=168874"><span class="jiathis_txt jtico jtico_tsina"></span></a>
-                <a class="jiathis_button_weixin" title="分享到微信" data-spm-click="gostr=/damai_pc.default.click;localid=share_1;dclicktitle=微信&ditem_id=168874"><span class="jiathis_txt jtico jtico_weixin"></span></a> 
-                <a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https%3A%2F%2Fpiao.damai.cn%2F168874.html&title=我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》』,时间是2018.12.29-2019.01.26，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;&pics=http%3A%2F%2Fpimg.dmcdn.cn%2Fperform%2Fproject%2F1688%2F168874_n.jpg&summary=" class="jiathis_button_qzone" title="分享到QQ空间" target="_blank" data-spm-click="gostr=/damai_pc.default.click;localid=share_2;dclicktitle=QQ空间&ditem_id=168874"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+                <a href="http://service.weibo.com/share/share.php?title=我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『《愤怒的小鸟欢乐SHOW》（武汉站）』,时间是2019.02.08-02.09，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;&url=https%3a%2f%2fpiao.damai.cn%2f172827.html&source=bookmark&appkey=3588246140&pic=https%3A%2F%2Fpimg.dmcdn.cn%2Fperform%2Fproject%2F1728%2F172827_n.jpg&ralateUid=1722647874" class="jiathis_button_tsina" title="分享到微博" target="_blank" data-spm-click="gostr=/damai_pc.default.click;localid=share_0;dclicktitle=微博&ditem_id=172827"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+                <a class="jiathis_button_weixin" title="分享到微信" data-spm-click="gostr=/damai_pc.default.click;localid=share_1;dclicktitle=微信&ditem_id=172827"><span class="jiathis_txt jtico jtico_weixin"></span></a>
+                <a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https%3A%2F%2Fpiao.damai.cn%2F172827.html&title=我在@大麦网 『www.damai.cn』发现了一个非常不错的演出:『《愤怒的小鸟欢乐SHOW》（武汉站）』,时间是2019.02.08-02.09，场馆在,强烈推荐！分享一下&gt;&gt;&gt;&gt;&gt;&gt;&pics=http%3A%2F%2Fpimg.dmcdn.cn%2Fperform%2Fproject%2F1728%2F172827_n.jpg&summary=" class="jiathis_button_qzone" title="分享到QQ空间" target="_blank" data-spm-click="gostr=/damai_pc.default.click;localid=share_2;dclicktitle=QQ空间&ditem_id=172827"><span class="jiathis_txt jtico jtico_qzone"></span></a>
               </div>
               <!-- JiaThis Button END -->
             </div>
             <!-- 分享 end -->
-           
+
 
           </div>
           <!-- 项目海报 end -->
-          
+
           <!-- 项目模块 begin -->
           <div class="m-goods">
             <h2 class="tt" data-spm="click">
-				 <span class="txt">禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》</span>
+				 <span class="txt">《愤怒的小鸟欢乐SHOW》（武汉站）</span>
             </h2>
 						<h3 class="stt">
               <span class="quotl"></span>
-              <span class="txt">goodbye旅行社之黑白先生</span>
+              <span class="txt">愤怒的小鸟欢乐SHOW</span>
               <span class="quotr"></span>
-            </h3>             
+            </h3>
             <!-- 时间轴 begin -->
 			            <div class="m-timeline m-timeline-3" id="projectAxis">
               <div class="wrap">
@@ -171,19 +168,19 @@ var is_show_qr_code = 0;
 					<div class="bd">
 						<div class="tips">
 							<div class="box z-hide"><p class="itm">
-														
+
 														</p></div>
 							<div class="ops"><span class="btnsel"></span></div>
 						</div>
 					</div>
 					<div class="mark" id="jinpaiMark" style="display:none;"></div>
 				</div>
-								
+
 								<div id="toBeAboutTo" class="m-countdown" data-init="false" style="display:none;">
 				<div class="ct"></div>
 				<div class="tips"><i class="ico"></i><span class="txt j_endtime"></span></div>
 				</div>
-							  
+
                                                                                           <!-- 促销信息模块 begin -->
               <div class="" id="yhcx" data-row="4" data-col="1"></div>
 			  <div class="m-load z-hide" id="getInfoFail"><p class="txt"><i></i>加载失败</p></div>
@@ -227,7 +224,7 @@ var is_show_qr_code = 0;
                 </div>
               </div>
               <!-- 选择票价模块 end -->
-			                 
+
               <!-- 购物车模块 begin -->
               <div class="m-cart  " id="cartList" style="display:none;" data-spm="click">
                 <h3 class="tt" style="display:none;">您选择了：</h3>
@@ -236,9 +233,8 @@ var is_show_qr_code = 0;
                 </div>
 
 				<div class="ops">
-				  				  <a href="javascript:;" class="u-btn u-btn-c1 u-btn-choose" id="btnXuanzuo" style="display:none;" data-spm-click="gostr=/damai_pc.default.click;localid=buyselectseatbtn;ditem_id=168874">选座购买</a>
-				                                      <a class="u-btn u-btn-buynow" href="javascript:;" id="btnBuyNow" data-spm-click="gostr=/damai_pc.default.click;localid=fastbuybtn;ditem_id=168874">立即购买</a>
-                                   </div>
+				  				  <a href="javascript:;" class="u-btn u-btn-c1 u-btn-choose" id="btnXuanzuo" style="display:none;" data-spm-click="gostr=/damai_pc.default.click;localid=buyselectseatbtn;ditem_id=172827">选座购买</a>
+				                                     </div>
 
               </div>
               <!-- 购物车模块 end -->
@@ -247,10 +243,10 @@ var is_show_qr_code = 0;
 				<input type="text" placeholder="请输入接收信息的手机号" class="u-ipt u-ipt-md" id="kaishoutixingPhone">
 				<a class="u-btn u-btn-md u-btn-remind" href="javascript:kaishoutixing;" id="btnKaishoutixing"><i class="ico"></i><span class="txt">开售提醒</span></a>
 				</div>
-				
-                                          
-                            
-                                          
+
+
+
+
                             <div id="jinpaiCounter" class="m-countdown" data-init="false" style="display:none;">
 				<div class="ct"><span class="lab">距抢座开始：</span>
 				<span class="num num-0">0</span><span class="num num-0">0</span><span class="txt">小时</span>
@@ -303,14 +299,14 @@ var is_show_qr_code = 0;
                   </div>
                 </div>
               </div>
-              
-                                          
-                                          
+
+
+
 			  			  <a name="projectPrivilege" id="privilegeAnchor"></a>
-			  
+
                                 <div class="m-qrcode"><!-- 大麦网客户端二维码 -->
                     <h3 class="tt"><span id="ErWeiMaTips">手机扫一扫<br />下单更快捷</span></h3>
-                    <p class="ct"><img original="//static.dmcdn.cn/Erweima/1688/168874.jpg" alt="大麦网客户端" width="109" height="108"/></p>
+                    <p class="ct"><img original="//static.dmcdn.cn/Erweima/1728/172827.jpg" alt="大麦网客户端" width="109" height="108"/></p>
                 </div>
                               			  <div class="m_heighlight_tip"></div>
 			              </div>
@@ -318,97 +314,73 @@ var is_show_qr_code = 0;
           </div>
           <!-- 项目模块 end -->
         </div>
-        
+
         <!-- 侧栏 begin -->
         <div class="sd">
-		  		  		  
-		  		  		  
+		  		            <!-- 票务总代 begin -->
+          <div class="m-agent">
+            <div class="tt">
+              <img original="//dui.dmcdn.cn/dm_2015/goods/images/m-agent-logo.png" alt="票务总代" />
+            </div>
+            <div class="ct">
+			  			  <a class="itm" target="_blank">本项目由大麦网总代理</a>
+			  <a class="itm" target="_blank">MAITIX独家票务系统支持</a>
+			              </div>
+          </div>
+          <!-- 票务总代 end -->
+
+
 		            <div class="m-sdbox m-showtime">
-			
+
 
 			            <h2 class="tt">演出时间</h2>
             <div class="ct">
-              <span class="txt">2018.12.29-2019.01.26</span>
+              <span class="txt">2019.02.08-02.09</span>
 			                <a href="javascript:;" class="u-btn u-btn-cal" id="rili" onClick="showcalendar(event, this); return false;" onFocus="showcalendar(event, this);"><i>日历</i></a>
 			              </div>
-			
+
           </div>
-		  
+
 
 		            <!-- 演出场馆 begin -->
           <div class="m-sdbox m-venue">
             <h2 class="tt">演出场馆</h2>
             <div class="ct">
-			  <p class="txt"> 禾空间小剧场 </p>
+			  <p class="txt"> 武汉琴台大剧院 </p>
                           </div>
           </div>
           <!-- 演出场馆 end -->
-		  
+
           <!-- 票品支持 begin -->
           <div class="m-sdbox m-support">
             <h2 class="tt">票品支持</h2>
             <div class="ct">
               <ul  class="m-mantab">
-                                                                 <li class="itm"><a href="javascript:;" class="u-btn u-btn-super"><i></i>超级票</a>
-					<div class="layer">
-							<div class="hd"><a href="javascript:;" class="btn-close">关闭</a></div>
-							<div class="bd">
-								<p>1.本项目支持使用【电子钱包-超级票账户】消费，支付时优先扣减超级票余额。</p><p>2.超级票成功充值电子钱包后，享受全网通兑、分次消费、无有效期限制、无使用张数限制、秒杀、抢票等服务。</p>
-							</div>
-							<div class="ft">
-								<a href="javascript:;" class="btn btn-close">关闭</a>
-							</div>
-						</div>
-				  </li>
-                                                  <li class="itm"><a href="javascript:;" class="u-btn u-btn-wallet"><i></i>电子钱包</a>
+                					<li class="itm"><a href="javascript:;" class="u-btn u-btn-choose"><i></i>选座</a>
 						<div class="layer">
 							<div class="hd"><a href="javascript:;" class="btn-close">关闭</a></div>
 							<div class="bd">
-								<p>本项目支持电子钱包。</p>
-              <p>1. 电子钱包是由大麦网自主研发的第三方支付平台</p>
-              <p>2. 为每一个用户在购票过程中提供"简单、安全、快速"的在线支付解决方案</p>
+								<p>本项目支持自助选座。</p><p>1. 选择演出时间，并点击"选座购买"进入选座页面。</p><p>2. 选座后，在15分钟内支付成功，选座生效。</p>
 							</div>
 							<div class="ft">
 								<a href="javascript:;" class="btn btn-close">关闭</a>
 							</div>
 						</div>
-				  </li>
+					</li>
 
-                                                  <li class="itm"><a href="javascript:;" class="u-btn u-btn-etkt"><i></i>电子票</a>
-					<div class="layer">
-							<div class="hd"><a href="javascript:;" class="btn-close">关闭</a></div>
-							<div class="bd">
-								<p>本项目支持二维码电子票</p>
-							</div>
-							<div class="ft">
-								<a href="javascript:;" class="btn btn-close">关闭</a>
-							</div>
-						</div>
-				  </li>
-                                                  <li class="itm"><a href="javascript:;" class="u-btn u-btn-credit"><i></i>返积分</a>
-						<div class="layer">
-							<div class="hd"><a href="javascript:;" class="btn-close">关闭</a></div>
-							<div class="bd">
-                                                                      <p>【会员多倍积分】 大麦会员按不同等级可分别获得消费金额×50%到100%比例的积分返还</p>
-                                  								<p>您可以在积分商城兑换明星周边、演出票品、优惠卡券等商品，也可以参与抽奖活动，赢取幸运大礼。</p>
-							</div>
-							<div class="ft">
-								<a href="javascript:;" class="btn btn-close">关闭</a>
-							</div>
-						</div>
-				  </li>
-                                                               <!-- -->
 
-                
-				
+                                               <!-- -->
+
+
+
 									<li class="itm"><a href="javascript:;" class="u-btn u-btn-selftake"><i></i>上门自取</a></li>
-				
+
 									<li class="itm"><a href="javascript:;" class="u-btn u-btn-express"><i></i>快递</a></li>
 				              </ul>
             </div>
           </div>
           <!-- 票品支持 end -->
-		  
+
 		            <!-- 实票配送 begin -->
           <div class="m-sdbox m-entity" id="freight">
             <h2 class="tt"> 实票配送</h2>
@@ -426,13 +398,13 @@ var is_show_qr_code = 0;
             </div>
           </div>
           <!-- 实票配送 end -->
-		  
+
         </div>
         <!-- 侧栏 end -->
-        
+
       </div>
       <!-- 终极页项目信息 end -->
-      
+
       <!-- 终极页项目详情 begin -->
       <div class="m-box m-box-col2">
         <div class="mn">
@@ -450,8 +422,7 @@ var is_show_qr_code = 0;
 
 															<div class="buy" id="buyButtonC" style="display:none;">
 												<a href="javascript:;" class="u-btn u-btn-buy " id="btnXuanzuo2" style="display:none;"><i class="ico"></i><span class="txt">选座购买</span></a>
-																		<a href="javascript:;" class="u-btn u-btn-cart " id="btnBuyNow2"><i class="ico"></i><span class="txt">立即购买</span></a>
-											</div>
+																	</div>
 					                </div>
               </div>
               <div class="bd">
@@ -465,108 +436,86 @@ var is_show_qr_code = 0;
 							                          <table class="m-table2">
                             <tbody>
 							  <tr>
-							                                  <td width="90" class="bg">演出时间</td><td>2018.12.29-2019.01.26</td>  							                                  <td width="90" class="bg">演出场馆</td><td width="200">禾空间小剧场</td>                                 </tr><tr> 							                                  <td width="90" class="bg">演出时长</td><td>约70分钟</td> 							  							                                  <td width="90" class="bg">入场时间</td><td width="200">演出前约30分钟</td> 							   </tr><tr>                               							   </tr><tr>                                                              </tr><tr> 							                                 </tr><tr> 							  								<td class="bg">限购</td><td>立即购买每单限20张。</td>                               							  							  							                                							                                  <td class="bg">儿童入场提示</td><td>儿童凭票入场<br /></td> 							  							   </tr><tr> 								<td class="bg">座位类型</td><td>不对号入座</td> 							  							  							  							    							  							    								<td class="bg">禁止携带物品</td>
-								<td>由于安保和版权的原因，大多数演出、展览及比赛场所禁止携带食品、饮料、专业摄录设备、打火机等物品，请您注意现场工作人员和广播的提示，予以配合。</td>
-																 </tr>  <tr>  															  							    								<td class="bg">付款时效提醒</td>
+							                                  <td width="90" class="bg">演出时间</td><td>2019.02.08-02.09</td>  							                                  <td width="90" class="bg">演出场馆</td><td width="200">武汉琴台大剧院</td>                                 </tr><tr> 							                                  <td width="90" class="bg">演出时长</td><td>约90分钟</td> 							  							                                  <td width="90" class="bg">入场时间</td><td width="200">演出前约30分钟</td> 							   </tr><tr>                               							   </tr><tr>                                                              </tr><tr> 							                                 </tr><tr> 							  								<td class="bg">限购</td><td>选座购买每单限6张</td>                               							  							  							                                							                                  <td class="bg">儿童入场提示</td><td>儿童一律凭成人票入场<br /></td> 							  							   </tr><tr> 							  							    							  							    								<td class="bg">禁止携带物品</td>
+								<td>由于安保和版权的原因，大多数演出、展览及比赛场所禁止携带食品、饮料、专业摄录设备、打火机等物品，请您注意现场工作人员和广播的提示，予以配合</td>
+																															  							    								<td class="bg">付款时效提醒</td>
 								<td>购票下单成功后需在15分钟内完成支付，未支付成功的订单，将在下单15分钟后系统自动取消，所选价位将自动释放后重新点亮，大家可及时刷新购票页面进行购买。</td>
-																															  							    								<td class="bg">缺货登记提醒</td>
+																 </tr>  <tr>  															  							    								<td class="bg">缺货登记提醒</td>
 								<td>所需票价若为灰色，说明已经售完。您可以在当前页面进行缺货登记，后期如果有票会以短信形式及时通知。</td>
-																 </tr>  <tr>  															  							    								<td class="bg">发票说明</td>
-								<td>发票由现场提供，演出当天请持门票到演出场馆开具</td>
-																															  							    								<td class="bg">实名制</td>
-								<td>无需实名制购票</td>
-																 </tr>  <tr>  															  							    								<td class="bg">座位类型</td>
-								<td>无具体位置号，请听从现场安排，有序进场入座</td>
+																															  							    								<td class="bg">发票说明</td>
+								<td>购票用户如需发票，请凭演出票（演出结束后一个月内有效）到琴台大剧院票务中心大剧院窗口开发票。发票开取时间：周一到周五（10:00-17:00），请当月与工作人系联系，跨月将无法开具发票。</td>
+																 </tr>  <tr>  															  							    							  							    								<td class="bg">座位类型</td>
+								<td>请按门票对应位置，有序对号入座</td>
 																															  							    								<td class="bg">物品寄存</td>
 								<td>无寄存处，请自行保管携带物品</td>
-																 </tr>  <tr>  															  							    								<td class="bg">有无中文字幕</td>
-								<td>演出现场无字幕</td>
-																															  							    								<td class="bg">演出语言</td>
-								<td>普通话</td>
-																 </tr>  <tr>  															  							    								<td class="bg">主演演员（团体）</td>
-								<td>不漏文化<br /></td>
-																															  							    								<td class="bg">大麦网首次开售时全场可售门票总张数</td>
-								<td>200张</td>
-																 </tr>  <tr>  															  							    								<td class="bg">退换说明</td>
-								<td>因票品受时效性、稀缺性及销售周期影响，退换票行为将影响到其他观众的正当权益，若您有退票需求，将产生相应费用，详见大麦网退换说明</td>
-																															  							    								<td class="bg">票品类型</td>
-								<td>二维码电子票<br /></td>
-																 </tr>  <tr>  															  							    								<td class="bg">入场方式</td>
-								<td>电子票入场<br /></td>
-																															  
-							  							  <td class="bg"></td><td></td></tr>
+																 </tr>  <tr>
 							                              </tbody>
                           </table>
                         </div>
                       </dd>
                     </dl>
-					
-															
-					
-					
+
+
+
+
 															<dl class="infoitm">
                       <dt class="tt"><span class="txt">项目介绍</span></dt>
                       <dd class="ct">
 						<div class="pre"><h4>
 	演出介绍
 </h4>
-<strong>编剧导演：张一天&nbsp; 舞美：刘岳坤</strong><br />
-如果一黑一白两个人，一个很黑、一个很白，出现在你面前，你首先会想到他们是谁？<br />
-如果一黑一白两个人，非要请你去他们的地盘旅游，你敢去吗？<br />
+Rovio授权正版：欢乐秀《愤怒的小鸟》舞台剧演出。这是一部适合全家人一同观看的"秀"。您会欣赏到缤纷的歌舞表演；炫酷的动画视效；精彩的杂技互动；劲爆的流行音乐。愤怒的小鸟明星们都将来到您的身边！别忘了还有爱捣乱的小猪们伺机而动……他们将带着您展开一场跌宕起伏的全新探险旅程！<br />
 <p>
-	如果一黑一白两个人，一定要让你留下来陪他们，你该怎么办？
+	<br />
 </p>
-<p style="text-align:center;">
-	<img original="https://damaipimg.oss-cn-beijing.aliyuncs.com/cfs/src/75a10314-fbfa-459d-b9fb-bea97a34705f" width="600" height="450" alt="" /> 
-</p>
-他，张一天，遇到了这两个人，去了他们的地盘，并决定留下……却最终一个人且只有一个人回到了人世！这其中究竟有怎样不可告人的秘密？<br />
-当张一天再次踩上江汉路的地面时，他轻轻哀叹：<br />
-长江大桥的风吹不散奈河的雾，地铁二号线到不了孟婆的销魂店。让我们在恐惧中开怀大笑，在虚幻里看清现实吧……<br />
+<h4>
+	剧情介绍
+</h4>
 <p>
-	黑白先生，请您来到"goodbye旅行社"，告别过去，笑着面对未来。
+	<br />
 </p>
-<p style="text-align:center;">
-	<img original="https://damaipimg.oss-cn-beijing.aliyuncs.com/cfs/src/26ff9f83-00ab-4d55-a580-76c3c1863582" width="600" height="450" alt="" /> 
+<p>
+	小鸟们正在准备举办飞行大赛，一架神秘的飞船突然从天而降......开赛不久，雄鹰奖杯就不幸失踪了！Red和他的伙伴能否找到奖杯的下落？他们发现一个更大的阴谋隐藏在其中……
 </p>
-"禾空间小剧场"&amp;【不low俱乐部】原创小剧场惊悚爆笑舞台剧--《goodbye旅行社之黑白先生》<br />
-有胆你就来！<br />
-<div style="text-align:center;">
-	<img original="https://damaipimg.oss-cn-beijing.aliyuncs.com/cfs/src/6e74a1d8-aa45-404a-9787-262da65975bd" width="600" height="450" alt="" /> 
-</div>
+<strong>舞美概述：</strong><br />
+整个舞台的背景主要以动画投影呈现，动画投影部分是场景形象中的"灵魂"。它承载着场景当中的空间和时间的造型部分的展现。舞台中的布景道具与投影相结合，呈现出 "海湾""湖泊""森林""高山"等动态场景。剧中还使用威压来表现小鸟弹出的飞行状态，同时邀请专业杂技演员加盟演出，运用滚球、蹦床等专业杂技。<br />
+<strong>剧目特点：</strong><br />
+剧目运用幽默诙谐的表现手法，使用大量的音乐素材来衬托肢体动作语言，烘托游戏式的情节内容。剧中角色对白将作为推动剧情的辅助表现手段出现，演出不只适应于少年儿童观众，这是一部适合全家老少共同欣赏以及各年龄层次粉丝群体观看体验的剧目。参与性也是本剧创作的着重之处，诸多设计环节能让观众加入互动体验，融入剧情，全身心投入到演出的参与之中。电影与游戏中的角色将真实的出现在观众身边，与你携手进入他们的欢乐世界。<br />
 &nbsp;<br />
-<br />
-<br />
-<br />
-&nbsp;<br />
-<br />
-<br />
-<br />
-<br />
+最有个性的一群小鸟<br />
+全球30亿人疯狂迷恋<br />
+经典游戏IP授权<br />
+超级舞台秀首度呈现<br />
+中、美、加、荷、意五国团队联手打造<br />
+耗时2年的倾力制作<br />
+华丽舞台璀璨呈现<br />
+12支英美流行乐队的榜曲配乐<br />
+杂技歌舞竞相辉映<br />
 <br /></div>
                       </dd>
                     </dl>
-										
-					
+
+
 															<dl class="infoitm">
                       <dt class="tt"><span class="txt">温馨提示</span></dt>
                       <dd class="ct">
                         <div class="table-info">
                           <table class="m-table2">
                             <tbody>
-							  							  							  							  							  							                                <tr>
-                                <td class="bg">发票说明</td><td>发票由现场提供，演出当天请持门票到演出场馆开具</td>
-                              </tr>
-							  							  							                              </tbody>
+							  							  							  							  							                                    							                                    <tr>
+                                    <td class="bg">发票说明</td><td>发票现场提供，演出当天请持门票到演出场馆开具</td>
+                                  </tr>
+    							                                							  							                              </tbody>
                           </table>
                         </div>
                       </dd>
                     </dl>
-										                      
+
 					                  </div>
                   <!-- 演出信息 end -->
                 </div>
 				<!-- 1 -->
-                
+
                 <div class="itm-tab" rel="3">
                   <!-- 购票说明 begin -->
                   <div class="m-infobase m-buydesc">
@@ -716,7 +665,7 @@ var is_show_qr_code = 0;
 				        		  <!-- 热门推荐 begin -->
           <div class="m-sdbox2-first" id="hotProjects"></div>
           <!-- 热门推荐 end-->
-          
+
 		<!-- 抢票速度榜 begin -->
                 <!-- 抢票速度榜 end -->
 
@@ -730,10 +679,10 @@ var is_show_qr_code = 0;
              </div>
           </div>
           <!-- 浏览历史 end -->
-		          
-       
 
-          
+
+
+
 		            <!-- 大麦微博 begin -->
           <div class="m-sdbox2  m-weibo">
             <div class="hd">
@@ -744,12 +693,12 @@ var is_show_qr_code = 0;
             </div>
           </div>
           <!-- 大麦微博 end -->
-		  		  
+
         </div>
       </div>
       <!-- 终极页项目详情 end -->
     </div>
-    
+
   </div>
 </div>
 <div class="g-ft">
@@ -1009,7 +958,7 @@ var is_show_qr_code = 0;
   </div>
   <div class="bd">
     <div class="m-viewseat" style="background:#fff url(img/loading.gif) no-repeat center center;">
-      <div class="seat" style="padding:20px 60px;width:220px; height: 220px;"><img lazy-src="//piao.damai.cn/ShowBarcode.aspx?content=https%3A%2F%2Fpiao.damai.cn%2F168874.html" alt="" style="width:220px; height: 220px; display:none;" /></div>
+      <div class="seat" style="padding:20px 60px;width:220px; height: 220px;"><img lazy-src="//piao.damai.cn/ShowBarcode.aspx?content=https%3A%2F%2Fpiao.damai.cn%2F172827.html" alt="" style="width:220px; height: 220px; display:none;" /></div>
     </div>
   </div>
   <div style="background:#fff;border-top:1px solid #e6e6e6; padding:8px 0px 8px 20px">
@@ -1044,7 +993,7 @@ var is_show_qr_code = 0;
         </div>
       </div>
       <!-- 选择票价模块 end -->
-       
+
       <!-- 购物车模块 begin -->
       <div class="m-cart">
         <h3 class="tt" style="display:none;">您选择了：</h3>
@@ -1053,12 +1002,11 @@ var is_show_qr_code = 0;
         </div>
         <div class="ops">
 		  <a class="u-btn u-btn-c1 u-btn-choose" href="javascript:;" id="btnXuanzuo3" style="display:none;">选座购买</a>
-		  		  <a class="u-btn u-btn-buynow" href="javascript:;" id="btnBuyNow3">立即购买</a>
 		          </div>
       </div>
       <!-- 购物车模块 end -->
     </div>
-  
+
   </div>
 </div>
 <!-- 选择商品弹层 end -->
@@ -1066,7 +1014,7 @@ var is_show_qr_code = 0;
 <!-- 固定侧栏 begin -->
 <div class="m-sdfix">
   <span class="itm weixin xiaonengService" style="cursor:pointer;">在线<br/>客服</span>
-	
+
   <a class="itm resch" target="_blank" href="//www.wenjuan.com/s/QV7vm2/">
     <i class="ico"></i>
     <span class="txt">调查问卷</span>
@@ -1083,7 +1031,7 @@ var is_show_qr_code = 0;
 <!-- 固定侧栏 end -->
 <script type="text/javascript" src="//dui.dmcdn.cn/dm_2015/goods/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
-        var performCount = 2;
+        var performCount = 1;
     </script>
 <iframe id="mapview" name="mapview" scrolling="no" frameborder="no" border="0" style="display:none;"></iframe>
 <script type="text/javascript">
@@ -1097,13 +1045,12 @@ var showCalendar = 0;
 <!-- 日历插件 end -->
 <script type="text/javascript">
 var projectDates={};
- jQuery("#rili").attr("data-value", '2019.01.12'); projectDates['D20190112']=true;
-projectDates['D20190126']=true;
+ jQuery("#rili").attr("data-value", '2019.02.09'); projectDates['D20190209']=true;
 showCalendar = 1;
 </script>
-	<script src="//dui.dmcdn.cn/??dm_2015/goods/site/js/common-min.js?v1.7.1,dm_2015/goods/site/js/search-min.js?v1.7.1,dm_2015/goods/site/js/widgetUIDs-min.js?v1.7.1,dm_2015/goods/site/js/calendarSettings-min.js,dm_2015/goods/site/js/calendar-min.js,dm_2015/goods/site/js/weixin-min.js,dm_2015/goods/site/js/json2-min.js,dm_2015/goods/site/js/datepicker-min.js,dm_2015/goods/site/js/app-min.js?v1.7.1" type="text/javascript"></script>
-	<script src="/js/min/item-min.js?v1.7.1" type="text/javascript"></script>
-	<script src="/js/min/qa-min.js?v1.7.1" type="text/javascript"></script>
+	<script src="//dui.dmcdn.cn/??dm_2015/goods/site/js/common-min.js?v6.9.0,dm_2015/goods/site/js/search-min.js?v6.9.0,dm_2015/goods/site/js/widgetUIDs-min.js?v6.9.0,dm_2015/goods/site/js/calendarSettings-min.js,dm_2015/goods/site/js/calendar-min.js,dm_2015/goods/site/js/weixin-min.js,dm_2015/goods/site/js/json2-min.js,dm_2015/goods/site/js/datepicker-min.js,dm_2015/goods/site/js/app-min.js?v6.9.0" type="text/javascript"></script>
+	<script src="/js/min/item-min.js?v6.9.0" type="text/javascript"></script>
+	<script src="/js/min/qa-min.js?v6.9.0" type="text/javascript"></script>
 <script type="text/javascript" src="//www.damai.cn/staticfile/Announcement/Announcement.js?937492837"></script>
 <script type="text/javascript">
     var title = $("#Title").val();
@@ -1125,7 +1072,7 @@ $(document).on("click", ".xiaonengService", function() {
 	 window.open("https://online.damai.cn/alime/toalime?from=damai_itemdetail&page=" + encodeURIComponent(location.href));
 });
 </script>
-<!-- start Dplus --><script type="text/javascript">!function(a,b){if(!b.__SV){var c,d,e,f;window.dplus=b,b._i=[],b.init=function(a,c,d){function g(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]),a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var h=b;for("undefined"!=typeof d?h=b[d]=[]:d="dplus",h.people=h.people||[],h.toString=function(a){var b="dplus";return"dplus"!==d&&(b+="."+d),a||(b+=" (stub)"),b},h.people.toString=function(){return h.toString(1)+".people (stub)"},e="disable track track_links track_forms register unregister get_property identify clear set_config get_config get_distinct_id track_pageview register_once track_with_tag time_event people.set people.unset people.delete_user".split(" "),f=0;f<e.length;f++)g(h,e[f]);b._i.push([a,c,d])},b.__SV=1.1,c=a.createElement("script"),c.type="text/javascript",c.charset="utf-8",c.async=!0,c.src="//w.cnzz.com/dplus.php?token=7415364c9dab5n09ff68",d=a.getElementsByTagName("script")[0],d.parentNode.insertBefore(c,d)}}(document,window.dplus||[]),dplus.init("7415364c9dab5n09ff68");</script><!-- end Dplus --> 
+<!-- start Dplus --><script type="text/javascript">!function(a,b){if(!b.__SV){var c,d,e,f;window.dplus=b,b._i=[],b.init=function(a,c,d){function g(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]),a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var h=b;for("undefined"!=typeof d?h=b[d]=[]:d="dplus",h.people=h.people||[],h.toString=function(a){var b="dplus";return"dplus"!==d&&(b+="."+d),a||(b+=" (stub)"),b},h.people.toString=function(){return h.toString(1)+".people (stub)"},e="disable track track_links track_forms register unregister get_property identify clear set_config get_config get_distinct_id track_pageview register_once track_with_tag time_event people.set people.unset people.delete_user".split(" "),f=0;f<e.length;f++)g(h,e[f]);b._i.push([a,c,d])},b.__SV=1.1,c=a.createElement("script"),c.type="text/javascript",c.charset="utf-8",c.async=!0,c.src="//w.cnzz.com/dplus.php?token=7415364c9dab5n09ff68",d=a.getElementsByTagName("script")[0],d.parentNode.insertBefore(c,d)}}(document,window.dplus||[]),dplus.init("7415364c9dab5n09ff68");</script><!-- end Dplus -->
 <!-- start Dplus Define -->
 <script type="text/javascript">!function(a,b){var c,d;window.__dplusDefineCacheQueue=[],b.define=function(){window.__dplusDefineCacheQueue.push(Array.prototype.slice.call(arguments))},c=a.createElement("script"),c.type="text/javascript",c.charset="utf-8",c.async=!0,c.src="//w.cnzz.com/dplus.define.php",d=a.getElementsByTagName("script")[0],d.parentNode.insertBefore(c,d)}(document,window.dplus);</script>
 <!-- end Dplus Define -->
@@ -1139,11 +1086,11 @@ $(document).on("click", ".xiaonengService", function() {
 		});
 		dplus.define('page', function(page){
 			page.setType('project');//设置页面类型
-			page.setTitle("禾空间小剧场原创惊悚爆笑舞台剧——《goodbye旅行社之黑白先生》");//设置页面标题,不填默认取document.title，建议填演出名
+			page.setTitle("《愤怒的小鸟欢乐SHOW》（武汉站）");//设置页面标题,不填默认取document.title，建议填演出名
 			page.setCategory(['话剧歌剧', '话剧歌剧']);//该演出对应的三级类目
 			page.setTags([]);//该演出的其他TAG
 			page.view({
-				'$avn':"禾空间小剧场",
+				'$avn':"武汉琴台大剧院",
 				'$alr':"",
 				'$aad': "武汉"
 			});
@@ -1194,50 +1141,403 @@ $(document).on("click", ".xiaonengService", function() {
 <script src="//g.alicdn.com/mtb/lib-mtop/2.3.16/mtop.js"></script>
 <script src="//g.alicdn.com/??damai/pc-wx/0.1.4/index.js"></script>
 </body>
-</html>"""
-    Info = BS(test, 'lxml')
+</html>
 
-    # # 采集表格中的数据
-    # _h = []
-    #
-    # for i in Info.find_all('tr'):
-    #     for j in i.find_all('td'):
-    #         _h.append(j.text)
-    # print(_h)
-    #
-    # 用beautifulSoup解析网页语法，并保存结果，注意此处第二个参数不能使用单引号，
-    #
-    # 否则会出现BUG
-    # NoneType
-    # object
-    # has
-    # no
-    # attribute
-    # 'find_all'
-
-    for i in Info.find_all('div',class_='pre'):
-        if i.find('演出介绍', beg=0, end=len(i)) != -1:
-            print(i.contents)
-
-def dd():
-    import configparser
-        config = configparser.ConfigParser()
-        config['DEFAULT'] = {'ServerAliveInterval': '45',
-                              ...                      'Compression': 'yes',
-                                                                      ...
-    'CompressionLevel': '9'}
-    >> > config['bitbucket.org'] = {}
-    >> > config['bitbucket.org']['User'] = 'hg'
-    >> > config['topsecret.server.com'] = {}
-    >> > topsecret = config['topsecret.server.com']
-    >> > topsecret['Port'] = '50022'  # mutates the parser
-    >> > topsecret['ForwardX11'] = 'no'  # same here
-    >> > config['DEFAULT']['ForwardX11'] = 'yes'
-    >> > with open('example.ini', 'w') as configfile:
-        ...
-        config.write(configfile)
+2019-02-10 12:40:55	_parse	返回值
+<!Doctype html>
+<html>
+<head>
+ <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9">
+ <meta http-equiv="X-UA-Compatible" content="IE=7,9">
+ <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+ <title>开心麻花爆笑舞台剧《牢友记》武汉站【网上订票】- 大麦网</title>
+ <meta name="keywords" content="开心麻花爆笑舞台剧《牢友记》武汉站，大麦网"/>
+ <meta name="description" content="大麦网（Damai.cn）开心麻花爆笑舞台剧《牢友记》武汉站将于2019.10.23 周三在武汉琴台大剧院上演，大麦网为开心麻花爆笑舞台剧《牢友记》武汉站门票代理，更多门票价格及订票详情请咨询大麦网。"/>
+ <meta charset="utf-8">
+ <meta name="spm-id" content="a2oeg"/>
+ <meta name='aplus-auto-exp-visible' content='0.5'>
+ <meta name='aplus-auto-exp-duration' content='500'>
+ <meta name='aplus-auto-exp' content='[{"logkey":"/damai_pc.pcexp.exp","tag":"p","filter":"class=perform__unsale__title","props":["item_id","clicktitle"]},{"logkey":"/damai_pc.pcexp.exp","tag":"div","filter":"class=perform__countdown__title","props":["item_id","clicktitle"]}]'>
+ <link rel="stylesheet" href="//g.alicdn.com/damai/pc/1.0.34/p/perform/index.css"/>
+ <link rel="shortcut icon" href="//gw.alicdn.com/tfs/TB1fGH0fgMPMeJjy1XcXXXpppXa-16-16.ico" type="image/x-icon">
+</head>
+<body data-spm='project'><script>
+with(document)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("exparams","category=&userid=&aplus&yunid=&&trid=0b83e2fe15497736555766579ea4db&asid=AQAAAABXq19cqzO/MwAAAAAlqHbvjray/w==",id="tb-beacon-aplus",src=(location>"https"?"//g":"//g")+".alicdn.com/alilog/mlog/aplus_v2.js")
+</script>
 
 
-if __name__ == '__main__':
 
-    dddd()
+<div class="dm-header-wrap">
+	<div class="dm-header-box" data-spm="top">
+		<a href="//www.damai.cn"><img class="i-logo" src="//gw.alicdn.com/tfs/TB1D1QUxjDpK1RjSZFrXXa78VXa-230-104.png" alt="大麦" /></a>
+		<div class="location-header">
+			<img class="i-icon-location" src="//img.alicdn.com/tfs/TB1XHDuxNGYBuNjy0FnXXX5lpXa-28-32.png" alt="定位" />
+			<span class="city-location">全国</span>
+			<img class="i-arrow-location" src="https://img.alicdn.com/tfs/TB1vnUBxStYBeNjSspaXXaOOFXa-20-12.png" alt="箭头" />
+			<div class="city-header-wrap">
+				<div class="city-header" data-spm="city">
+					<div class="now-city">
+						<span class="title-city">当前城市:</span>
+						<span class="name-city select-city">全国</span>
+					</div>
+					<div class="hot-city">
+						<span class="title-city">热门城市:</span>
+						<div class="list-other"></div>
+					</div>
+					<div class="other-city">
+						<span class="title-city">其他城市:</span>
+						<div class="list-other"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="recommend-header">
+			<a href="//www.damai.cn" class="type-recommend select" data-spm="dhome">首页</a>
+			<a href="//search.damai.cn/search.htm?order=1" class="type-recommend" data-spm="dcategory">分类</a>
+
+
+		</div>
+		<div class="right-header" data-spm="nick">
+			<div class="box-header user-header">
+				<a href="javascript:void(0)" class="J_userinfo_img" data-spm="duserinfo"><img class="i-box-header i-user" src="//img.alicdn.com/tfs/TB14UKCGQyWBuNjy0FpXXassXXa-54-54.png" /></a>
+				<a href="//passport.damai.cn/accountinfo/myinfo" class="J_userinfo_name" data-spm="duserinfo">
+					<div class="span-box-header name-user"></div>
+				</a>
+				<div class="login-user show">
+					<span class="span-box-header span-user" data-spm="dlogin">登录</span>
+				</div>
+				<div class="list-wrap">
+					<div class="list-login">
+						<a href="//passport.damai.cn/accountinfo/myinfo" class="li-login select" data-spm="duserinfo">个人信息</a>
+						<a href="//my.damai.cn/account/accountSafe" class="li-login" data-spm="daccountsetting">账号设置</a>
+						<a href="//orders.damai.cn/orderList" class="li-login" data-spm="dordermanage">订单管理</a>
+						<a href="//www.damai.cn/redirect.aspx?type=logout" data-spm="dexit" class="li-login out-login">退出登录</a>
+					</div>
+				</div>
+			</div>
+			<div class="box-header download-header">
+				<img class="i-box-header i-download" src="//img.alicdn.com/tfs/TB1A9eIGKuSBuNjy1XcXXcYjFXa-54-54.png" alt="下载" />
+				<span class="span-box-header">下载</span>
+				<div class="ewm-download">
+					<img class="i-ewm" src="//img.alicdn.com/tfs/TB1r0uFxHSYBuNjSspiXXXNzpXa-280-280.png" />
+				</div>
+			</div>
+			<div class="box-header">
+				<a href="//en.damai.cn/" data-spm="denglish">
+					<img class="i-box-header" src="//img.alicdn.com/tfs/TB13UKCGQyWBuNjy0FpXXassXXa-54-54.png" alt="英文站" />
+					<span class="span-box-header">English</span>
+				</a>
+			</div>
+		</div>
+		<div class="search-header" data-spm="searchtxt">
+			<img class="i-search" src="//img.alicdn.com/tfs/TB1qv3jxGmWBuNjy1XaXXXCbXXa-34-36.png" alt="搜索" />
+			<input class="input-search" placeholder="搜索明星、演出、体育赛事" data-spm="dsearchbtn" />
+			<div class="btn-search" data-spm="dsearchbtn2">搜索</div>
+			<div class="list-search-wrap">
+				<div class="list-search">
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="perform">
+ <div class="w1200 perform__box">
+ <div class="perform__hd">
+ <div class="perform__hd__cont">
+   <img class="perform__hd__poster" src="https://img.alicdn.com/imgextra/i3/2251059038/O1CN01mPtomI2GdS8bjLtb6_!!0-item_pic.jpg" alt="">
+
+ <!--引流版-->
+   <!--交易版-->
+   <div class="perform__order">
+ <div class="perform__order__title">开心麻花爆笑舞台剧《牢友记》武汉站</div>
+   <div class="perform__ticketinfo" data-spm="projectinfo">
+     <ul class="perform__ticketinfo__offer" data-spm="projectinfo">
+   <li data-spm="dcoupon">立减</li>
+   </ul>
+
+   <i class="perform__ticketinfo__arrow" data-spm="dcoupon"></i>
+   <!--优惠说明弹窗-->
+ <div class="ticketinfo__popup popup_d">
+ <div class="ticketinfo__popup__hd">
+ <span class="ticketinfo__popup__title">优惠说明</span>
+ <img class="ticketinfo__popup__close"
+ src="//img.alicdn.com/tfs/TB1TRy.BKuSBuNjy1XcXXcYjFXa-42-42.png" alt="">
+ </div>
+ <div class="ticketinfo__popup__bd">
+ <div class="coupon__ponup__box">
+ </div>
+   <div class="coupon__policy">
+ <div class="coupon__policy__title">立减</div>
+ <div class="coupon__policy__words">280.0元票价每满2件减140元
+ </div>
+ </div>
+   <div class="coupon__policy">
+ <div class="coupon__policy__title">立减</div>
+ <div class="coupon__policy__words">380.0元票价每满2件减180元
+ </div>
+ </div>
+   <div class="coupon__policy">
+ <div class="coupon__policy__title">立减</div>
+ <div class="coupon__policy__words">480.0元票价每满2件减260元
+ </div>
+ </div>
+
+ </div>
+ </div>
+ </div>
+   <div class="perform__order__address" data-spm="projectinfo">
+ <div class="time">时间：2019.10.23 周三</div>
+ <div class="place">场馆：武汉市 | 武汉琴台大剧院</div>
+ <div class="mapicon" data-spm="daddress"></div>
+   </div>
+ <div class="perform__order__box"></div>
+ </div>
+   </div>
+ </div>
+ <div class="perform__bd" id="perform__bd">
+ <ul class="perform__bd__menu tabs-nav" data-spm="detail">
+ <li class="perform__bd__menu__list selected" data-spm="dprojectdetail"><a href="javascript:void(0);">商品详情</a></li>
+ <li class="perform__bd__menu__list" data-spm="dnotice"><a href="javascript:void(0);">购票须知</a></li>
+ </ul>
+ <div class="perform__bd__cont tabs-content">
+ <div class="perform__bd__info tabs-pannel">
+ <!--观演须知-->
+ <div class="perform__bd__cont__list">
+ <div class="perform__bd__title">观演须知</div>
+ <div class="perform__bd__words">
+   <p>演出时长</p>
+ <ul>
+ <li>最低约70分钟，仅供参考，最终以现场实际时长为准</li>
+ </ul>
+   <p>限购政策</p>
+ <ul>
+ <li>选座购买每单限6张</li>
+ </ul>
+   <p>实名制</p>
+ <ul>
+ <li>无需实名制购票</li>
+ </ul>
+   <p>退换说明</p>
+ <ul>
+ <li>票品不支持退换。如无法正常观看，还请自行处理，给您带来不便敬请谅解</li>
+ </ul>
+   <p>儿童入场说明</p>
+ <ul>
+ <li>1.2米以上凭成人票入场，1.2米以下谢绝入场</li>
+ </ul>
+   <p>入场时间</p>
+ <ul>
+ <li>提前30分钟，仅供参考，最终以现场实际入场时间为准</li>
+ </ul>
+   <p>座位类型</p>
+ <ul>
+ <li>请按门票对应位置，有序对号入座</li>
+ </ul>
+   <p>发票说明</p>
+ <ul>
+ <li>发票由现场提供，演出当天请持门票到演出场馆开具</li>
+ </ul>
+   <p>禁止携带物品</p>
+ <ul>
+ <li>由于安保和版权的原因，大多数演出、展览及比赛场所禁止携带食品、饮料、专业摄录设备、打火机等物品，请您注意现场工作人员和广播的提示，予以配合</li>
+ </ul>
+   <p>物品寄存</p>
+ <ul>
+ <li>无寄存处，请自行保管携带物品</li>
+ </ul>
+   <p>主要演员（团体）</p>
+ <ul>
+ <li>开心麻花</li>
+ </ul>
+   <p>大麦网首次开售时全场可售门票总张数</p>
+ <ul>
+ <li>123</li>
+ </ul>
+   </div>
+ </div>
+ <!--退换说明-->
+ <div class="perform__bd__cont__list perform__returned">
+ <div class="perform__bd__title">退换说明</div>
+   <div class="perform__bd__words">
+ <p>不支持退换</p>
+ <p>因演出票的唯一性、时效性，本项目在购买后不支持退换票，如无法正常观看，还请自行处理，给您带来不便敬请谅解！</p>
+ </div>
+   </div>
+
+ <!--演出介绍-->
+ <div class="perform__bd__cont__list">
+ <div class="perform__bd__title">演出介绍</div>
+ <div class="perform__bd__words">
+ <h3>演出介绍</h3><p>　　导演：宋阳</p><p>　　编剧：张吃鱼宋阳</p><p><strong>　　简介：</strong></p><p>　　摇滚天王艾西巴创作遇到瓶颈，他为寻找灵感主动入狱，却被最好的兄弟阴了一记，更遇到了一众离谱队友。</p><p>　　假如身为摇滚巨星的你如愿以偿地进了监狱，假如你被情同手足的兄弟无情背叛，假如你现在唯一的指望是三个不靠谱的牢友&hellip;&hellip;再假如这样牛（ku）叉（bi）的遭遇与你产生了强烈的共鸣，欢迎你来剧场深切感受一下，什么叫山外有山人外有人苦逼更有强中手！</p><p><strong>精彩看点：</strong>电影《夏洛特烦恼》之后，开心麻花舞台最新作品</p><p><strong>主创介绍</strong></p><p>　　导演：宋阳</p><p>　　电影《夏洛特烦恼》&quot;张扬&quot;的扮演者，电影上映后，被观众称为&quot;张蜀黍&quot;。这位优秀的喜剧演员同时是身兼导演、编剧等多重身份的创作型人才。</p><p>　　他曾三次登上春晚舞台，自2004年几乎每年都在开心麻花贺岁大戏中担当重要角色。2012年起，宋阳先后执导开心麻花《那年的梦想》《须摩提世界》，2015年自编自导自演的舞台剧《羞羞的铁拳》，再次证明了自己非同一般的表导演能力。</p><p>　　2015年底，在宋阳的武力胁迫下，开心麻花众位功勋演员再次屈服于他的淫威，带来最新贺岁大戏《牢友记》。如果你想从宋阳的手中拯救众位功勋演员，请立刻拨打电话号码&quot;51261058&quot;，大声念出爱的咒语--我要包场！</p><p>　　编剧：张吃鱼</p><p>　　来自二次元的美少年编剧，跟他的美貌相比，他的才华不值一提--这是吃鱼对自己的评价。作为一名旁观者，小编只想问一句，他是什么时候瞎的？</p><p>　　脑洞畸形、灵魂炸裂，这8个字精准地诠释了他的作品。2015年，由他编剧的开心麻花爆笑舞台剧《羞羞的铁拳》，开演之后广受好评，经常出现一票难求的盛况，该戏被称为2015年最值得一看的舞台剧。</p><p>　　作为导演宋阳最忠贞不渝的基情CP，依靠潜规则等不为人知的手段，他再次成功上位，和宋阳共处一室长达半年，干柴烈火下终于熬出《牢友记》剧本，其精彩程度，嘿嘿嘿嘿。</p>
+ </div>
+ </div>
+ </div>
+ <div class="perform__bd__info tabs-pannel hidden">
+ <div class="perform__bd__cont__list">
+ <div class="perform__bd__title">支付及配送</div>
+ <div class="perform__bd__note">
+   <p class="perform__bd__note__title">选座</p>
+ <ul class="perform__bd__tips">
+ <li>1.本项目部分场次支持自助选座。
+2.请根据具体场次进行先选座后支付或在支付完成之后根据订单页面提示选座。</li>
+ </ul>
+   <p class="perform__bd__note__title">快递</p>
+ <ul class="perform__bd__tips">
+ <li>1.同城10.0元，发货后1-3天到达；省内12.0元，发货后1-3天到达；其他地区18.0元，发货后1-3天到达；澳门、香港、台湾40.0元，发货后1-5天到达。
+2.演出前4天不支持快递。</li>
+ </ul>
+   </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div id="dataDefault" style="display: none">{"MStationQRCode":"https://damai-item.oss-cn-beijing.aliyuncs.com/projQcode/5867019997/2/586701999767.jpg","appNeedUpGrade":false,"buyBtnShow":"选座购买","buyBtnStatus":206,"hasItemCouponTag":false,"hasItemPromotionTag":true,"itemCouponTag":[],"itemPromotionTag":["立减"],"needRealNameCertified":false,"performBases":[{"name":"10.23 周三","performBaseTagDesc":"立减","performBaseTagValue":3,"performs":[{"chooseSeatType":1,"itemId":586701999767,"performBeginTime":"19:30","performDate":1571830200000,"performId":210009604,"performName":"2019-10-23 周三 19:30","performStartDate":"2019-10-23","performTagDesc":"立减","performTagValue":3,"performTime":"2019.10.23 19:30-22:00","permissionWithPrivilegeBuy":true,"privilegeLimitBuy":99999,"projectId":200003333,"promotionTags":["惠"],"saleForm":1,"singleLimit":6,"skuList":[{"dashPrice":"180","packagesFlag":false,"permissionWithPrivilegeBuy":true,"price":180,"priceId":220258043,"priceIdOfTC":220258043,"promotionTags":[],"quantitySellAble":29,"quantityWithHolding":0,"skuEnable":true,"skuId":4150898114468,"skuName":"180元","skuStatus":1,"skuTagType":0},{"dashPrice":"280","packagesFlag":false,"permissionWithPrivilegeBuy":true,"price":280,"priceId":220250066,"priceIdOfTC":220250066,"promotionCopyWrite":"每满2件减140元","promotionTags":["惠"],"quantitySellAble":10,"quantityWithHolding":0,"skuEnable":true,"skuId":4150898114471,"skuName":"280元","skuPromotionText":"每满2件减140元","skuStatus":1,"skuTag":"立减","skuTagType":3},{"dashPrice":"380","packagesFlag":false,"permissionWithPrivilegeBuy":true,"price":380,"priceId":220254051,"priceIdOfTC":220254051,"promotionCopyWrite":"每满2件减180元","promotionTags":["惠"],"quantitySellAble":22,"quantityWithHolding":0,"skuEnable":true,"skuId":4150898114470,"skuName":"380元","skuPromotionText":"每满2件减180元","skuStatus":1,"skuTag":"立减","skuTagType":3},{"dashPrice":"480","packagesFlag":false,"permissionWithPrivilegeBuy":true,"price":480,"priceId":220258042,"priceIdOfTC":220258042,"promotionCopyWrite":"每满2件减260元","promotionTags":["惠"],"quantitySellAble":22,"quantityWithHolding":0,"skuEnable":true,"skuId":4150898114469,"skuName":"480元","skuPromotionText":"每满2件减260元","skuStatus":1,"skuTag":"立减","skuTagType":3},{"dashPrice":"580","packagesFlag":false,"permissionWithPrivilegeBuy":true,"price":580,"priceId":220265047,"priceIdOfTC":220265047,"promotionTags":[],"quantitySellAble":40,"quantityWithHolding":0,"skuEnable":true,"skuId":4150898114472,"skuName":"580元","skuStatus":1,"skuTagType":0}],"skuPromotionRelations":"586701999767&210009604&4150898114471_7751360494@4150898114470_7751160992@4150898114469_7751304632","supportGroup":false}],"permissionWithPrivilegeBuy":true,"promotionTags":["惠"],"timeSpan":1571760000000,"type":1}],"performCount":1,"priceRange":"¥180-580","promotionRemark":"您选购优惠票档所对应的票品种类可能为套票、优惠票等类型，具体以您收到的票面信息标示为准。实际优惠情况以订单确认页为准。","promotions":[{"content":"280.0元票价每满2件减140元","performanceIds":[210009604],"tag":"立减"},{"content":"380.0元票价每满2件减180元","performanceIds":[210009604],"tag":"立减"},{"content":"480.0元票价每满2件减260元","performanceIds":[210009604],"tag":"立减"}],"sellStartTimeStr":"02月05日 17:42","showQRCode":true,"wechatQRCode":"https://intercms.damai.cn/qrcode_hn/qrcode_586701999767_380050681.png"}</div>
+ <div id="staticDataDefault" style="display: none">{"features":[{"name":"选座","description":"1.本项目部分场次支持自助选座。\r\n2.请根据具体场次进行先选座后支付或在支付完成之后根据订单页面提示选座。"},{"name":"快递","description":"1.同城10.0元，发货后1-3天到达；省内12.0元，发货后1-3天到达；其他地区18.0元，发货后1-3天到达；澳门、香港、台湾40.0元，发货后1-5天到达。\r\n2.演出前4天不支持快递。"}],"realName":{"credentials":[],"credentialNames":[],"type":3},"venue":{"venueName":"武汉琴台大剧院","lng":114.2595320000000000000000000,"venueId":589,"venueCityName":"武汉市","lat":30.5609010000000000000000000},"itemBase":{"itemId":586701999767,"itemName":"开心麻花爆笑舞台剧《牢友记》武汉站","cityName":"武汉","itemPic":"https://img.alicdn.com/imgextra/i3/2251059038/O1CN01mPtomI2GdS8bjLtb6_!!0-item_pic.jpg","showTime":"2019.10.23 周三","atomSplit":1,"generalAgent":{"generalAgent":false},"cityId":29429,"nationalStandardCityId":420100,"categoryId":50019088,"oldCompanyId":586},"itemExtendInfo":{"itemExtend":"%3Ch3%3E%E6%BC%94%E5%87%BA%E4%BB%8B%E7%BB%8D%3C%2Fh3%3E%3Cp%3E%E3%80%80%E3%80%80%E5%AF%BC%E6%BC%94%EF%BC%9A%E5%AE%8B%E9%98%B3%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E7%BC%96%E5%89%A7%EF%BC%9A%E5%BC%A0%E5%90%83%E9%B1%BC%E5%AE%8B%E9%98%B3%3C%2Fp%3E%3Cp%3E%3Cstrong%3E%E3%80%80%E3%80%80%E7%AE%80%E4%BB%8B%EF%BC%9A%3C%2Fstrong%3E%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E6%91%87%E6%BB%9A%E5%A4%A9%E7%8E%8B%E8%89%BE%E8%A5%BF%E5%B7%B4%E5%88%9B%E4%BD%9C%E9%81%87%E5%88%B0%E7%93%B6%E9%A2%88%EF%BC%8C%E4%BB%96%E4%B8%BA%E5%AF%BB%E6%89%BE%E7%81%B5%E6%84%9F%E4%B8%BB%E5%8A%A8%E5%85%A5%E7%8B%B1%EF%BC%8C%E5%8D%B4%E8%A2%AB%E6%9C%80%E5%A5%BD%E7%9A%84%E5%85%84%E5%BC%9F%E9%98%B4%E4%BA%86%E4%B8%80%E8%AE%B0%EF%BC%8C%E6%9B%B4%E9%81%87%E5%88%B0%E4%BA%86%E4%B8%80%E4%BC%97%E7%A6%BB%E8%B0%B1%E9%98%9F%E5%8F%8B%E3%80%82%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E5%81%87%E5%A6%82%E8%BA%AB%E4%B8%BA%E6%91%87%E6%BB%9A%E5%B7%A8%E6%98%9F%E7%9A%84%E4%BD%A0%E5%A6%82%E6%84%BF%E4%BB%A5%E5%81%BF%E5%9C%B0%E8%BF%9B%E4%BA%86%E7%9B%91%E7%8B%B1%EF%BC%8C%E5%81%87%E5%A6%82%E4%BD%A0%E8%A2%AB%E6%83%85%E5%90%8C%E6%89%8B%E8%B6%B3%E7%9A%84%E5%85%84%E5%BC%9F%E6%97%A0%E6%83%85%E8%83%8C%E5%8F%9B%EF%BC%8C%E5%81%87%E5%A6%82%E4%BD%A0%E7%8E%B0%E5%9C%A8%E5%94%AF%E4%B8%80%E7%9A%84%E6%8C%87%E6%9C%9B%E6%98%AF%E4%B8%89%E4%B8%AA%E4%B8%8D%E9%9D%A0%E8%B0%B1%E7%9A%84%E7%89%A2%E5%8F%8B%26hellip%3B%26hellip%3B%E5%86%8D%E5%81%87%E5%A6%82%E8%BF%99%E6%A0%B7%E7%89%9B%EF%BC%88ku%EF%BC%89%E5%8F%89%EF%BC%88bi%EF%BC%89%E7%9A%84%E9%81%AD%E9%81%87%E4%B8%8E%E4%BD%A0%E4%BA%A7%E7%94%9F%E4%BA%86%E5%BC%BA%E7%83%88%E7%9A%84%E5%85%B1%E9%B8%A3%EF%BC%8C%E6%AC%A2%E8%BF%8E%E4%BD%A0%E6%9D%A5%E5%89%A7%E5%9C%BA%E6%B7%B1%E5%88%87%E6%84%9F%E5%8F%97%E4%B8%80%E4%B8%8B%EF%BC%8C%E4%BB%80%E4%B9%88%E5%8F%AB%E5%B1%B1%E5%A4%96%E6%9C%89%E5%B1%B1%E4%BA%BA%E5%A4%96%E6%9C%89%E4%BA%BA%E8%8B%A6%E9%80%BC%E6%9B%B4%E6%9C%89%E5%BC%BA%E4%B8%AD%E6%89%8B%EF%BC%81%3C%2Fp%3E%3Cp%3E%3Cstrong%3E%E7%B2%BE%E5%BD%A9%E7%9C%8B%E7%82%B9%EF%BC%9A%3C%2Fstrong%3E%E7%94%B5%E5%BD%B1%E3%80%8A%E5%A4%8F%E6%B4%9B%E7%89%B9%E7%83%A6%E6%81%BC%E3%80%8B%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%BC%80%E5%BF%83%E9%BA%BB%E8%8A%B1%E8%88%9E%E5%8F%B0%E6%9C%80%E6%96%B0%E4%BD%9C%E5%93%81%3C%2Fp%3E%3Cp%3E%3Cstrong%3E%E4%B8%BB%E5%88%9B%E4%BB%8B%E7%BB%8D%3C%2Fstrong%3E%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E5%AF%BC%E6%BC%94%EF%BC%9A%E5%AE%8B%E9%98%B3%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E7%94%B5%E5%BD%B1%E3%80%8A%E5%A4%8F%E6%B4%9B%E7%89%B9%E7%83%A6%E6%81%BC%E3%80%8B%26quot%3B%E5%BC%A0%E6%89%AC%26quot%3B%E7%9A%84%E6%89%AE%E6%BC%94%E8%80%85%EF%BC%8C%E7%94%B5%E5%BD%B1%E4%B8%8A%E6%98%A0%E5%90%8E%EF%BC%8C%E8%A2%AB%E8%A7%82%E4%BC%97%E7%A7%B0%E4%B8%BA%26quot%3B%E5%BC%A0%E8%9C%80%E9%BB%8D%26quot%3B%E3%80%82%E8%BF%99%E4%BD%8D%E4%BC%98%E7%A7%80%E7%9A%84%E5%96%9C%E5%89%A7%E6%BC%94%E5%91%98%E5%90%8C%E6%97%B6%E6%98%AF%E8%BA%AB%E5%85%BC%E5%AF%BC%E6%BC%94%E3%80%81%E7%BC%96%E5%89%A7%E7%AD%89%E5%A4%9A%E9%87%8D%E8%BA%AB%E4%BB%BD%E7%9A%84%E5%88%9B%E4%BD%9C%E5%9E%8B%E4%BA%BA%E6%89%8D%E3%80%82%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E4%BB%96%E6%9B%BE%E4%B8%89%E6%AC%A1%E7%99%BB%E4%B8%8A%E6%98%A5%E6%99%9A%E8%88%9E%E5%8F%B0%EF%BC%8C%E8%87%AA2004%E5%B9%B4%E5%87%A0%E4%B9%8E%E6%AF%8F%E5%B9%B4%E9%83%BD%E5%9C%A8%E5%BC%80%E5%BF%83%E9%BA%BB%E8%8A%B1%E8%B4%BA%E5%B2%81%E5%A4%A7%E6%88%8F%E4%B8%AD%E6%8B%85%E5%BD%93%E9%87%8D%E8%A6%81%E8%A7%92%E8%89%B2%E3%80%822012%E5%B9%B4%E8%B5%B7%EF%BC%8C%E5%AE%8B%E9%98%B3%E5%85%88%E5%90%8E%E6%89%A7%E5%AF%BC%E5%BC%80%E5%BF%83%E9%BA%BB%E8%8A%B1%E3%80%8A%E9%82%A3%E5%B9%B4%E7%9A%84%E6%A2%A6%E6%83%B3%E3%80%8B%E3%80%8A%E9%A1%BB%E6%91%A9%E6%8F%90%E4%B8%96%E7%95%8C%E3%80%8B%EF%BC%8C2015%E5%B9%B4%E8%87%AA%E7%BC%96%E8%87%AA%E5%AF%BC%E8%87%AA%E6%BC%94%E7%9A%84%E8%88%9E%E5%8F%B0%E5%89%A7%E3%80%8A%E7%BE%9E%E7%BE%9E%E7%9A%84%E9%93%81%E6%8B%B3%E3%80%8B%EF%BC%8C%E5%86%8D%E6%AC%A1%E8%AF%81%E6%98%8E%E4%BA%86%E8%87%AA%E5%B7%B1%E9%9D%9E%E5%90%8C%E4%B8%80%E8%88%AC%E7%9A%84%E8%A1%A8%E5%AF%BC%E6%BC%94%E8%83%BD%E5%8A%9B%E3%80%82%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%802015%E5%B9%B4%E5%BA%95%EF%BC%8C%E5%9C%A8%E5%AE%8B%E9%98%B3%E7%9A%84%E6%AD%A6%E5%8A%9B%E8%83%81%E8%BF%AB%E4%B8%8B%EF%BC%8C%E5%BC%80%E5%BF%83%E9%BA%BB%E8%8A%B1%E4%BC%97%E4%BD%8D%E5%8A%9F%E5%8B%8B%E6%BC%94%E5%91%98%E5%86%8D%E6%AC%A1%E5%B1%88%E6%9C%8D%E4%BA%8E%E4%BB%96%E7%9A%84%E6%B7%AB%E5%A8%81%EF%BC%8C%E5%B8%A6%E6%9D%A5%E6%9C%80%E6%96%B0%E8%B4%BA%E5%B2%81%E5%A4%A7%E6%88%8F%E3%80%8A%E7%89%A2%E5%8F%8B%E8%AE%B0%E3%80%8B%E3%80%82%E5%A6%82%E6%9E%9C%E4%BD%A0%E6%83%B3%E4%BB%8E%E5%AE%8B%E9%98%B3%E7%9A%84%E6%89%8B%E4%B8%AD%E6%8B%AF%E6%95%91%E4%BC%97%E4%BD%8D%E5%8A%9F%E5%8B%8B%E6%BC%94%E5%91%98%EF%BC%8C%E8%AF%B7%E7%AB%8B%E5%88%BB%E6%8B%A8%E6%89%93%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%26quot%3B51261058%26quot%3B%EF%BC%8C%E5%A4%A7%E5%A3%B0%E5%BF%B5%E5%87%BA%E7%88%B1%E7%9A%84%E5%92%92%E8%AF%AD--%E6%88%91%E8%A6%81%E5%8C%85%E5%9C%BA%EF%BC%81%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E7%BC%96%E5%89%A7%EF%BC%9A%E5%BC%A0%E5%90%83%E9%B1%BC%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E6%9D%A5%E8%87%AA%E4%BA%8C%E6%AC%A1%E5%85%83%E7%9A%84%E7%BE%8E%E5%B0%91%E5%B9%B4%E7%BC%96%E5%89%A7%EF%BC%8C%E8%B7%9F%E4%BB%96%E7%9A%84%E7%BE%8E%E8%B2%8C%E7%9B%B8%E6%AF%94%EF%BC%8C%E4%BB%96%E7%9A%84%E6%89%8D%E5%8D%8E%E4%B8%8D%E5%80%BC%E4%B8%80%E6%8F%90--%E8%BF%99%E6%98%AF%E5%90%83%E9%B1%BC%E5%AF%B9%E8%87%AA%E5%B7%B1%E7%9A%84%E8%AF%84%E4%BB%B7%E3%80%82%E4%BD%9C%E4%B8%BA%E4%B8%80%E5%90%8D%E6%97%81%E8%A7%82%E8%80%85%EF%BC%8C%E5%B0%8F%E7%BC%96%E5%8F%AA%E6%83%B3%E9%97%AE%E4%B8%80%E5%8F%A5%EF%BC%8C%E4%BB%96%E6%98%AF%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%9E%8E%E7%9A%84%EF%BC%9F%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E8%84%91%E6%B4%9E%E7%95%B8%E5%BD%A2%E3%80%81%E7%81%B5%E9%AD%82%E7%82%B8%E8%A3%82%EF%BC%8C%E8%BF%998%E4%B8%AA%E5%AD%97%E7%B2%BE%E5%87%86%E5%9C%B0%E8%AF%A0%E9%87%8A%E4%BA%86%E4%BB%96%E7%9A%84%E4%BD%9C%E5%93%81%E3%80%822015%E5%B9%B4%EF%BC%8C%E7%94%B1%E4%BB%96%E7%BC%96%E5%89%A7%E7%9A%84%E5%BC%80%E5%BF%83%E9%BA%BB%E8%8A%B1%E7%88%86%E7%AC%91%E8%88%9E%E5%8F%B0%E5%89%A7%E3%80%8A%E7%BE%9E%E7%BE%9E%E7%9A%84%E9%93%81%E6%8B%B3%E3%80%8B%EF%BC%8C%E5%BC%80%E6%BC%94%E4%B9%8B%E5%90%8E%E5%B9%BF%E5%8F%97%E5%A5%BD%E8%AF%84%EF%BC%8C%E7%BB%8F%E5%B8%B8%E5%87%BA%E7%8E%B0%E4%B8%80%E7%A5%A8%E9%9A%BE%E6%B1%82%E7%9A%84%E7%9B%9B%E5%86%B5%EF%BC%8C%E8%AF%A5%E6%88%8F%E8%A2%AB%E7%A7%B0%E4%B8%BA2015%E5%B9%B4%E6%9C%80%E5%80%BC%E5%BE%97%E4%B8%80%E7%9C%8B%E7%9A%84%E8%88%9E%E5%8F%B0%E5%89%A7%E3%80%82%3C%2Fp%3E%3Cp%3E%E3%80%80%E3%80%80%E4%BD%9C%E4%B8%BA%E5%AF%BC%E6%BC%94%E5%AE%8B%E9%98%B3%E6%9C%80%E5%BF%A0%E8%B4%9E%E4%B8%8D%E6%B8%9D%E7%9A%84%E5%9F%BA%E6%83%85CP%EF%BC%8C%E4%BE%9D%E9%9D%A0%E6%BD%9C%E8%A7%84%E5%88%99%E7%AD%89%E4%B8%8D%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84%E6%89%8B%E6%AE%B5%EF%BC%8C%E4%BB%96%E5%86%8D%E6%AC%A1%E6%88%90%E5%8A%9F%E4%B8%8A%E4%BD%8D%EF%BC%8C%E5%92%8C%E5%AE%8B%E9%98%B3%E5%85%B1%E5%A4%84%E4%B8%80%E5%AE%A4%E9%95%BF%E8%BE%BE%E5%8D%8A%E5%B9%B4%EF%BC%8C%E5%B9%B2%E6%9F%B4%E7%83%88%E7%81%AB%E4%B8%8B%E7%BB%88%E4%BA%8E%E7%86%AC%E5%87%BA%E3%80%8A%E7%89%A2%E5%8F%8B%E8%AE%B0%E3%80%8B%E5%89%A7%E6%9C%AC%EF%BC%8C%E5%85%B6%E7%B2%BE%E5%BD%A9%E7%A8%8B%E5%BA%A6%EF%BC%8C%E5%98%BF%E5%98%BF%E5%98%BF%E5%98%BF%E3%80%82%3C%2Fp%3E"},"returnPolicy":{"supportReturn":false},"ticketNotes":[{"title":"演出时长","content":"最低约70分钟，仅供参考，最终以现场实际时长为准"},{"title":"限购政策","content":"选座购买每单限6张"},{"title":"实名制","content":"无需实名制购票"},{"title":"退换说明","content":"票品不支持退换。如无法正常观看，还请自行处理，给您带来不便敬请谅解"},{"title":"儿童入场说明","content":"1.2米以上凭成人票入场，1.2米以下谢绝入场"},{"title":"入场时间","content":"提前30分钟，仅供参考，最终以现场实际入场时间为准"},{"title":"座位类型","content":"请按门票对应位置，有序对号入座"},{"title":"发票说明","content":"发票由现场提供，演出当天请持门票到演出场馆开具"},{"title":"禁止携带物品","content":"由于安保和版权的原因，大多数演出、展览及比赛场所禁止携带食品、饮料、专业摄录设备、打火机等物品，请您注意现场工作人员和广播的提示，予以配合"},{"title":"物品寄存","content":"无寄存处，请自行保管携带物品"},{"title":"主要演员（团体）","content":"开心麻花"},{"title":"大麦网首次开售时全场可售门票总张数","content":"123"}]}</div>
+</div>
+
+
+<div class="dm-footer">
+    <div class="w1200">
+        <ul class="footer__links">
+
+            <li class="footer__links__list"><a href="//help.damai.cn" target="_blank" data-spm="flink0">帮助中心</a></li>
+            <li class="footer__links__grep">|</li>
+
+            <li class="footer__links__list"><a href="&#x2F;&#x2F;help.damai.cn&#x2F;helpPage.htm?pageId=69&amp;categoryId=30" target="_blank" data-spm="flink1">公司介绍</a></li>
+            <li class="footer__links__grep">|</li>
+
+            <li class="footer__links__list"><a href="&#x2F;&#x2F;help.damai.cn&#x2F;helpPage.htm?pageId=70&amp;categoryId=30" target="_blank" data-spm="flink2">品牌识别</a></li>
+            <li class="footer__links__grep">|</li>
+
+            <li class="footer__links__list"><a href="&#x2F;&#x2F;help.damai.cn&#x2F;helpPage.htm?pageId=72&amp;categoryId=30" target="_blank" data-spm="flink3">公司大事记</a></li>
+            <li class="footer__links__grep">|</li>
+
+            <li class="footer__links__list"><a href="&#x2F;&#x2F;help.damai.cn&#x2F;helpPage.htm?pageId=40&amp;categoryId=14" target="_blank" data-spm="flink4">协议及隐私权政策</a></li>
+            <li class="footer__links__grep">|</li>
+
+            <li class="footer__links__list"><a href="&#x2F;&#x2F;jubao.alibaba.com&#x2F;internet&#x2F;readme.htm?spm=a2o6e.search.0.0.72f44d15Votov6&amp;site=damai" target="_blank" data-spm="flink5">廉正举报</a></li>
+            <li class="footer__links__grep">|</li>
+
+            <li class="footer__links__list"><a href="&#x2F;&#x2F;help.damai.cn&#x2F;helpPage.htm?pageId=58&amp;categoryId=5" target="_blank" data-spm="flink6">联系合作</a></li>
+            <li class="footer__links__grep">|</li>
+
+            <li class="footer__links__list"><a href="&#x2F;&#x2F;job.alibaba.com&#x2F;zhaopin&#x2F;positionList.htm?keyWord=JXU1OTI3JXU5RUE2&amp;_input_charset=UTF-8" target="_blank" data-spm="flink7">招聘信息</a></li>
+            <li class="footer__links__grep">|</li>
+
+            <li class="footer__links__list"><a href="&#x2F;&#x2F;x.damai.cn&#x2F;markets&#x2F;special&#x2F;fangzhapian?spm=a2o6e.home.0.0.75df48d3hqGWGD&amp;wh_ttid=pc" target="_blank" data-spm="flink8">防骗秘籍</a></li>
+
+
+        </ul>
+        <div class="footer__ft">
+            <div class="footer__ft_fl">
+                <a href="//www.damai.cn/?spm=a2o6e.home.0.0.591b48d3QzpG8B" target="_blank" class="footer__ft__logo">
+                    <img src="https://img.alicdn.com/tfs/TB1NTQWxlLoK1RjSZFuXXXn0XXa-167-60.png" alt="">
+                </a>
+                <div class="footer__ft__code__box">
+                    <img class="footer__ft__code" src="//img.alicdn.com/tfs/TB1r0uFxHSYBuNjSspiXXXNzpXa-280-280.png" alt="">
+                    <span>APP下载</span>
+                </div>
+            </div>
+            <div class="footer__ft_fr">
+                <div class="footer__fr__contact">
+
+                    <a style="margin-left:0;" href="//online.damai.cn/alime/index?from=damai_pc_item&v=3" class="footer__fr__contact__btn alime">在线客服</a>
+                </div>
+                <ul class="footer__ft__words">
+                    <li class="footer__ft__certificate"><a
+                            href="http://www.miitbeian.gov.cn?spm=a2o6e.home.0.0.5b4d48d3mVzb2Z" target="_blank">京ICP证031057号</a></li>
+                    <li class="footer__ft__grep">|</li>
+                    <li class="footer__ft__certificate"><a href="http://www.miitbeian.gov.cn" target="_blank">京ICP备11043884号</a></li>
+                    <li class="footer__ft__grep">|</li>
+                    <li class="footer__ft__certificate"><a
+                            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102000430" target="_blank">京公网安备11010102000430号</a>
+                    </li>
+                    <li class="footer__ft__grep">|</li>
+                    <li class="footer__ft__certificate"><a href="//img.alicdn.com/tfs/TB1K9r6xN9YBuNjy0FfXXXIsVXa-1152-799.jpg" target="_blank">广播电视节目制作经营许可证
+                        (京)字第02253号</a></li>
+                </ul>
+                <ul class="footer__ft__words">
+                    <li class="footer__ft__certificate"><a
+                            href="//img.alicdn.com/tfs/TB1AsH4xH9YBuNjy0FgXXcxcXXa-1420-1032.jpg" target="_blank">网络文化经营许可证
+                        京网文[2016]3438-413号</a></li>
+                    <li class="footer__ft__grep">|</li>
+                    <li class="footer__ft__certificate"><a href="//img.alicdn.com/tfs/TB1DfD6CxGYBuNjy0FnXXX5lpXa-1079-1527.jpg" target="_blank">营业性演出许可证
+                        京市演587号</a></li>
+                </ul>
+                <ul class="footer__ft__words">
+                    <li class="footer__ft__certificate">北京红马传媒文化发展有限公司 版权所有</li>
+                    <li class="footer__ft__certificate"><a
+                            href="//www.damai.cn/?spm=a2o6e.home.0.0.591b48d3QzpG8B">大麦网</a></li>
+                    <li>Copyright 2003-2018 All Rights Reserved</li>
+                </ul>
+                <div class="footer__ft__img">
+                    <span id="siteseal">
+                    <script async="" type="text/javascript">
+                            function verifySeal() {
+                                var bgHeight = "null";
+                                var bgWidth = "593";
+                                var url = "https:\/\/seal.godaddy.com\/verifySeal?sealID=LU6rXPgk5BZ67ZEYpYS2JcN3AyCJOs6aD3HBo4dwA3iGeqp6csKFmqgB0zLL";
+                                window.open(url, 'SealVerfication', 'menubar=no,toolbar=no,personalbar=no,location=yes,status=no,resizable=yes,fullscreen=no,scrollbars=no,width=' + bgWidth + ',height=' + bgHeight);
+                            }
+                    </script>
+                    <img style="cursor:pointer;cursor:hand" class="footer__ft__img1"
+                         src="//img.alicdn.com/tfs/TB1gw_ZxNWYBuNjy1zkXXXGGpXa-131-32.gif"
+                         onclick="verifySeal();" alt="SSL site seal - click to verify"
+                         data-spm-anchor-id="a2o6e.home.0.i1.5b4d48d3mVzb2Z">
+                    </span>
+                    <a rel="nofollow" title="电子营业执照" target="_blank"
+                       href="//img.alicdn.com/tfs/TB1CChlpwDqK1RjSZSyXXaxEVXa-1200-1672.jpg">
+                        <img class="footer__ft__img2" alt="" src="//img.alicdn.com/tfs/TB1ZO80pyOYBuNjSsD4XXbSkFXa-141-41.png">
+                    </a>
+
+                    <a rel="nofollow" target="_blank" href="https://www.pcisecuritystandards.org/">
+                        <img src="//img.alicdn.com/tfs/TB1Y580pyOYBuNjSsD4XXbSkFXa-83-50.png" class="footer__ft__img3">
+                    </a>
+                    <a rel="nofollow" target="_blank"
+                       href="http://www.itrust.org.cn/home/index/itrust_certifi/wm/1756737221">
+                        <img src="//img.alicdn.com/tfs/TB1pM_ZxNWYBuNjy1zkXXXGGpXa-114-40.png" class="footer__ft__img4w">
+                    </a>
+                    <a target="_blank" href="https://search.szfw.org/cert/l/CX20130327002367002885"
+                       id="___szfw_logo___">
+                        <img class="footer__ft__img4" src="//img.alicdn.com/tfs/TB1C4nNxTlYBeNjSszcXXbwhFXa-114-42.png">
+                    </a>
+                    <script type="text/javascript">(function () {
+                        document.getElementById('___szfw_logo___').oncontextmenu = function () {
+                            return false;
+                        }
+                    })();</script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.sidebar{top: 72.5%;}
+.sidebar .item .icon {
+    background-image: url(https://img.alicdn.com/tfs/TB1u1U9xmzqK1RjSZFHXXb3CpXa-64-180.png);
+}
+img{border: 0;}
+</style>
+<script type="text/javascript" src="https://g.alicdn.com/dt/tracker/3.5.4/??tracker.Tracker.js,tracker.interfaceTrackerPlugin.js,tracker.performanceTrackerPlugin.js" crossorigin></script>
+<script type="text/javascript">
+
+var tracker = new window.Tracker({
+  pid: 'damaipc',
+  plugins: [
+    [window.interfaceTrackerPlugin],
+    [window.performanceTrackerPlugin]
+  ],
+});
+
+// 启动 tracker 并监听全局 JS 异常
+tracker.install();
+</script>
+
+</body>
+<script src="//assets.alicdn.com/g/alilog/mlog/aplus_v2.js"></script>
+<script>window.buyFlag = true; </script>
+<script data-config="{combine:true}" src="//g.alicdn.com/kissy/k/6.2.4/seed.js"></script>
+<script src="//g.alicdn.com/damai/pc/1.0.34/p/perform/index.js" async></script>
+</html>

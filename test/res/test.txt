@@ -1,12 +1,10 @@
-<row>
-		<field name="id">4485373</field>
-		<field name="from_client">3</field>
-		<field name="client_version">22</field>
-		<field name="app_version">2.4.0</field>
-		<field name="action_type">clickHomeTopic</field>
-		<field name="uid">0</field>
-		<field name="device_id">ffffffff-b6b6-6c0d-0000-00001f4e3e91</field>
-		<field name="info">{&amp;quot;title&amp;quot;:试管解析&amp;quot;}</field>
-		<field name="remote_ip">180.99.244.24</field>
-		<field name="created_at">2019-01-28 10:20:03</field>
-	</row>
+<field name="id">4485373</field>
+<field name="from_client">3</field>
+<field name="client_version">22</field>
+<field name="app_version">2.4.0</field>
+<field name="action_type">clickHomeTopic</field>
+<field name="uid">0</field>
+<field name="device_id">ffffffff-b6b6-6c0d-0000-00001f4e3e91</field>
+<field name="info">{&amp;quot;title&amp;quot;:试管解析&amp;quot;}</field>
+<field name="remote_ip">180.99.244.24</field>
+<field name="created_at">2019-01-28 10:20:03</field>

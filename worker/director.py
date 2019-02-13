@@ -1,10 +1,11 @@
 # -*- coding: UTF-8 -*-
-##########################################
-# 导演，控制目前所有的内容的完成，作为总控台，完成所有分配任务
-##########################################
+"""
+导演，控制目前所有的内容的完成，作为总控台，完成所有分配任务
+"""
+
 
 # from worker.writers import update_list   as update_list
-from worker.readers import get_show_list, get_info
+from worker.readers.get_show import main as get_show
 from worker.writers import entry_show_list
 
 
@@ -19,11 +20,13 @@ class controller(object):
 
     # 主函数
     def to_do(self):
-        _get_show_list = get_show_list().get_value  # 调用函数，获取演出:List
+        _get_show_list = get_show() # 调用函数，获取演出:List
 
-        _entry_show_list = entry_show_list(_get_show_list).get_value  # 将列表中的信息写入数据库，写入时会进r行去重操作
+        # _entry_show_list = entry_show_list(_get_show_list).main  # 将列表中的信息写入数据库，写入时会进r行去重操作
 
-        _get_info = get_info().updata()  # 抓取更详细的内容，也是通过大麦
+        # _get_info = get_info().main()  # 抓取更详细的内容，也是通过大麦
+
+        # get_review()
 
         # 抓取周边信息，通过百度，调用更多的爬虫
 
