@@ -191,7 +191,8 @@ def action_to_cn(aciton):
 
 
 # 输入字典或列表，制作饼状图
-def make_pie(_list):
+def make_pie(_list,_title='无'):
+    import matplotlib as mpl
     import matplotlib.pyplot as plt #导入画图库
 
     key = list()
@@ -205,10 +206,10 @@ def make_pie(_list):
     explode = [0.05,0,0,0,0,0,0,0,0]  # 0.1 凸出这部分，
     plt.axes(aspect=1)  # set this , Figure is round, otherwise it is an ellipse
 
-    plt.rcParams['font.family'] = ['Arial Unicode MS']  # 解决中文乱码
+    mpl.rcParams['font.family'] = ['Arial Unicode MS']  # 解决中文乱码
     plt.pie(x=value,labels=key,autopct='%3.1f %%',
             shadow=False,labeldistance=1.1,startangle=90,pctdistance=0.6)
-
+    plt.title(_title)
     plt.axis('equal')
     # plt.legend()
     plt.savefig('timeseries_y.jpg')
@@ -234,6 +235,20 @@ def dde(dict,tops):
 def fenci(txt):
     pass
 
+#形成3D数据
+def for_3d(count_last_times):
+    to_3d = []  # 制作3d坐标点
+    _z = 0  # z轴值
+    _last = 0  # 最后x轴值
+    for i in count_last_times:  # 产出3D数据
+        if _last == i[0]:
+            _z += 1
+        else:
+            _z = 0
+
+        to_3d.append((i[0],i[1],_z))
+
+    print(to_3d)
 
 if __name__ == '__main__':
     make_pie([('搜索结果', 25613), ('社区首页', 16721), ('用户名片界面', 16207), ('首页-推文', 9684), ('试管婴儿版块', 9217), ('首页', 3579), ('社区-最新页签', 1705)])

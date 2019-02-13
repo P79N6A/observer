@@ -48,7 +48,10 @@ site_created_at = list_key.index('created_at')  # created_at位置
 
 def get_txt(name_date):
     """
-    如果没有txt文件，则生成txt文件，如果有文件，则返回此文件的内容
+    传入name_date为:2019_02
+    从user_action_report文件夹中的txt文件夹中查找对应文件
+    如果没有txt文件，则从xml文件夹中查找对应xml文件，生成txt文件。则返回此文件的内容
+    如果有文件，则返回此文件的内容
     :return: 返回整个数据表，单个元素('8029', '27', 'sitePersonalCenter', '6034917', 'ffffffff-cdee-8173-ffff-ffff95527399', '2018-09-29 10:28:56')
     """
     path_txt = r'res/%s/txt/%s_%s.txt' % (name,name,name_date)
@@ -73,7 +76,7 @@ def get_txt(name_date):
 
 def mak_uid_file(data):
     """
-    传入数据，用来更新uid中的文件，重复的内容不会被添加进去
+    传入数据，用来更新uid文件夹中的文件，重复的内容不会被添加进去
     :rtype: object
     """
     list_uid_times = list()  # 获取非游客用户的UID和操作日期,元素：[('6056857', '2018-09-30')]
@@ -131,9 +134,11 @@ def mak_uid_file(data):
                     data_uid_old.append((int(_i_file[0]),_i_file[1],_i_file[2]))
             # print(r'有原文件:%s' % data_uid_old)
             os.remove(_path)  # 删除文件
+        _v_data_uid_old = len(data_uid_old)  # 旧文件内容的动作条数，用于对比新文件是否有变化
 
         data_uid = data_uid_old + data_uid_new
         data_uid = list(set(data_uid))  # 去重
+        _v_data_uid = len(data_uid)  # 新文件内容的动作条数，用于对比新文件是否有变化
         data_uid.sort()  # 排序
 
         login_times = []  # 获取用户的登录日期，用于命名文件
@@ -146,15 +151,22 @@ def mak_uid_file(data):
             for i in data_uid:  # 遍历数据表，符合条件，则添加到_one_list
                 file.write(u'%s\t%s\t%s\r' % (i[0],i[1],i[2]))  # 写入数据
 
+        if _v_data_uid > _v_data_uid_old:  # 如果新增
+            _v = '有新增'
+        elif _v_data_uid == _v_data_uid_old:  # 如果相等
+            _v = '无新增'
+        else:
+            _v = '异常'
+
         _plan += 1
-        print(r'更新进度 (%s/%s): %03d-%s-%s' % (_plan,len(list_uid),len(login_times),_k,_client))
+        print(r'更新进度 (%s/%s): %03d-%s-%s %s' % (_plan,len(list_uid),len(login_times),_k,_client,_v))
 
     path_report = r'res/user_action_report/月份用户报告.txt'  # 生成月份报告
     if not os.path.exists(path_report):  # 如果没有文件，创建文件，增加表头
         with open(path_report,'w') as file:
             file.write('年月\t活跃用户数\t登录天/次')
     with open(path_report,'a+') as file:
-        _file = '\r%s\t%s\t%s' % (list_uid_times[0][1][:7],len(list_uid),len(list_uid_times))
+        _file = '\r%s\t%s\t%s' % (list_uid_times[0][1][:7],len(list_uid),len(list_uid_times),_v)
         file.write(_file)
 
 
@@ -212,11 +224,14 @@ def make_device_file(data):
                     data_device_old.append((int(_i_file[0]),_i_file[1],_i_file[2],_i_file[3]))
             # print(r'原文件:%s' % data_device_old)
             os.remove(_path)  # 删除文件
+        _v_data_device_old = len(data_device_old)  # 旧文件内容的动作条数，用于对比新文件是否有变化
 
         data_device = data_device_old + data_device_new
         data_device = list(set(data_device))  # 去重
+        _v_data_device = len(data_device)  # 新文件内容的动作条数，用于对比新文件是否有变化
         data_device.sort()  # 排序
         # print(r'组合文件:%s' % data_device)
+
         login_times = []  # 获取device的登录日期，用于命名文件
         for i in data_device:
             _i = str(datetime.strptime(i[1],"%Y-%m-%d %H:%M:%S").date())
@@ -227,8 +242,15 @@ def make_device_file(data):
             for i in data_device:  # 遍历数据表，符合条件，则添加到_one_list
                 file.write(u'%s\t%s\t%s\t%s\r' % (i[0],i[1],i[2],i[3]))  # 写入数据
 
+        if _v_data_device > _v_data_device_old:  # 如果新增
+            _v = '有新增'
+        elif _v_data_device == _v_data_device_old:  # 如果相等
+            _v = '无新增'
+        else:
+            _v = '异常'
+
         _plan += 1
-        print(r'更新进度 (%s/%s): %03d_%s' % (_plan,len(list_device),len(login_times),_k,))
+        print(r'更新进度 (%s/%s): %03d_%s %s' % (_plan,len(list_device),len(login_times),_k,_v))
 
     path_report = r'res/user_action_report/月份设备报告.txt'  # 生成月份报告
     if not os.path.exists(path_report):  # 如果没有文件，创建文件，增加表头
@@ -260,14 +282,14 @@ def _get_list_visitor(_reset=False):
 
     if not os.path.exists(path_file) or _reset:
         print('生成文件：%s' % path_file)
-        list_file = _get_list_all_device()  # 调用
+        list_visitor = list()  # 返回值
 
         _plan = 0  # 统计更新进度
 
-        list_visitor = list()
+        list_file = _get_list_all_device()  # device文件夹中的文件列表
         for i_path_file in list_file:  # 查找只包含uid为0的用
             _i_path_file = r'%s/%s' % (path_device_file,i_path_file)
-            with open(_i_path_file,'r') as file:  # 统计进入帖子详情时，用户是在什么界面
+            with open(_i_path_file,'r') as file:  # 打开用户操作的文件
                 _file = file.readlines()
 
             _visitor = True
@@ -296,27 +318,36 @@ def _get_list_visitor(_reset=False):
     return list_visitor
 
 
-# 提取只登录过一天的设备，并生成报告文件
-def _get_list_few_day():
+# 在device文件夹中只登录过一天的设备，并生成文件 day_n.txt ,默认不重新生成新文件
+def _get_list_few_day(_number=1,_reset=False):
     print(r'开始查找只登录一次的设备')
-    path_file = '%s/%s' % (path,'one_day.txt')  # 文件地址
-    list_one_day = []
+    path_file = '%s/day_%s.txt' % (path,str(_number))  # 文件地址
 
-    _plan = 0  # 统计更新进度
+    if not os.path.exists(path_file) or _reset:
+        print('生成文件：%s' % path_file)
+        list_few_day = list()  # 返回值
 
-    list_file = _get_list_all_device()  # 调用
-    for _path in list_file:
-        if int(_path.split('_')[0]) == 1:  # 筛选只登录了一天的设备
-            list_one_day.append(_path)
+        _plan = 0  # 统计更新进度
 
-        _plan += 1
-        print(r'更新进度 (%s/%s)' % (_plan,len(list_file)))
+        list_file = _get_list_all_device()  # device文件夹中的文件列表
+        for _path in list_file:
+            if int(_path.split('_')[0]) == _number:  # 筛选只登录了一天的设备
+                list_few_day.append(_path)
 
-    with open(path_file,'w') as file:
-        file.write(str(list_one_day))
-    print('生成文件：%s(%s)' % (path_file,len(list_one_day)))
+            _plan += 1
+            print(r'更新进度 (%s/%s)' % (_plan,len(list_file)))
 
-    return list_one_day
+        print(u'登录%s天的用户总数：%s\r占总设备的比例：%0.2f' % (str(_number),len(list_few_day),len(list_few_day) / len(list_file)))
+
+        with open(path_file,'w') as file:
+            file.write(str(list_few_day))
+        print('生成文件：%s(%s)' % (path_file,len(list_few_day)))
+    else:
+        with open(path_file,'r') as file:
+            list_few_day = eval(file.read())
+        print('找到文件：%s(%s)' % (path_file,len(list_few_day)))
+
+    return list_few_day
 
 
 # 传入列表，统计每个操作的次数/统计帖子详情前页面的次数
@@ -380,56 +411,89 @@ class show_view_time:
         # print(list_all_file)
         # print(list_all_file_last)
 
-    # 返回每个设备所有操作的统计
+    # 返回每个设备的所有操作的计数
     @property
-    def every_action(self):
+    def list_every_action(self):
+        """
+        返回一个列表，列表中的每个元素都是一个用户的所有操作的计数
+        {'社区首页': 6, '启动APP': 6, '消息页面': 6, '弹出框提示': 5, '首页': 5}
+        不能作为饼状图
+        """
         self.main()
+        print('返回每个设备所有操作的统计:%s' % self.count_every_action)
         return self.count_every_action
 
-    # 返回所有设备所有操作的统计
+    # 返回所有设备所有操作的计数
     @property
     def all_action(self):
+        """
+        返回一个列表，列表中的每个元素都是一个操作的计数
+        ('请求数据时', 175012)
+        可以作为饼状图
+        """
         self.main()
+        print('返回所有设备所有操作的统计:%s' % self.count_all_action)
         return self.count_all_action
 
     # 返回所有设备在帖子详情前操作的统计
     @property
     def last_action(self):
+        """
+        返回一个列表，列表中的每个元素都是一个操作的计数
+        ('请求数据时', 175012)
+        可以作为饼状图
+        """
         self.main()
+        print('返回所有设备在帖子详情前操作的统计:%s' % self.count_last_action)
         return self.count_last_action
 
 
 # 根据传入数据的操作次数，统计某个操作的使用比例
 def count_one_percent(action,list_file):
-    count_last_times = list()  # 统计所有的次数，元素(操作次数,此行动的操作次数)
+    """
+    :param action: 传入需要统计的操作（中文）
+    :param list_file: 传入需要统计的数据列表（可以是设备也可以是UID）
+    :return: 列表，单个元素为（总操作次数，指定动作的操作次数）
+    """
+    print(r'开始统计%s的使用占比' % action)
+    count_last_times = [[],[]]  # 统计所有的次数，元素(操作次数,此行动的操作次数)
+
+    _plan = 0  # 进度统计
 
     for _path in list_file:
         with open('%s/%s' % (path_device_file,_path),'r') as file:  # 统计进入帖子详情时，用户是在什么界面
             _file = file.readlines()
 
-        int(_path.split('_')[0])  # 数据
-        count_times = 0  # 操作次数统计
+        file_count = 0  # 有效去的次数统计
+        time_count = 0  # 指定操作的次数统计
         for i in _file:
-            txt = i.strip('\n').split("\t")[3]  # 提取界面
-            if txt == action:
-                count_times += 1
+            _list = i.strip('\n').split("\t")  # 提取界面
+            _action = _list[-1]#操作内容
+            _time = datetime.strptime(_list[1],"%Y-%m-%d %H:%M:%S").date()#时间
 
-        count_last_times.append((len(_file),count_times))
+            if _time >= datetime.strptime('2019-01-30',"%Y-%m-%d").date():
+                file_count +=1
 
-        count_last_times.sort(key=lambda x:x[1])
+                if _action == action:
+                    time_count += 1
+                    count_last_times[1].append(i)
 
-    to_3d = []  # 制作3d坐标点
-    _z = 0  # z轴值
-    _last = 0  # 最后x轴值
-    for i in count_last_times:  # 产出3D数据
-        if _last == i[0]:
-            _z += 1
-        else:
-            _z = 0
+        count_last_times[0].append((file_count,time_count))
+        count_last_times[0].sort(key=lambda x:x[1])
 
-        to_3d.append((i[0],i[1],_z))
+        _plan += 1
+        print(r'更新进度 (%s/%s):%s     %s' % (_plan,len(list_file),_path,len(_file)))
 
-    print(to_3d)
+    print(count_last_times)
+
+    sum = 0
+    one = 0
+    for i in count_last_times[0]:
+        sum += i[0]
+        one += i[1]
+
+    print('操作次数:%s,总操作次数:%s,占比:%0.2f' % (one,sum,one / sum))
+    return count_last_times
 
 
 """小工具"""
@@ -488,7 +552,10 @@ def show_home_times():
     for i in aa:
         txt[i] = txt.get(i,0) + 1
 
+    list(set(txt.items()))
     print(txt)
+
+    make_pie(list(set(txt.items())))
 
 
 """待整理"""
@@ -795,9 +862,9 @@ def report_for_days_by_device_id(tab):
 
 
 if __name__ == '__main__':
-    """生成需要的文件"""
-    # ['2018_09','2018_10','2018_11','2018_12','2019_01']  # 要添加的文件
-    # r_file = ['2018_08']  # 要添加的文件
+    """更新目前的uid和device文件夹"""
+    # _list_file =['2018_09','2018_10','2018_11','2018_12','2019_01','2019_02']  # 要添加的文件
+    # r_file = _list_file[-1:]  # 要添加的文件
     # for i in r_file:
     #     print('开始:%s' % i)
     #     a = get_txt(i)  # 生成txt文件
@@ -810,21 +877,26 @@ if __name__ == '__main__':
 
     """按照一个条件，获取一个列表，并进行对用统计"""
     # # 游客在进入帖子详情前，在哪个界面，显示最多多6个数据，生成饼状图
-    # a = _get_list_visitor()
-    # b = show_view_time(a).all_view_count
-    # make_pie(b[:6])
+    # a = _get_list_visitor()  # 获取游客列表
+    # b = show_view_time(a).all_action  # 统计访问界面的次数
+    # make_pie(b[:6],'游客在看贴前的所处界面占比')  # 生成饼状图
 
     ## 提取只登录过一天的设备，并生成报告文件
-    # a = _get_list_few_day()
+    # a = _get_list_few_day() # 获取只登录一天的用户列表
     # b = show_view_time(a).last_action
     # make_pie(b[:6])
 
+    a = count_one_percent('首页-专题',_get_list_all_device())
+    # show_home_times()
+
+    a = count_one_percent('首页-专题',_get_list_all_device())
+
     # find_device(216740)  # 找到登录过此用户的设备，确认一个用户用多少设备在使用，从而明确用户的粘性
-    _example = ['001_0A1E920F-ECF5-4A2D-A58D-DC20BAD39596','001_0DDB58A4-A050-46FA-BA08-230E2E33AE8C']
-
-    see_device(_example)  # 查看单个设备的情况
-
-    count_one_percent('首页',_example)
+    # _example = ['001_0A1E920F-ECF5-4A2D-A58D-DC20BAD39596','001_0DDB58A4-A050-46FA-BA08-230E2E33AE8C']
+    #
+    # see_device(_example)  # 查看单个设备的情况
+    #
+    # count_one_percent('首页',_example)
 
     # device_last()
     # # 输入区间，将只上线一天的设备统计并报告
