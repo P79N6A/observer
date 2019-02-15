@@ -2747,3 +2747,36 @@ def _itchat():
 
 if __name__ == '__main__':
     _print()
+=======
+def ax3d(_list=[(2, 0, 0), (6, 1, 0), (6, 1, 0), (6, 1, 0)]):
+    # -*- coding: utf-8 -*-
+    print(_list)
+    # 加入中文显示
+    import matplotlib.font_manager as fm
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D  # 绘制三D图形
+
+    fig = plt.figure()  # 创建一张图片
+    ax3d = Axes3D(fig)
+
+    # 三个轴  x y z
+    x = list()
+    y = list()
+    z = list()
+
+    for i in _list:
+        print(i)
+        x.append(i[0])
+        y.append(i[1])
+        z.append(i[2])
+    print(x,y,z)
+    ax3d.plot_surface(x,y,z,rstride=1,cstride=1,cmap=plt.cm.spring)  # cmap还可以是summer autumn winter也可以自己配置
+    # rstride    Array row stride (step size)    步长
+    # cstride    Array column stride (step size)
+    plt.show()
+
+
+if __name__ == '__main__':
+    ax3d()
+>>>>>>> 8bc6d86055937ad7065779da9168191df8a8b43a
