@@ -7,7 +7,7 @@ from requests import RequestException  # 错误测试的返回值
 from bs4 import BeautifulSoup as BS  # 加载解析HTML库
 import os  # 处理文件
 
-
+_path = os.path.dirname(os.getcwd())
 # 获取ip
 class proxy(object):
     # 构造请求头等
@@ -18,7 +18,7 @@ class proxy(object):
 
         self.headers = {"User-Agent": user_agent.generate_user_agent()}  # 请求头内容,随机生成的
         self.test_url = 'https://httpbin.org/get'  # 测试网站地址
-        self.file_path = "res/list_ip.txt"  # 代理IP文件存放地址
+        self.file_path = "%s/res/list_ip.txt" %_path # 代理IP文件存放地址
 
         self.pages = 5  # 方案A：设定需要搜索页数
         self.from_page = 1  # 方案B：搜索起始页
