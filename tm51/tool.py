@@ -40,7 +40,8 @@ def get_xml(name,key_list):
     :param key_list:
     :return: 返回列表，元素为元组
     """
-    if type(name) is list:#如果是列表，说明有分表，否则，就是单表
+    print('开始：%s' % sys._getframe().f_code.co_name)
+    if type(name) is list:  # 如果是列表，说明有分表，否则，就是单表
         path_xml = 'res/%s/xml/%s-%s.xml' % (name[0],name[0],name[1])
     else:
         path_xml = 'res/%s/xml/%s.xml' % (name,name)
@@ -85,8 +86,8 @@ def get_mini(name,key_list):
     :return: 返回列表，元素为元组
     """
     file_path = r'res/%s' % name
-    txt_path = 'res/%s/%s.txt' % (name,name )
-    xml_path = 'res/%s/%s.xml' % (name,name )
+    txt_path = 'res/%s/%s.txt' % (name,name)
+    xml_path = 'res/%s/%s.xml' % (name,name)
 
     if os.path.exists(txt_path):  # 是否存在mini版，存在则读取内容
         print('运气很好，有对应的txt文件，开始读取……')
@@ -193,7 +194,7 @@ def action_to_cn(aciton):
 # 输入字典或列表，制作饼状图
 def make_pie(_list,_title='无'):
     import matplotlib as mpl
-    import matplotlib.pyplot as plt #导入画图库
+    import matplotlib.pyplot as plt  # 导入画图库
 
     key = list()
     value = list()
@@ -201,18 +202,45 @@ def make_pie(_list,_title='无'):
         key.append(i[0])
         value.append(i[1])
 
-
-
     explode = [0.05,0,0,0,0,0,0,0,0]  # 0.1 凸出这部分，
     plt.axes(aspect=1)  # set this , Figure is round, otherwise it is an ellipse
 
     mpl.rcParams['font.family'] = ['Arial Unicode MS']  # 解决中文乱码
     plt.pie(x=value,labels=key,autopct='%3.1f %%',
             shadow=False,labeldistance=1.1,startangle=90,pctdistance=0.6)
-    plt.title(_title)
+
     plt.axis('equal')
     # plt.legend()
+    plt.title(_title)
     plt.savefig('timeseries_y.jpg')
+    plt.show()
+
+
+# 输入字典或列表，制作柱状图
+def make_bar(_file,_title='无'):
+    import matplotlib as mpl
+    import matplotlib.pyplot as plt  # 导入画图库
+
+    _list = list(_file.items())
+    _list.sort()    #排序
+
+    x = list()
+    y = list()
+    for i in _list:  # 生成x、y轴数据
+        x.append(r'%s月' % i[0])
+        y.append(int(i[1]))
+
+    print(x)
+    plt.rcParams['font.family'] = ['Arial Unicode MS']  # 解决中文乱码
+
+    plt.bar(x,y)  # 生成表格
+
+    for _x,_y in zip(x,y):  # 显示刻度上的数字
+        plt.text(_x,_y,_y,ha='center',va='bottom')
+
+    plt.title(_title)  # 显示标题
+
+    plt.savefig(r'%s.jpg' % _title)  # 保存图标
     plt.show()
 
 
@@ -235,7 +263,8 @@ def dde(dict,tops):
 def fenci(txt):
     pass
 
-#形成3D数据
+
+# 形成3D数据
 def for_3d(count_last_times):
     to_3d = []  # 制作3d坐标点
     _z = 0  # z轴值
@@ -250,5 +279,7 @@ def for_3d(count_last_times):
 
     print(to_3d)
 
+
 if __name__ == '__main__':
-    make_pie([('搜索结果', 25613), ('社区首页', 16721), ('用户名片界面', 16207), ('首页-推文', 9684), ('试管婴儿版块', 9217), ('首页', 3579), ('社区-最新页签', 1705)])
+    make_pie(
+        [('搜索结果',25613),('社区首页',16721),('用户名片界面',16207),('首页-推文',9684),('试管婴儿版块',9217),('首页',3579),('社区-最新页签',1705)])

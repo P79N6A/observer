@@ -6,8 +6,8 @@
 # 公共库
 import os  # 转换内容 ，并提取数据
 from datetime import datetime  # 日期处理
-import matplotlib.pyplot as plt  # 制表
 import re
+import numpy as np  # 计算
 
 # 私有库
 from tm51.tool import get_xml,new_folder,action_to_cn,make_pie,dde
@@ -35,12 +35,17 @@ name = 'user_action_report'
 path = new_folder('res/%s' % name)
 path_device_file = new_folder('%s/%s' % (path,'device'))  # 新建文件夹
 
-list_key = ['id','client_version','action_type','uid','device_id','created_at']
+list_key = ['id','from_client','client_version','app_version','action_type','uid','device_id','info','remote_ip',
+            'created_at']
 site_id = list_key.index('id')  # id位置
+site_from_client = list_key.index('from_client')  # from_client位置
 site_client_version = list_key.index('client_version')  # client_version位置
+site_app_version = list_key.index('app_version')  # app_version位置
 site_action_type = list_key.index('action_type')  # action_type位置
 site_uid = list_key.index('uid')  # uid位置
 site_device_id = list_key.index('device_id')  # device_id位置
+site_info = list_key.index('info')  # info位置
+site_remote_ip = list_key.index('remote_ip')  # remote_ip位置
 site_created_at = list_key.index('created_at')  # created_at位置
 
 """生成txt数据，生成单个用户的文件"""
@@ -54,7 +59,8 @@ def get_txt(name_date):
     如果有文件，则返回此文件的内容
     :return: 返回整个数据表，单个元素('8029', '27', 'sitePersonalCenter', '6034917', 'ffffffff-cdee-8173-ffff-ffff95527399', '2018-09-29 10:28:56')
     """
-    path_txt = r'res/%s/txt/%s_%s.txt' % (name,name,name_date)
+    print(__name__)
+    path_txt = r'%s/txt/%s-%s.txt' % (path,name,name_date)
     # print(path_txt)
     if os.path.exists(path_txt):  # 如果有文件，则读取文件，并返回
         with open(path_txt,'r') as file:
@@ -166,7 +172,7 @@ def mak_uid_file(data):
         with open(path_report,'w') as file:
             file.write('年月\t活跃用户数\t登录天/次')
     with open(path_report,'a+') as file:
-        _file = '\r%s\t%s\t%s' % (list_uid_times[0][1][:7],len(list_uid),len(list_uid_times),_v)
+        _file = '\r%s\t%s\t%s' % (list_uid_times[0][1][:7],len(list_uid),len(list_uid_times))
         file.write(_file)
 
 
@@ -261,7 +267,7 @@ def make_device_file(data):
         file.write(_file)
 
 
-"""数据统计"""
+"""获取搜索列表"""
 
 
 # 获取所有设备列表，元素：['001_6F76FB62-3C7D-4060-92E9-68CCDC427786']
@@ -348,6 +354,9 @@ def _get_list_few_day(_number=1,_reset=False):
         print('找到文件：%s(%s)' % (path_file,len(list_few_day)))
 
     return list_few_day
+
+
+"""统计"""
 
 
 # 传入列表，统计每个操作的次数/统计帖子详情前页面的次数
@@ -468,11 +477,11 @@ def count_one_percent(action,list_file):
         time_count = 0  # 指定操作的次数统计
         for i in _file:
             _list = i.strip('\n').split("\t")  # 提取界面
-            _action = _list[-1]#操作内容
-            _time = datetime.strptime(_list[1],"%Y-%m-%d %H:%M:%S").date()#时间
+            _action = _list[-1]  # 操作内容
+            _time = datetime.strptime(_list[1],"%Y-%m-%d %H:%M:%S").date()  # 时间
 
             if _time >= datetime.strptime('2019-01-30',"%Y-%m-%d").date():
-                file_count +=1
+                file_count += 1
 
                 if _action == action:
                     time_count += 1
@@ -486,13 +495,13 @@ def count_one_percent(action,list_file):
 
     print(count_last_times)
 
-    sum = 0
-    one = 0
+    _sum = 0
+    _one = 0
     for i in count_last_times[0]:
-        sum += i[0]
-        one += i[1]
+        _sum += i[0]
+        _one += i[1]
 
-    print('操作次数:%s,总操作次数:%s,占比:%0.2f' % (one,sum,one / sum))
+    print('操作次数:%s,总操作次数:%s,占比:%0.2f' % (_one,_sum,_one / _sum))
     return count_last_times
 
 
@@ -543,7 +552,7 @@ def see_device(list_file):
 
 # 统计用户在首页 点击功能按钮的次数
 def show_home_times():
-    with open('%s/xml/user_action_report-2018_08.xml' % path,'r') as file:
+    with open('%s/xml/user_action_report-clickHomeTopic.xml' % path,'r') as file:
         _file = file.read()
 
     aa = re.findall('{&amp;quot;title&amp;quot;:((?:.|\n)*?)&',_file,flags=0)  # 提取需要的中文
@@ -559,6 +568,42 @@ def show_home_times():
 
 
 """待整理"""
+
+
+# 针对消息按钮，统计消息按钮是游客用户的第几次点击操作
+def count_site_news(_txt,list_file):
+    """
+    :param _txt: 需要查询的动作
+    :param list_file:需要查询的设备列表
+    :return: 显示此动作在列表中，是第几个位置出现的
+    """
+    print('开始统计%s在操作中的位置' % _txt)
+    count_list = list()  # 统计数据
+
+    _plan = 0  # 进度统计
+    for _path in list_file:
+        with open('%s/%s' % (path_device_file,_path),'r') as file:  # 统计进入帖子详情时，用户是在什么界面
+            _file = file.readlines()
+
+        _v = 0  # 统计序号
+        for i in _file:
+            txt = i.strip('\n').split("\t")[-1]  # 提取uid
+            _v += 1
+
+            if txt == _txt:
+                count_list.append(_v)
+                break  # 找到第一个以后就停止
+
+        _plan += 1
+        print(r'更新进度 (%s/%s)' % (_plan,len(list_file)))
+
+    print(count_list)
+    # 均值
+    _mean = np.mean(count_list)
+    # 中位数
+    _median = np.median(count_list)
+
+    print('平均数：%s\t中位数：%s' % (_mean,_median))
 
 
 # 统计不同操作数区间的用户，他们各种操作占有的比例
@@ -861,35 +906,49 @@ def report_for_days_by_device_id(tab):
     print('生成数据报告')
 
 
+def updata_file(list_file):
+    """
+    生成和更新目前的uid和device文件夹
+    :param list_file: 要添加的文件名：'2018_09'
+    :return:
+    """
+    for i in list_file:
+        print('开始:%s' % i)
+        a = get_txt(i)  # 生成txt文件
+
+        print('开始:mak_uid_file')
+        mak_uid_file(a)  # 更新到uid
+
+        print('开始:make_device_file')
+        make_device_file(a)  # 更新到uid
+
+
 if __name__ == '__main__':
-    """更新目前的uid和device文件夹"""
-    # _list_file =['2018_09','2018_10','2018_11','2018_12','2019_01','2019_02']  # 要添加的文件
-    # r_file = _list_file[-1:]  # 要添加的文件
-    # for i in r_file:
-    #     print('开始:%s' % i)
-    #     a = get_txt(i)  # 生成txt文件
-    #
-    #     print('开始:mak_uid_file')
-    #     mak_uid_file(a)  # 更新到uid
-    #
-    #     print('开始:make_device_file')
-    #     make_device_file(a)  # 更新到uid
+    """更新文件"""
+    _list_file = ['2018_09','2018_10','2018_11','2018_12','2019_01','2019_02']  # 要添加的文件
+    _special_file = ['clickHomeTopic']  # 添加特殊的文件
+    r_file = _list_file[-1:]  # 要添加的文件
+    # updata_file(r_file)#更新文件
 
     """按照一个条件，获取一个列表，并进行对用统计"""
-    # # 游客在进入帖子详情前，在哪个界面，显示最多多6个数据，生成饼状图
-    # a = _get_list_visitor()  # 获取游客列表
-    # b = show_view_time(a).all_action  # 统计访问界面的次数
-    # make_pie(b[:6],'游客在看贴前的所处界面占比')  # 生成饼状图
+    _list_visitor = _get_list_visitor()  # 获取游客列表
+    _list_all_device = _get_list_all_device()  # 获取所有设备
+    _list_few_day = _get_list_few_day()  # 获取登录N天设备
+
+    """游客在进入帖子详情前，在哪个界面，显示最多多6个数据，生成饼状图"""
+    d = show_view_time(_list_all_device).all_action  # 统计访问界面的次数
+    make_pie(d[:6],'游客在看贴前的所处界面占比')  # 生成饼状图
 
     ## 提取只登录过一天的设备，并生成报告文件
     # a = _get_list_few_day() # 获取只登录一天的用户列表
     # b = show_view_time(a).last_action
     # make_pie(b[:6])
 
-    a = count_one_percent('首页-专题',_get_list_all_device())
+    # a = count_one_percent('首页-专题',_get_list_all_device())
     # show_home_times()
 
-    a = count_one_percent('首页-专题',_get_list_all_device())
+    # a = count_one_percent('首页-悬浮按钮',_get_list_all_device())
+    # a = count_one_percent('帖子详情',_get_list_all_device())
 
     # find_device(216740)  # 找到登录过此用户的设备，确认一个用户用多少设备在使用，从而明确用户的粘性
     # _example = ['001_0A1E920F-ECF5-4A2D-A58D-DC20BAD39596','001_0DDB58A4-A050-46FA-BA08-230E2E33AE8C']
