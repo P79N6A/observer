@@ -1,6 +1,11 @@
+import sys
+import json
+import re
+
 # json处理
+
+
 def _json():
-    import json
     # model={'fav': '总冠军', 'age': 31} #数据
     # with open("test.json",'w',encoding='utf-8') as json_file:
     #         json.dump(model,json_file,ensure_ascii=False)
@@ -179,7 +184,7 @@ def _cleam():
 
 
 # 获得上级地址
-def get_path():
+def get_path1():
     import os
     # 获得当前路径的上级路径
     curPath2 = os.path.dirname(os.getcwd())
@@ -2710,44 +2715,6 @@ def _print():
     print("祝各位身体健康")
 
 
-import itchat
-from itchat.content import *
-
-
-# 测试itchat
-def _itchat():
-    itchat.auto_login(enableCmdQR=2, hotReload=True)
-    # print(itchat.get_friends(True))
-    itchat.send('Hello, filehelper', toUserName='filehelper')
-
-    @itchat.msg_register(TEXT, isFriendChat=True)
-    def _FriendChat(msg):
-        # equals to print(msg['FromUserName'])
-        print(msg)
-        return msg['MsgId']
-
-    @itchat.msg_register(TEXT, isGroupChat=True)
-    def _GroupChat(msg):
-        print(msg.isAt)
-        # equals to print(msg['FromUserName'])
-        print(len(msg.user.memberList))
-        # for key,value in :
-        #     print(key)
-        #     print(value)
-        # return msg['MsgId']
-
-    @itchat.msg_register(TEXT, isMpChat=True)
-    def _GroupChat(msg):
-        # equals to print(msg['FromUserName'])
-        print(msg)
-        # return msg['MsgId']
-
-    itchat.run(True)
-
-
-if __name__ == '__main__':
-    _print()
-=======
 def ax3d(_list=[(2, 0, 0), (6, 1, 0), (6, 1, 0), (6, 1, 0)]):
     # -*- coding: utf-8 -*-
     print(_list)
@@ -2770,13 +2737,131 @@ def ax3d(_list=[(2, 0, 0), (6, 1, 0), (6, 1, 0), (6, 1, 0)]):
         x.append(i[0])
         y.append(i[1])
         z.append(i[2])
-    print(x,y,z)
-    ax3d.plot_surface(x,y,z,rstride=1,cstride=1,cmap=plt.cm.spring)  # cmap还可以是summer autumn winter也可以自己配置
+    print(x, y, z)
+    ax3d.plot_surface(x, y, z, rstride=1, cstride=1, cmap=plt.cm.spring)  # cmap还可以是summer autumn winter也可以自己配置
     # rstride    Array row stride (step size)    步长
     # cstride    Array column stride (step size)
     plt.show()
 
 
+# # 测试itchat
+# def _itchat():
+#     import itchat
+#     from itchat.content import *
+#     itchat.auto_login(enableCmdQR=2, hotReload=True)
+#     # print(itchat.get_friends(True))
+#     itchat.send('Hello, filehelper', toUserName='filehelper')
+#
+#     @itchat.msg_register(TEXT, isFriendChat=True)
+#     def _FriendChat(msg):
+#         # equals to print(msg['FromUserName'])
+#         print(msg)
+#         return msg['MsgId']
+#
+#     @itchat.msg_register(TEXT, isGroupChat=True)
+#     def _GroupChat(msg):
+#         print(msg.isAt)
+#         # equals to print(msg['FromUserName'])
+#         print(len(msg.user.memberList))
+#         # for key,value in :
+#         #     print(key)
+#         #     print(value)
+#         # return msg['MsgId']
+#
+#     @itchat.msg_register(TEXT, isMpChat=True)
+#     def _GroupChat(msg):
+#         # equals to print(msg['FromUserName'])
+#         print(msg)
+#         # return msg['MsgId']
+#
+#     itchat.run(True)
+
+
+def a():
+    print(sys._getframe().f_code.co_name)
+    d = {"MStationQRCode": "https://damai-item.oss-cn-beijing.aliyuncs.com/projQcode/5867019997/2/586701999767.jpg",
+         "appNeedUpGrade": False, "buyBtnShow": "选座购买", "buyBtnStatus": 206, "hasItemCouponTag": False,
+         "hasItemPromotionTag": True, "itemCouponTag": [], "itemPromotionTag": ["立减"], "needRealNameCertified": False,
+         "performBases": [{"name": "10.23 周三", "performBaseTagDesc": "立减", "performBaseTagValue": 3, "performs": [
+             {"chooseSeatType": 1, "itemId": 586701999767, "performBeginTime": "19:30", "performDate": 1571830200000,
+              "performId": 210009604, "performName": "2019-10-23 周三 19:30", "performStartDate": "2019-10-23",
+              "performTagDesc": "立减", "performTagValue": 3, "performTime": "2019.10.23 19:30-22:00",
+              "permissionWithPrivilegeBuy": True, "privilegeLimitBuy": 99999, "projectId": 200003333,
+              "promotionTags": ["惠"], "saleForm": 1, "singleLimit": 6, "skuList": [
+                 {"dashPrice": "180", "packagesFlag": False, "permissionWithPrivilegeBuy": True, "price": 180,
+                  "priceId": 220258043, "priceIdOfTC": 220258043, "promotionTags": ["无票"], "quantitySellAble": 0,
+                  "quantityWithHolding": 0, "skuEnable": False, "skuId": 4150898114468, "skuName": "180元",
+                  "skuStatus": 1, "skuTag": "无票", "skuTagType": 1},
+                 {"dashPrice": "280", "packagesFlag": False, "permissionWithPrivilegeBuy": True, "price": 280,
+                  "priceId": 220250066, "priceIdOfTC": 220250066, "promotionCopyWrite": "每满2件减140元",
+                  "promotionTags": ["惠"], "quantitySellAble": 50, "quantityWithHolding": 0, "skuEnable": True,
+                  "skuId": 4150898114471, "skuName": "280元", "skuPromotionText": "每满2件减140元", "skuStatus": 1,
+                  "skuTag": "立减", "skuTagType": 3},
+                 {"dashPrice": "380", "packagesFlag": False, "permissionWithPrivilegeBuy": True, "price": 380,
+                  "priceId": 220254051, "priceIdOfTC": 220254051, "promotionCopyWrite": "每满2件减180元",
+                  "promotionTags": ["惠"], "quantitySellAble": 22, "quantityWithHolding": 0, "skuEnable": True,
+                  "skuId": 4150898114470, "skuName": "380元", "skuPromotionText": "每满2件减180元", "skuStatus": 1,
+                  "skuTag": "立减", "skuTagType": 3},
+                 {"dashPrice": "480", "packagesFlag": False, "permissionWithPrivilegeBuy": True, "price": 480,
+                  "priceId": 220258042, "priceIdOfTC": 220258042, "promotionCopyWrite": "每满2件减260元",
+                  "promotionTags": ["惠"], "quantitySellAble": 22, "quantityWithHolding": 0, "skuEnable": True,
+                  "skuId": 4150898114469, "skuName": "480元", "skuPromotionText": "每满2件减260元", "skuStatus": 1,
+                  "skuTag": "立减", "skuTagType": 3},
+                 {"dashPrice": "580", "packagesFlag": False, "permissionWithPrivilegeBuy": True, "price": 580,
+                  "priceId": 220265047, "priceIdOfTC": 220265047, "promotionTags": [], "quantitySellAble": 40,
+                  "quantityWithHolding": 0, "skuEnable": True, "skuId": 4150898114472, "skuName": "580元",
+                  "skuStatus": 1, "skuTagType": 0}],
+              "skuPromotionRelations": "586701999767&amp;210009604&amp;4150898114471_7751360494@4150898114470_7751160992@4150898114469_7751304632",
+              "supportGroup": False}], "permissionWithPrivilegeBuy": True, "promotionTags": ["惠"],
+                           "timeSpan": 1571760000000, "type": 1}], "performCount": 1, "priceRange": "¥180-580",
+         "promotionRemark": "您选购优惠票档所对应的票品种类可能为套票、优惠票等类型，具体以您收到的票面信息标示为准。实际优惠情况以订单确认页为准。",
+         "promotions": [{"content": "280.0元票价每满2件减140元", "performanceIds": [210009604], "tag": "立减"},
+                        {"content": "380.0元票价每满2件减180元", "performanceIds": [210009604], "tag": "立减"},
+                        {"content": "480.0元票价每满2件减260元", "performanceIds": [210009604], "tag": "立减"}],
+         "sellStartTimeStr": "02月12日 17:42", "showQRCode": True}
+
+    # for key, value in d.items():
+    #     print(key, value)
+
+    # for key, value in d['performBases'][0].items():
+    #     print(key, value)
+
+    # for key, value in d['performBases'][0]['performs'][0].items():
+    #     print(key, value)
+
+    for key in d['performBases'][0]['performs'][0]['skuList']:
+        print(key)
+
 if __name__ == '__main__':
-    ax3d()
->>>>>>> 8bc6d86055937ad7065779da9168191df8a8b43a
+    _home_page ="""<dd class="ct">
+                        <div class="table-info">
+							                          <table class="m-table2">
+                            <tbody>
+							  <tr>
+							                                  <td width="90" class="bg">演出时间</td><td>2019.04.18-04.20</td>  							                                  <td width="90" class="bg">演出场馆</td><td width="200">湖北剧院</td>                                 </tr><tr> 							                                  <td width="90" class="bg">演出时长</td><td>约90分钟</td> 							  							                                  <td width="90" class="bg">入场时间</td><td width="200">演出前约30分钟</td> 							   </tr><tr>                               							   </tr><tr>                                                              </tr><tr> 							                                 </tr><tr> 							  								<td class="bg">限购</td><td>选座购买每单限6张。对于异常订购行为，大麦网有权在订单成立或者生效之后取消相应订单。异常订购行为包括但不限于以下情形：（1）通过同一ID订购超出限购张数的订单；（2）经合理判断认为非真实消费者的下单行为，包括但不限于通过批量相同或虚构的支付账号、收货地址（包括下单时填写及最终实际收货地址）、收件人、电话号码订购超出限购张数的订单。</td>                               							  							  							                                							                                  <td class="bg">儿童入场提示</td><td>1.2米以上凭成人票入场，1.2米以下谢绝入场<br></td> 							  							   </tr><tr> 							  							    							  							    								<td class="bg">禁止携带物品</td>
+								<td>由于安保和版权的原因，大多数演出、展览及比赛场所禁止携带食品、饮料、专业摄录设备、打火机等物品，请您注意现场工作人员和广播的提示，予以配合</td>
+																															  							    								<td class="bg">付款时效提醒</td>
+								<td>购票下单成功后需在15分钟内完成支付，未支付成功的订单，将在下单15分钟后系统自动取消，所选价位将自动释放后重新点亮，大家可及时刷新购票页面进行购买。</td>
+																 </tr>  <tr>  															  							    								<td class="bg">缺货登记提醒</td>
+								<td>所需票价若为灰色，说明已经售完。您可以在当前页面进行缺货登记，后期如果有票会以短信形式及时通知。</td>
+																															  							    								<td class="bg">发票说明</td>
+								<td>发票由现场提供，演出当天请持门票到演出场馆开具</td>
+																 </tr>  <tr>  															  							    							  							    								<td class="bg">座位类型</td>
+								<td>请按门票对应位置，有序对号入座</td>
+																															  							    								<td class="bg">物品寄存</td>
+								<td>无寄存处，请自行保管携带物品</td>
+																 </tr>  <tr>  															  							    							  							    								<td class="bg">大麦网首次开售时全场可售门票总张数</td>
+								<td>1000张<br></td>
+																															  							    								<td class="bg">有无中文字幕</td>
+								<td>演出现场无字幕</td>
+																 </tr>  <tr>  															  							    								<td class="bg">演出语言</td>
+								<td>普通话</td>
+																															  							    								<td class="bg">主演演员（团体）</td>
+								<td>开心麻花<br></td>
+																 </tr>  <tr>  															  							    								<td class="bg">退换说明</td>
+								<td>票品不支持退换。如无法正常观看，还请自行处理，给您带来不便敬请谅解</td>
+																															  
+							  							  <td class="bg"></td><td></td></tr>
+							                              </tbody>"""
+    _re_A = re.findall(r'演出时长(.*?)<span>(.*?)</span>', _home_page, re.S)
+    print(_re_A)

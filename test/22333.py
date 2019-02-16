@@ -4,6 +4,7 @@ from scrapy.http import Request, FormRequest
 import re
 
 
+
 class PachSpider(scrapy.Spider):  # 定义爬虫类，必须继承scrapy.Spider
     name = 'pach'  # 设置爬虫名称
     allowed_domains = ['www.damai.cn']  # 爬取域名
