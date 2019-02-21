@@ -2865,3 +2865,6 @@ if __name__ == '__main__':
 							                              </tbody>"""
     _re_A = re.findall(r'演出时长(.*?)<span>(.*?)</span>', _home_page, re.S)
     print(_re_A)
+
+    #panduan bianliang
+    isinstance(a,list)
